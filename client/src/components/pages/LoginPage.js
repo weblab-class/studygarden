@@ -4,7 +4,7 @@ import GoogleLogin, { GoogleLogout } from "react-google-login";
 import "../../utilities.css";
 import "./LoginPage.css";
 
-//TODO: REPLACE WITH YOUR OWN CLIENT_ID
+
 const GOOGLE_CLIENT_ID = "529894289409-jecjp2cbbu9hsu3fobsrc063mv19t99r.apps.googleusercontent.com";
 
 class LoginPage extends Component {

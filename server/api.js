@@ -11,7 +11,7 @@ const express = require("express");
 
 // import models so we can interact with the database
 const User = require("./models/user");
-
+const StudySession = require("./models/studytimer"); //rip file name
 // import authentication library
 const auth = require("./auth");
 
@@ -37,6 +37,17 @@ router.post("/initsocket", (req, res) => {
   if (req.user) socket.addUser(req.user, socket.getSocketFromSocketID(req.body.socketid));
   res.send({});
 });
+
+router.post("/timer", (req, res) =>{  //WIP
+  const startTime = Date.now()
+  const newSession = new StudyTimer({
+    creator_id: req.user._id,
+    creator_name: req.user.name,
+    content: req.body.content,
+  });
+
+  newStory.save().then((story) => res.send(story));
+})
 
 // |------------------------------|
 // | write your API methods below!|

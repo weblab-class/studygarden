@@ -39,11 +39,13 @@ class App extends Component {
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
       this.setState({ userId: user._id });
+      window.location = `/home/${this.state.userId}`; /*todo: change to not use window
+      because jenn says it's bad lmao*/
       //  post("/api/initsocket", { socketid: socket.id });
-      console.log(userId);
+      // console.log("yeet");
     });
-    console.log(this.state.userId);
-    //window.location = `/home/${userId}`;
+    // console.log(this.state.userId);
+    
   };
 
   handleLogout = () => {
