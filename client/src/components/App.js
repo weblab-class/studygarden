@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { Router } from "@reach/router";
+import NavBar from "./modules/NavBar.js";
+import HomePage from "./pages/HomePage.js";
 import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
 
 import "../utilities.css";
 
-import { socket } from "../client-socket.js";
+//import { socket } from "../client-socket.js";
 
 import { get, post } from "../utilities";
 
@@ -35,11 +37,12 @@ class App extends Component {
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
       this.setState({ userId: user._id });
-      post("/api/initsocket", { socketid: socket.id });
+      //  post("/api/initsocket", { socketid: socket.id });
     });
   };
 
   handleLogout = () => {
+    console.log("Logged out successfully!");
     this.setState({ userId: undefined });
     post("/api/logout");
   };
@@ -47,15 +50,12 @@ class App extends Component {
   render() {
     return (
       <>
-        <Router>
-          <Skeleton
-            path="/"
-            handleLogin={this.handleLogin}
-            handleLogout={this.handleLogout}
-            userId={this.state.userId}
-          />
-          <NotFound default />
-        </Router>
+        <div className="App-container">
+          <Router>
+            <HomePage path="/" userId={this.state.userId} />
+            <NotFound default />
+          </Router>
+        </div>
       </>
     );
   }

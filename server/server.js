@@ -29,7 +29,7 @@ const api = require("./api");
 const auth = require("./auth");
 
 // socket stuff
-const socket = require("./server-socket");
+//const socket = require("./server-socket");
 
 // Server configuration below
 // TODO change connection URL after setting up your team database
@@ -39,11 +39,14 @@ const databaseName = "FILL ME IN";
 
 // connect to mongodb
 mongoose
-  .connect(mongoConnectionURL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    dbName: databaseName,
-  })
+  .connect(
+    mongoConnectionURL,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      dbName: databaseName,
+    }
+  )
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.log(`Error connecting to MongoDB: ${err}`));
 
