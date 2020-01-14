@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Router } from "@reach/router";
 import NavBar from "./modules/NavBar.js";
+import LoginPage from "./pages/LoginPage.js";
 import HomePage from "./pages/HomePage.js";
 import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
@@ -52,7 +53,13 @@ class App extends Component {
       <>
         <div className="App-container">
           <Router>
-            <HomePage path="/" userId={this.state.userId} />
+            <LoginPage
+              path="/"
+              userId={this.state.userId}
+              handleLogin={this.handleLogin}
+              handleLogout={this.handleLogout}
+            />
+            <HomePage path="/home" userId={this.state.userId} />
             <NotFound default />
           </Router>
         </div>

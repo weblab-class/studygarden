@@ -3,13 +3,3 @@
   background: linear-gradient(0deg, rgba(255, 209, 224, 1) 0%, rgba(189, 217, 241, 1) 100%);
 }
 */
-.HomePage-title {
-  padding: var(--s) var(--m);
-  text-align: center;
-}
-
-.HomePage-loginLink {
-  padding: var(--s) var(--m);
-  background-color: blue;
-  text-align: center;
-}

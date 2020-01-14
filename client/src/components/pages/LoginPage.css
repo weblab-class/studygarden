@@ -1,0 +1,10 @@
+.LoginPage-title {
+  padding: var(--s) var(--m);
+  text-align: center;
+}
+
+.LoginPage-loginLink {
+  padding: var(--s) var(--m);
+  background-color: blue;
+  text-align: center;
+}
