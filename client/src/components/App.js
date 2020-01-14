@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Router } from "@reach/router";
+import { Redirect } from "react-router-dom";
 import NavBar from "./modules/NavBar.js";
 import LoginPage from "./pages/LoginPage.js";
 import HomePage from "./pages/HomePage.js";
@@ -39,7 +40,10 @@ class App extends Component {
     post("/api/login", { token: userToken }).then((user) => {
       this.setState({ userId: user._id });
       //  post("/api/initsocket", { socketid: socket.id });
+      console.log(userId);
     });
+    console.log(this.state.userId);
+    //window.location = `/home/${userId}`;
   };
 
   handleLogout = () => {
@@ -59,7 +63,7 @@ class App extends Component {
               handleLogin={this.handleLogin}
               handleLogout={this.handleLogout}
             />
-            <HomePage path="/home" userId={this.state.userId} />
+            <HomePage path="/home/:userId" />
             <NotFound default />
           </Router>
         </div>

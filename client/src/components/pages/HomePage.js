@@ -1,21 +1,23 @@
 import React, { Component } from "react";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
+import { get } from "../../utilities";
 
 import "../../utilities.css";
 import "./HomePage.css";
-
-//TODO: REPLACE WITH YOUR OWN CLIENT_ID
-const GOOGLE_CLIENT_ID = "529894289409-jecjp2cbbu9hsu3fobsrc063mv19t99r.apps.googleusercontent.com";
 
 class HomePage extends Component {
   constructor(props) {
     super(props);
     // Initialize Default State
-    this.state = {};
+    this.state = {
+      user: null,
+    };
   }
 
   componentDidMount() {
     // remember -- api calls go here!
+    document.title = "Profile Page";
+    get(`/api/user`, { userId: this.props.userId }).then((user) => this.setState({ user: user }));
   }
 
   render() {

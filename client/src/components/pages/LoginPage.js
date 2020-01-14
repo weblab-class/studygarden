@@ -24,13 +24,23 @@ class LoginPage extends Component {
         <>
           <div className="LoginPage-container">
             <h1 className="LoginPage-title"> study garden </h1>
-            <GoogleLogin
-              clientId={GOOGLE_CLIENT_ID}
-              buttonText="Login with Google"
-              onSuccess={this.props.handleLogin}
-              onFailure={(err) => console.log(err)}
-              className="LoginPage-loginLink"
-            />
+            {this.props.userId ? (
+              <GoogleLogout
+                clientId={GOOGLE_CLIENT_ID}
+                buttonText="Logout"
+                onLogoutSuccess={this.props.handleLogout}
+                onFailure={(err) => console.log(err)}
+                className="NavBar-link NavBar-login"
+              />
+            ) : (
+              <GoogleLogin
+                clientId={GOOGLE_CLIENT_ID}
+                buttonText="Login"
+                onSuccess={this.props.handleLogin}
+                onFailure={(err) => console.log(err)}
+                className="NavBar-link NavBar-login"
+              />
+            )}
           </div>
         </>
       );
