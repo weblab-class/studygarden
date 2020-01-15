@@ -32,14 +32,16 @@ router.get("/whoami", (req, res) => {
   res.send(req.user);
 });
 
-router.post("/initsocket", (req, res) => {
+/* router.post("/initsocket", (req, res) => {
   // do nothing if user not logged in
   if (req.user) socket.addUser(req.user, socket.getSocketFromSocketID(req.body.socketid));
   res.send({});
 });
+*/
 
-router.post("/timer", (req, res) =>{  //WIP
-  const startTime = Date.now()
+router.post("/timer", (req, res) => {
+  //WIP
+  const startTime = Date.now();
   const newSession = new StudyTimer({
     creator_id: req.user._id,
     creator_name: req.user.name,
@@ -47,11 +49,17 @@ router.post("/timer", (req, res) =>{  //WIP
   });
 
   newStory.save().then((story) => res.send(story));
-})
+});
 
 // |------------------------------|
 // | write your API methods below!|
 // |------------------------------|
+
+router.get("/user", (req, res) => {
+  User.findById(req.query.userId).then((user) => {
+    res.send(user);
+  });
+});
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
