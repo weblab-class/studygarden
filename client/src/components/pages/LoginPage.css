@@ -1,12 +1,12 @@
 @import url("https://fonts.googleapis.com/css?family=Muli:300,600");
 
 :root {
-  --lightblue: #9CBBE0;
+  --lightblue: #9cbbe0;
   --darkblue: #577394;
   --white: #fff;
-  --pink: #E6B9B5;
-  --green: #8F9365;
-  --lightgreen: #CFD996;
+  --pink: #e6b9b5;
+  --green: #8f9365;
+  --lightgreen: #cfd996;
 
   --maintitle: 160px;
   --xs: 4px;
@@ -15,14 +15,14 @@
   --l: 24px;
 }
 
-.u-textCenter{
+.u-textCenter {
   text-align: center;
 }
 
 .wrapper {
-    max-width: 800px;
-    width: 80%;
-    margin: 0 auto;
+  max-width: 800px;
+  width: 80%;
+  margin: 0 auto;
 }
 
 body {
@@ -59,27 +59,27 @@ body {
 }
 
 .footer {
-    position: flex;
-    top: 0px;
-    left: 0px;
-    padding: 0;
-    margin: 0;
-    width: auto;
-    height: auto;
-    text-align: center;
-    bottom: 0px;
-    width:100%;
-    display: block;
+  position: flex;
+  top: 0px;
+  left: 0px;
+  padding: 0;
+  margin: 0;
+  width: auto;
+  height: auto;
+  text-align: center;
+  bottom: 0px;
+  width: 100%;
+  display: block;
 }
 
 /* Image settings for garden on bottom of page */
 img {
-    position:fixed;
-    bottom:0px;
-    left: 0px;
-    padding: 0;
-    display: block;
-    margin: 0 auto;
-    max-height: 100%;
-    max-width: 100%;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  padding: 0;
+  display: block;
+  margin: 0 auto;
+  max-height: 100%;
+  max-width: 100%;
 }

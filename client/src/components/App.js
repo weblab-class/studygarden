@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { Router } from "@reach/router";
+import NavBar from "./modules/NavBar.js";
+import LoginPage from "./pages/LoginPage.js";
+import HomePage from "./pages/HomePage.js";
 import NotFound from "./pages/NotFound.js";
-import Skeleton from "./pages/Skeleton.js";
 
 import "../utilities.css";
-
-import { socket } from "../client-socket.js";
+import "./App.css";
+//import { socket } from "../client-socket.js";
 
 import { get, post } from "../utilities";
 
@@ -17,7 +19,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: undefined,
+      userId: null,
     };
   }
 
@@ -26,6 +28,7 @@ class App extends Component {
       if (user._id) {
         // they are registed in the database, and currently logged in.
         this.setState({ userId: user._id });
+        console.log("user detected");
       }
     });
   }
@@ -35,27 +38,35 @@ class App extends Component {
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
       this.setState({ userId: user._id });
-      post("/api/initsocket", { socketid: socket.id });
+      window.location = `/home/${
+        this.state.userId
+      }`; /*todo: change to not use window
+      //  because jenn says it's bad lmao*/
+      //  post("/api/initsocket", { socketid: socket.id });
     });
   };
 
   handleLogout = () => {
-    this.setState({ userId: undefined });
+    console.log("Logged out successfully!");
+    this.setState({ userId: null });
     post("/api/logout");
   };
 
   render() {
     return (
       <>
-        <Router>
-          <Skeleton
-            path="/"
-            handleLogin={this.handleLogin}
-            handleLogout={this.handleLogout}
-            userId={this.state.userId}
-          />
-          <NotFound default />
-        </Router>
+        <div className="App-container">
+          <Router>
+            <LoginPage
+              path="/"
+              userId={this.state.userId}
+              handleLogin={this.handleLogin}
+              handleLogout={this.handleLogout}
+            />
+            <HomePage path="/home/:userId" />
+            <NotFound default />
+          </Router>
+        </div>
       </>
     );
   }

@@ -29,21 +29,27 @@ const api = require("./api");
 const auth = require("./auth");
 
 // socket stuff
-const socket = require("./server-socket");
+//const socket = require("./server-socket");
 
 // Server configuration below
 // TODO change connection URL after setting up your team database
-const mongoConnectionURL = "FILL ME IN";
-// TODO change database name to the name you chose
-const databaseName = "FILL ME IN";
+//const mongoConnectionURL = "mongodb+srv://admin:XZ9yNb7KaPyEXG9X@cluster0-t5kvp.mongodb.net/test?retryWrites=true&w=majority"
+//  STUDY GARDEN SERVER BELOWO
+const mongoConnectionURL =
+  "mongodb+srv://admin:XZ9yNb7KaPyEXG9X@cluster0-h7gmv.mongodb.net/test?retryWrites=true&w=majority";
+
+const databaseName = "Cluster0";
 
 // connect to mongodb
 mongoose
-  .connect(mongoConnectionURL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    dbName: databaseName,
-  })
+  .connect(
+    mongoConnectionURL,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      dbName: databaseName,
+    }
+  )
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.log(`Error connecting to MongoDB: ${err}`));
 
@@ -97,7 +103,7 @@ app.use((err, req, res, next) => {
 // hardcode port to 3000 for now
 const port = 3000;
 const server = http.Server(app);
-socket.init(server);
+//socket.init(server);
 
 server.listen(port, () => {
   console.log(`Server running on port: ${port}`);
