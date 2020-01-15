@@ -60,7 +60,6 @@ class App extends Component {
           handleLogin={this.handleLogin}
           handleLogout={this.handleLogout}
           userId={this.state.userId}
-          hideNavBar={false}
         />
         <div className="App-container">
           <Router>

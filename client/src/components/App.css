@@ -1,6 +1,7 @@
 .App-container {
-  max-width: 960px;
-  padding: var(--m) var(--m);
+  max-width: 100%;
+  max-height: 100%;
+  padding: 100px 60px;
   margin: auto;
-  background-color: #a4def9;
+  background-color: #9bbce0;
 }

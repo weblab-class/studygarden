@@ -10,7 +10,9 @@ class LoginPage extends Component {
   constructor(props) {
     super(props);
     // Initialize Default State
-    this.state = {};
+    this.state = {
+      hideNavBar: true,
+    };
   }
 
   componentDidMount() {
