@@ -36,7 +36,7 @@ const auth = require("./auth");
 //const mongoConnectionURL = "mongodb+srv://admin:XZ9yNb7KaPyEXG9X@cluster0-t5kvp.mongodb.net/test?retryWrites=true&w=majority"
 //  STUDY GARDEN SERVER BELOWO
 const mongoConnectionURL =
-  "mongodb+srv://Jennifer:studygarden@cluster0-h7gmv.mongodb.net/test?retryWrites=true&w=majority";
+  "mongodb+srv://admin:XZ9yNb7KaPyEXG9X@cluster0-h7gmv.mongodb.net/test?retryWrites=true&w=majority";
 
 const databaseName = "Cluster0";
 
