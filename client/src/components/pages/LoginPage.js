@@ -22,22 +22,26 @@ class LoginPage extends Component {
       return (
         <>
           <div className="LoginPage-container">
-            <h1 className="LoginPage-title"> study garden </h1>
-            {this.props.userId ? (
-              <GoogleLogout
-                clientId={GOOGLE_CLIENT_ID}
-                buttonText="Logout"
-                onLogoutSuccess={this.props.handleLogout}
-                onFailure={(err) => console.log(err)}
-              />
-            ) : (
-              <GoogleLogin
-                clientId={GOOGLE_CLIENT_ID}
-                buttonText="Login"
-                onSuccess={this.props.handleLogin}
-                onFailure={(err) => console.log(err)}
-              />
-            )}
+            <div className="footer">
+              <h1 className="LoginPage-title"> study garden </h1>
+              {this.props.userId ? (
+                <GoogleLogout
+                  clientId={GOOGLE_CLIENT_ID}
+                  buttonText="Logout"
+                  onLogoutSuccess={this.props.handleLogout}
+                  onFailure={(err) => console.log(err)}
+                />
+              ) : (
+                <GoogleLogin
+                  clientId={GOOGLE_CLIENT_ID}
+                  buttonText="Login"
+                  onSuccess={this.props.handleLogin}
+                  onFailure={(err) => console.log(err)}
+                />
+              )}
+              <img src="https://i.imgur.com/peJQgf0.png" />
+            </div>
+            <br />
           </div>
         </>
       );
