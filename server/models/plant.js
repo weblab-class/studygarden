@@ -5,13 +5,14 @@ const PlantSchema = new mongoose.Schema({
   plantName: String,
   subject: String,
   creator: {type: ObjectId, ref: "user"},
-  timeCreated: Date,
+  timeCreated: {Date, default: Date.now},
   goalTime: Date,
-  studyTimeInit: [Date],
-  studyTimeFinal: [Date],
+  studyTimeIniti: Date,
+  studyTimeFinal: Date,
   studyTimeCumul: Number,
   Stage: Number,
-  
+  isStudying: Boolean,
+
 
 });
 

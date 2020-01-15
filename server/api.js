@@ -12,6 +12,7 @@ const express = require("express");
 // import models so we can interact with the database
 const User = require("./models/user");
 const StudySession = require("./models/studytimer"); //rip file name
+const Plant = require("./models/plant"); //planty bois are coming 👀
 // import authentication library
 const auth = require("./auth");
 
@@ -38,6 +39,7 @@ router.get("/whoami", (req, res) => {
   res.send({});
 });
 */
+//will need sockets don't delete plz :x
 
 router.post("/timer", (req, res) => {
   //WIP
@@ -50,7 +52,27 @@ router.post("/timer", (req, res) => {
 
   newStory.save().then((story) => res.send(story));
 });
+router.post("/plant/new", (req, res) =>{
+  //WIP, end point for creating a brand new plant
+  const creationTime = Date.now;
+  const plantName = req.body.name;
+  const subject = req.body.subject;
+  const goalTime = req.body.goal; //how tf will this be parsed into a Date type in front end
+  //...the world may never know
 
+  const newPlant = new Plant{
+    plantName: plantName,
+    subject: subject,
+    creator: {type: ObjectId, ref: "user"}, //@cor, osuHOW
+    timeCreated: Date,
+    goalTime: Date,
+    studyTimeIniti: Date,
+    studyTimeFinal: Date,
+    studyTimeCumul: Number,
+    Stage: Number,
+    isStudying: Boolean,
+  }
+}
 // |------------------------------|
 // | write your API methods below!|
 // |------------------------------|
