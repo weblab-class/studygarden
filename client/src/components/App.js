@@ -26,6 +26,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    //make this async eventually
     get("/api/whoami").then((user) => {
       if (user._id) {
         // they are registed in the database, and currently logged in.
@@ -55,6 +56,12 @@ class App extends Component {
   render() {
     return (
       <>
+        <NavBar
+          handleLogin={this.handleLogin}
+          handleLogout={this.handleLogout}
+          userId={this.state.userId}
+          hideNavBar={false}
+        />
         <div className="App-container">
           <Router>
             <LoginPage
