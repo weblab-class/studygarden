@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import { Router } from "@reach/router";
-import { Redirect } from "react-router-dom";
 import NavBar from "./modules/NavBar.js";
 import LoginPage from "./pages/LoginPage.js";
 import HomePage from "./pages/HomePage.js";
 import NotFound from "./pages/NotFound.js";
-import Skeleton from "./pages/Skeleton.js";
 
 import "../utilities.css";
-
+import "./App.css";
 //import { socket } from "../client-socket.js";
 
 import { get, post } from "../utilities";
@@ -21,7 +19,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: undefined,
+      userId: null,
     };
   }
 
@@ -31,6 +29,7 @@ class App extends Component {
       if (user._id) {
         // they are registed in the database, and currently logged in.
         this.setState({ userId: user._id });
+        console.log("user detected");
       }
     });
   }
@@ -40,16 +39,17 @@ class App extends Component {
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
       this.setState({ userId: user._id });
+      window.location = `/home/${
+        this.state.userId
+      }`; /*todo: change to not use window
+      //  because jenn says it's bad lmao*/
       //  post("/api/initsocket", { socketid: socket.id });
-      console.log(userId);
     });
-    console.log(this.state.userId);
-    //window.location = `/home/${userId}`;
   };
 
   handleLogout = () => {
     console.log("Logged out successfully!");
-    this.setState({ userId: undefined });
+    this.setState({ userId: null });
     post("/api/logout");
   };
 

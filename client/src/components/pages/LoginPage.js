@@ -4,7 +4,6 @@ import GoogleLogin, { GoogleLogout } from "react-google-login";
 import "../../utilities.css";
 import "./LoginPage.css";
 
-//TODO: REPLACE WITH YOUR OWN CLIENT_ID
 const GOOGLE_CLIENT_ID = "529894289409-jecjp2cbbu9hsu3fobsrc063mv19t99r.apps.googleusercontent.com";
 
 class LoginPage extends Component {
@@ -23,24 +22,26 @@ class LoginPage extends Component {
       return (
         <>
           <div className="LoginPage-container">
-            <h1 className="LoginPage-title"> study garden </h1>
-            {this.props.userId ? (
-              <GoogleLogout
-                clientId={GOOGLE_CLIENT_ID}
-                buttonText="Logout"
-                onLogoutSuccess={this.props.handleLogout}
-                onFailure={(err) => console.log(err)}
-                className="NavBar-link NavBar-login"
-              />
-            ) : (
-              <GoogleLogin
-                clientId={GOOGLE_CLIENT_ID}
-                buttonText="Login"
-                onSuccess={this.props.handleLogin}
-                onFailure={(err) => console.log(err)}
-                className="NavBar-link NavBar-login"
-              />
-            )}
+            <div className="footer">
+              <h1 className="LoginPage-title"> study garden </h1>
+              {this.props.userId ? (
+                <GoogleLogout
+                  clientId={GOOGLE_CLIENT_ID}
+                  buttonText="Logout"
+                  onLogoutSuccess={this.props.handleLogout}
+                  onFailure={(err) => console.log(err)}
+                />
+              ) : (
+                <GoogleLogin
+                  clientId={GOOGLE_CLIENT_ID}
+                  buttonText="Login"
+                  onSuccess={this.props.handleLogin}
+                  onFailure={(err) => console.log(err)}
+                />
+              )}
+              <img src="https://i.imgur.com/peJQgf0.png" />
+            </div>
+            <br />
           </div>
         </>
       );

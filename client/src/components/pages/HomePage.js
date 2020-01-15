@@ -21,6 +21,20 @@ class HomePage extends Component {
   }
 
   render() {
+    return (
+      <>
+        {this.state.user ? (
+          <>
+            <h1>Welcome!</h1>
+            <h2>see your garden here.</h2>
+          </>
+        ) : (
+          <div> Please Log In! </div>
+        )}
+      </>
+    );
+
+    /* {
     if (!this.state.user) {
       return <div> Please Log In! </div>;
     } else {
@@ -31,6 +45,7 @@ class HomePage extends Component {
         </>
       );
     }
+  } */
   }
 }
 

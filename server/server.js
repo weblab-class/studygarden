@@ -33,9 +33,11 @@ const auth = require("./auth");
 
 // Server configuration below
 // TODO change connection URL after setting up your team database
+//const mongoConnectionURL = "mongodb+srv://admin:XZ9yNb7KaPyEXG9X@cluster0-t5kvp.mongodb.net/test?retryWrites=true&w=majority"
+//  STUDY GARDEN SERVER BELOWO
 const mongoConnectionURL =
-  "mongodb+srv://Jennifer:2EZ24get@cluster0-h7gmv.mongodb.net/test?retryWrites=true&w=majority";
-// TODO change database name to the name you chose
+  "mongodb+srv://admin:XZ9yNb7KaPyEXG9X@cluster0-h7gmv.mongodb.net/test?retryWrites=true&w=majority";
+
 const databaseName = "Cluster0";
 
 // connect to mongodb
