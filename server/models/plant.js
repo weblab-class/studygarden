@@ -3,10 +3,11 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const PlantSchema = new mongoose.Schema({
   plantName: String,
+  plantType: Number, //can be string if y'all want it to be
   subject: String,
   creator_id: String, //will hold the user's objectId
   timeCreated: Date,
-  goalTime: Date,
+  goalTime: Number,
   studyTimeIniti: Date,
   studyTimeFinal: Date,
   studyTimeCumul: {Number, default: 0},

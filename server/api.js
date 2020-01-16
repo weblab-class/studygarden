@@ -7,6 +7,10 @@
 |
 */
 
+
+/**
+ * @team doc in drive will eventually contain endpoint documentation
+ */
 const express = require("express");
 
 // import models so we can interact with the database
@@ -59,14 +63,15 @@ router.post("/timer", (req, res) => {
 router.post("/plant/new", async (req, res) =>{
   //WIP, end point for creating a brand new plant
   const plantName = req.body.name;
+  const plantType = req.body.type;
   const subject = req.body.subject;
   const id = req.body.id;
-  const creationTime = Date.now;
-  const goalTime = req.body.goal; //how tf will this be parsed into a Date type in front end
-                                  //...the world may never know
+  const creationTime = req.body.time;
+  const goalTime = req.body.goal; //this shouldn't be a date...
 
   const newPlant = new Plant({
     plantName: plantName,
+    plantType: plantType,
     subject: subject,
     creator_id: id,
     timeCreated: creationTime,
@@ -87,7 +92,7 @@ router.get("/plant", (req,res) =>{
   Plant.find({creator_id: req.query.id}).then((plants) =>res.send(plants));
   } catch (err) {
     res.send(err.concat( " | userid is invalid or user appears to have no plants!"));
-  }
+  };
 });
 
 /* END plant specific endpoints */
