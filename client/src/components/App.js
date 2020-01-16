@@ -3,6 +3,7 @@ import { Router } from "@reach/router";
 import NavBar from "./modules/NavBar.js";
 import LoginPage from "./pages/LoginPage.js";
 import HomePage from "./pages/HomePage.js";
+import NewPlantPage from "./pages/NewPlant.js";
 import NotFound from "./pages/NotFound.js";
 
 import "../utilities.css";
@@ -71,6 +72,7 @@ class App extends Component {
               handleLogout={this.handleLogout}
             />
             <HomePage path="/home/:userId" />
+            <NewPlantPage path="/home/:userId/newplant" />
             <NotFound default />
           </Router>
         </div>
