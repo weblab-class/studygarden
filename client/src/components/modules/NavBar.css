@@ -1,15 +1,22 @@
 .NavBar-container {
   padding: var(--s) var(--m);
-  background-color: var(--primary);
+  background-color: #e6b9b5;
+  position: fixed;
+  width: 100%;
+  display: flex;
+  box-shadow: 0 8px 10px -6px grey;
+  z-index: 1;
+  height: 45px;
 }
 
 .NavBar-title {
   color: var(--white);
   font-size: 20px;
-}
-
-.NavBar-linkContainer {
-  margin-left: var(--l);
+  margin-right: auto;
+  display: flex;
+  flex-flow: row nowrap;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .NavBar-link,
@@ -17,6 +24,8 @@
   color: var(--white);
   opacity: 0.6;
   text-decoration: none;
+  font-size: 18px;
+  padding: 20px;
 }
 
 .NavBar-link:hover {
@@ -27,6 +36,6 @@
   opacity: 1;
 }
 
-.NavBar-link + .NavBar-link {
-  margin-left: var(--m);
+.NavBar-logout {
+  margin-right: 40px;
 }
