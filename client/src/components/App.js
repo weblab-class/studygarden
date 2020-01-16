@@ -39,10 +39,11 @@ class App extends Component {
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
       this.setState({ userId: user._id });
-      window.location = `/home/${
+      location.href = `/home/${
         this.state.userId
       }`; /*todo: change to not use window
       //  because jenn says it's bad lmao*/
+      //  sort of resolved, location.href acts like a link
       //  post("/api/initsocket", { socketid: socket.id });
     });
   };

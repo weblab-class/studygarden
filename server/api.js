@@ -7,11 +7,17 @@
 |
 */
 
+
+/**
+ * @team doc in drive will eventually contain endpoint documentation
+ */
 const express = require("express");
 
 // import models so we can interact with the database
 const User = require("./models/user");
 const StudySession = require("./models/studytimer"); //rip file name
+const Plant = require("./models/plant"); //planty bois are coming 👀
+const ProfOrder = require("./models/profileorder");
 // import authentication library
 const auth = require("./auth");
 
@@ -39,6 +45,8 @@ router.get("/whoami", (req, res) => {
 });
 */
 
+//will need sockets don't delete plz :x
+
 router.post("/timer", (req, res) => {
   //WIP
   const startTime = Date.now();
@@ -50,10 +58,44 @@ router.post("/timer", (req, res) => {
 
   newStory.save().then((story) => res.send(story));
 });
+/* plant specific endpoints */
 
-// |------------------------------|
-// | write your API methods below!|
-// |------------------------------|
+router.post("/plant/new", async (req, res) =>{
+  //WIP, end point for creating a brand new plant
+  const plantName = req.body.name;
+  const plantType = req.body.type;
+  const subject = req.body.subject;
+  const id = req.body.id;
+  const creationTime = req.body.time;
+  const goalTime = req.body.goal; //this shouldn't be a date...
+
+  const newPlant = new Plant({
+    plantName: plantName,
+    plantType: plantType,
+    subject: subject,
+    creator_id: id,
+    timeCreated: creationTime,
+    goalTime: goalTime,
+  });
+  const plant = await newPlant.save();
+  return res.send(plant);
+});
+router.post("/plant/update", async (req, res) =>{
+  //WIP, will handle any update requests for plants
+  const plant = await newPlant.save();
+  return res.send(plant);
+});
+
+router.get("/plant", (req,res) =>{
+  //WIP, will get all plants from user
+  try{
+  Plant.find({creator_id: req.query.id}).then((plants) =>res.send(plants));
+  } catch (err) {
+    res.send(err.concat( " | userid is invalid or user appears to have no plants!"));
+  };
+});
+
+/* END plant specific endpoints */
 
 router.get("/user", (req, res) => {
   User.findById(req.query.userId).then((user) => {
