@@ -13,6 +13,7 @@ const express = require("express");
 const User = require("./models/user");
 const StudySession = require("./models/studytimer"); //rip file name
 const Plant = require("./models/plant"); //planty bois are coming 👀
+const ProfOrder = require("./models/profileorder");
 // import authentication library
 const auth = require("./auth");
 
@@ -39,6 +40,7 @@ router.get("/whoami", (req, res) => {
   res.send({});
 });
 */
+
 //will need sockets don't delete plz :x
 
 router.post("/timer", (req, res) => {
@@ -52,30 +54,38 @@ router.post("/timer", (req, res) => {
 
   newStory.save().then((story) => res.send(story));
 });
-router.post("/plant/new", (req, res) =>{
+/* plant specific endpoints */
+
+router.post("/plant/new", async (req, res) =>{
   //WIP, end point for creating a brand new plant
-  const creationTime = Date.now;
   const plantName = req.body.name;
   const subject = req.body.subject;
+  const id = req.body.id;
+  const creationTime = Date.now; //currently redundant, may remove
   const goalTime = req.body.goal; //how tf will this be parsed into a Date type in front end
-  //...the world may never know
+                                  //...the world may never know
 
-  const newPlant = new Plant{
+  const newPlant = new Plant({
     plantName: plantName,
     subject: subject,
-    creator: {type: ObjectId, ref: "user"}, //@cor, osuHOW
-    timeCreated: Date,
-    goalTime: Date,
-    studyTimeIniti: Date,
-    studyTimeFinal: Date,
-    studyTimeCumul: Number,
-    Stage: Number,
-    isStudying: Boolean,
-  }
-}
-// |------------------------------|
-// | write your API methods below!|
-// |------------------------------|
+    creator_id: id,
+    timeCreated: creationTime,
+    goalTime: goalTime,
+  });
+  const plant = await newPlant.save();
+  return res.send(plant);
+});
+router.post("/plant/update", (req, res) =>{
+  //WIP, will handle any update requests for plants
+  const plant = await newPlant.save();
+  return res.send(plant);
+});
+
+router.get("/plant", (req,res) =>{
+  //TODO, will get plant info
+});
+
+/* END plant specific endpoints */
 
 router.get("/user", (req, res) => {
   User.findById(req.query.userId).then((user) => {
