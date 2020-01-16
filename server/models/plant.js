@@ -5,14 +5,14 @@ const PlantSchema = new mongoose.Schema({
   plantName: String,
   subject: String,
   creator_id: String, //will hold the user's objectId
-  timeCreated: {Date, default: Date.now},
+  timeCreated: Date,
   goalTime: Date,
-  studyTimeIniti: {Date, default: null},
-  studyTimeFinal: {Date, default: null},
+  studyTimeIniti: Date,
+  studyTimeFinal: Date,
   studyTimeCumul: {Number, default: 0},
   Stage: {Number, default: 0},
   isStudying: {Boolean, default: false},
-  homePageIndex: {Number, default: null}, /* in case we want to
+  homePageIndex: Number, /* in case we want to
   let people reorder their plants (doesn't seem too hard to implement)*/
   // famous last words
 

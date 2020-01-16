@@ -61,7 +61,7 @@ router.post("/plant/new", async (req, res) =>{
   const plantName = req.body.name;
   const subject = req.body.subject;
   const id = req.body.id;
-  const creationTime = Date.now; //currently redundant, may remove
+  const creationTime = Date.now;
   const goalTime = req.body.goal; //how tf will this be parsed into a Date type in front end
                                   //...the world may never know
 
@@ -75,7 +75,7 @@ router.post("/plant/new", async (req, res) =>{
   const plant = await newPlant.save();
   return res.send(plant);
 });
-router.post("/plant/update", (req, res) =>{
+router.post("/plant/update", async (req, res) =>{
   //WIP, will handle any update requests for plants
   const plant = await newPlant.save();
   return res.send(plant);
