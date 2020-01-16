@@ -35,3 +35,7 @@
 .NavBar-link.NavBar-login {
   opacity: 1;
 }
+
+.NavBar-logout {
+  margin-right: 40px;
+}
