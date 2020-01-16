@@ -82,7 +82,12 @@ router.post("/plant/update", async (req, res) =>{
 });
 
 router.get("/plant", (req,res) =>{
-  //TODO, will get plant info
+  //WIP, will get all plants from user
+  try{
+  Plant.find({creator_id: req.query.id}).then((plants) =>res.send(plants));
+  } catch (err) {
+    res.send(err.concat( " | userid is invalid or user appears to have no plants!"));
+  }
 });
 
 /* END plant specific endpoints */
