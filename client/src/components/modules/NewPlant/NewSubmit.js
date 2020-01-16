@@ -12,9 +12,8 @@ import { post } from "../../../utilities";
  * @param {String} creator_id
  */
 
-
 //should combine into newplantinput
- 
+import "../../modules/NewPlantInput.css";
 import "../../../utilities.css";
 //import "./HomePage.css";
 
@@ -23,24 +22,22 @@ class NewSubmit extends Component {
     super(props);
     // Initialize Default State
     this.state = {
-        timeCreated: Date.now(),
-        // Goal: "",
-        
-
+      timeCreated: Date.now(),
+      // Goal: "",
     };
   }
 
   postNewPlant = (body) => {
     post("/api/plant/new", body).then((plant) => {
-        console.log("plant added?");
-        console.log(plant);
+      console.log("plant added?");
+      console.log(plant);
     });
   };
 
   componentDidMount() {
     // remember -- api calls go here!
   }
-/*   // called whenever the user types in the new post input box
+  /*   // called whenever the user types in the new post input box
   handleChange = (event) => {
     this.setState({
       value: event.target.value,
@@ -51,32 +48,33 @@ class NewSubmit extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const plant = {
-        plantName: this.props.fields.plantName,
-        plantType: this.props.fields.plantType,
-        subject: this.props.fields.subject,
-        id: this.props.userId,
-        time: this.state.timeCreated,
-        goalTime: this.props.fields.goalTime,
+      plantName: this.props.fields.plantName,
+      plantType: this.props.fields.plantType,
+      subject: this.props.fields.subject,
+      id: this.props.userId,
+      time: this.state.timeCreated,
+      goalTime: this.props.fields.goalTime,
     };
+    console.log(plant);
     this.postNewPlant(plant);
     // this.props.onSubmit && this.props.onSubmit(this.state.value);
     // this.setState({
     //   value: "",
     // });
   };
-  render(){
-    return(
-        <div className = "u-link">
-          <button
-            type="submit"
-            className="NewPostInput-button u-pointer"
-            value="Submit"
-            onClick={this.handleSubmit}
-          >
-            Submit
-          </button>
-        </div>
-    )
+  render() {
+    return (
+      <div className="NewPlantInput-buttonContainer">
+        <button
+          type="submit"
+          className="NewPlantInput-submitButton u-pointer"
+          value="Submit"
+          onClick={this.handleSubmit}
+        >
+          plant!
+        </button>
+      </div>
+    );
   }
 }
 

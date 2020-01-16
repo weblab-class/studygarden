@@ -11,7 +11,7 @@ import NewSubmit from "./NewPlant/NewSubmit.js";
  * @param {Number} fields.goalTime
  * @param {String} creator_id
  */
-
+import "./NewPlantInput.css";
 import "../../utilities.css";
 //import "./HomePage.css";
 
@@ -22,44 +22,59 @@ class NewPlantInput extends Component {
     this.state = {
       plantName: "",
       subject: "",
-      goalTime: 1,
+      goalTime: 0,
     };
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
     // remember -- api calls go here!
   }
+  handleChange(event) {
+    const target = event.target;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const name = target.name;
 
-  changeField = (field, input) => {
-    this.setState({ [field]: input });
-  };
+    this.setState({
+      [name]: value,
+    });
+  }
+
   //could use .map() here...
   render() {
     return (
-      <div className="u-flex">
-        <InputBox
-          type="text"
-          defaultText="subject"
-          field="subject"
-          changeField={this.changeField}
-          className="NewPostInput-input"
-        />
+      <form className="NewPlantInput-form">
+        <label className="NewPlantInput-container">
+          Subject:
+          <input
+            name="subject"
+            type="text"
+            value={this.state.subject}
+            onChange={this.handleChange}
+            className="NewPlantInput-input"
+          />
+        </label>
+        <label className="NewPlantInput-container">
+          Goal (in hours):
+          <input
+            name="goalTime"
+            type="number"
+            value={this.state.goalTime}
+            onChange={this.handleChange}
+            className="NewPlantInput-input"
+          />
+        </label>
+        <label className="NewPlantInput-container">
+          Name Your Plant:
+          <input
+            name="plantName"
+            type="text"
+            value={this.state.plantName}
+            onChange={this.handleChange}
+            className="NewPlantInput-input"
+          />
+        </label>
 
-        <InputBox
-          type="text"
-          defaultText="Goal"
-          field="goalTime"
-          changeField={this.changeField}
-          className="NewPostInput-input"
-        />
-
-        <InputBox
-          type="text"
-          defaultText="name"
-          field="plantName"
-          changeField={this.changeField}
-          className="NewPostInput-input"
-        />
         <NewSubmit
           fields={{
             plantName: this.state.plantName,
@@ -69,44 +84,8 @@ class NewPlantInput extends Component {
           }}
           userId={this.props.userId}
         />
-      </div>
+      </form>
     );
   }
 }
-
-class InputBox extends Component {
-  constructor(props) {
-    super(props);
-    // Initialize Default State
-    this.state = {
-      value: "",
-    };
-  }
-  // called whenever the user types in the new post input box
-  handleChange = (event) => {
-    this.setState({
-      value: event.target.value,
-    });
-    if (this.props.field !== "Goal") {
-      this.changeField(this.props.field, this.state.value);
-    } else {
-      this.changeField(this.props.field, this.state.value.parseInt());
-    }
-  };
-
-  render() {
-    return (
-      <div className="u-flex">
-        <input
-          type="text"
-          placeholder={this.props.defaultText}
-          value={this.state.value}
-          onChange={this.handleChange}
-          className="NewPostInput-input"
-        />
-      </div>
-    );
-  }
-}
-
 export default NewPlantInput;
