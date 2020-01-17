@@ -18,18 +18,9 @@ class HomePage extends Component {
   componentDidMount() {
     // remember -- api calls go here!
     document.title = "Profile Page";
-    /* if (this.props.userId === null){
-      navigate(`/`);
-    }else{
-      get(`/api/user`, { userId: this.props.userId }).then((user) => this.setState({ user: user }));
-    } */
-    
-    //this won't work lmao
 
     get(`/api/user`, { userId: this.props.userId }).then((user) => this.setState({ user: user }));
     //why not get user in app.js and pass it down as prop?
-    
-    //get("/api/plant", 
   }
 
   render() {
@@ -45,19 +36,6 @@ class HomePage extends Component {
         )}
       </>
     );
-
-    /* {
-    if (!this.state.user) {
-      return <div> Please Log In! </div>;
-    } else {
-      return (
-        <>
-          <h1>Welcome, {user.name}!</h1>
-          <h2> see your garden here.</h2>
-        </>
-      );
-    }
-  } */
   }
 }
 
