@@ -34,10 +34,21 @@ class NewPlantInput extends Component {
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
-
-    this.setState({
-      [name]: value,
-    });
+    if(target.type === "number") { //prevents putting a negative number in
+      if(target.value < 1){
+        this.setState({
+          [name]: 1,
+        });
+      } else {
+        this.setState({
+          [name]: value,
+        });
+      }
+    } else {
+      this.setState({
+        [name]: value,
+      });
+    };
   }
 
   //could use .map() here...
