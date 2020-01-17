@@ -32,6 +32,12 @@ class LoginPage extends Component {
                   buttonText="Logout"
                   onLogoutSuccess={this.props.handleLogout}
                   onFailure={(err) => console.log(err)}
+                  render={(renderProps) => (
+                    <button onClick={renderProps.onClick} className="LoginPage-googleButton">
+                      Logout
+                    </button>
+                  )}
+                  className="LoginPage-googleButton"
                 />
               ) : (
                 <GoogleLogin
@@ -39,6 +45,12 @@ class LoginPage extends Component {
                   buttonText="Login"
                   onSuccess={this.props.handleLogin}
                   onFailure={(err) => console.log(err)}
+                  render={(renderProps) => (
+                    <button onClick={renderProps.onClick} className="LoginPage-googleButton">
+                      Log In With Google
+                    </button>
+                  )}
+                  className="LoginPage-googleButton"
                 />
               )}
               <img src="https://i.imgur.com/peJQgf0.png" />

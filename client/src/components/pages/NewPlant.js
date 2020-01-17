@@ -30,19 +30,6 @@ class NewPlantPage extends Component {
         <NewPlantInput />
       </>
     );
-
-    /* {
-    if (!this.state.user) {
-      return <div> Please Log In! </div>;
-    } else {
-      return (
-        <>
-          <h1>Welcome, {user.name}!</h1>
-          <h2> see your garden here.</h2>
-        </>
-      );
-    }
-  } */
   }
 }
 
