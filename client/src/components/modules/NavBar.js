@@ -18,10 +18,9 @@ class NavBar extends Component {
   render() {
     return (
       <nav className="NavBar-container">
-        <div className="NavBar-title">
-          <div>study garden </div>
-          <div>
-            {" "}
+        <div className="NavBar-leftSide">
+          <div className="NavBar-title">study garden </div>
+          <div className="NavBar-linkContainer">
             {this.props.userId && (
               <div>
                 <Link to={`/home/${this.props.userId}`} className="NavBar-link">
@@ -44,7 +43,7 @@ class NavBar extends Component {
               onFailure={(err) => console.log(err)}
               render={(renderProps) => (
                 <button onClick={renderProps.onClick} className="NavBar-googleButton">
-                  Logout
+                  logout
                 </button>
               )}
               className="NavBar-link NavBar-login"
@@ -57,7 +56,7 @@ class NavBar extends Component {
               onFailure={(err) => console.log(err)}
               render={(renderProps) => (
                 <button onClick={renderProps.onClick} className="NavBar-googleButton">
-                  Login
+                  login
                 </button>
               )}
               className="NavBar-link NavBar-login"
