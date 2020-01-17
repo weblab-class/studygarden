@@ -1,0 +1,38 @@
+.NewPlantInput-form {
+  display: flex;
+  flex-direction: column;
+  background-color: #cfd896;
+  width: 35%;
+  border-radius: 20px;
+  box-shadow: 0 8px 10px 6px grey;
+}
+
+.NewPlantInput-container {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  margin: 10px 20px;
+  font-weight: bold;
+}
+
+.NewPlantInput-input {
+  margin: 10px 5px;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+
+.NewPlantInput-buttonContainer {
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.NewPlantInput-submitButton {
+  margin: auto;
+  padding: 10px 15px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  border-radius: 20px;
+  background-color: #8d945f;
+}

@@ -23,9 +23,14 @@ class NavBar extends Component {
           <div>
             {" "}
             {this.props.userId && (
-              <Link to={`/home/${this.props.userId}`} className="NavBar-link">
-                home
-              </Link>
+              <div>
+                <Link to={`/home/${this.props.userId}`} className="NavBar-link">
+                  home
+                </Link>
+                <Link to={`/home/${this.props.userId}/newplant`} className="NavBar-link">
+                  new plant
+                </Link>
+              </div>
             )}
           </div>
         </div>
@@ -37,6 +42,11 @@ class NavBar extends Component {
               buttonText="Logout"
               onLogoutSuccess={this.props.handleLogout}
               onFailure={(err) => console.log(err)}
+              render={(renderProps) => (
+                <button onClick={renderProps.onClick} className="NavBar-googleButton">
+                  Logout
+                </button>
+              )}
               className="NavBar-link NavBar-login"
             />
           ) : (
@@ -45,6 +55,11 @@ class NavBar extends Component {
               buttonText="Login"
               onSuccess={this.props.handleLogin}
               onFailure={(err) => console.log(err)}
+              render={(renderProps) => (
+                <button onClick={renderProps.onClick} className="NavBar-googleButton">
+                  Login
+                </button>
+              )}
               className="NavBar-link NavBar-login"
             />
           )}

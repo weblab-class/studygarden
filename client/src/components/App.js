@@ -3,6 +3,7 @@ import { Router } from "@reach/router";
 import NavBar from "./modules/NavBar.js";
 import LoginPage from "./pages/LoginPage.js";
 import HomePage from "./pages/HomePage.js";
+import NewPlantPage from "./pages/NewPlant.js";
 import NotFound from "./pages/NotFound.js";
 
 import "../utilities.css";
@@ -39,10 +40,11 @@ class App extends Component {
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
       this.setState({ userId: user._id });
-      window.location = `/home/${
+      location.href = `/home/${
         this.state.userId
       }`; /*todo: change to not use window
       //  because jenn says it's bad lmao*/
+      //  sort of resolved, location.href acts like a link
       //  post("/api/initsocket", { socketid: socket.id });
     });
   };
@@ -70,6 +72,7 @@ class App extends Component {
               handleLogout={this.handleLogout}
             />
             <HomePage path="/home/:userId" />
+            <NewPlantPage path="/home/:userId/newplant" />
             <NotFound default />
           </Router>
         </div>
