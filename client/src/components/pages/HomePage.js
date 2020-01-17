@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import { get } from "../../utilities";
+import { navigate } from "@reach/router";
 
 import "../../utilities.css";
 import "./HomePage.css";
@@ -17,6 +18,14 @@ class HomePage extends Component {
   componentDidMount() {
     // remember -- api calls go here!
     document.title = "Profile Page";
+    /* if (this.props.userId === null){
+      navigate(`/`);
+    }else{
+      get(`/api/user`, { userId: this.props.userId }).then((user) => this.setState({ user: user }));
+    } */
+    
+    //this won't work lmao
+
     get(`/api/user`, { userId: this.props.userId }).then((user) => this.setState({ user: user }));
     //why not get user in app.js and pass it down as prop?
     

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 
+import flowerDecor from "../../../img/peJQgf0.png"
 import "../../utilities.css";
 import "./LoginPage.css";
 
@@ -33,9 +34,9 @@ class LoginPage extends Component {
                   onLogoutSuccess={this.props.handleLogout}
                   onFailure={(err) => console.log(err)}
                   render={(renderProps) => (
-                    <button onClick={renderProps.onClick} className="LoginPage-googleButton">
+                    <button onClick={renderProps.onClick} className="LoginPage-googleButton u-pointer">
                       Logout
-                    </button>
+                    </button> //FIXME: font is wrong
                   )}
                   className="LoginPage-googleButton"
                 />
@@ -46,14 +47,14 @@ class LoginPage extends Component {
                   onSuccess={this.props.handleLogin}
                   onFailure={(err) => console.log(err)}
                   render={(renderProps) => (
-                    <button onClick={renderProps.onClick} className="LoginPage-googleButton">
+                    <button onClick={renderProps.onClick} className="LoginPage-googleButton u-pointer">
                       Log In With Google
-                    </button>
+                    </button> //FIXME: font is wrong
                   )}
-                  className="LoginPage-googleButton"
+                  className="LoginPage-googleButton" 
                 />
               )}
-              <img src="https://i.imgur.com/peJQgf0.png" />
+              <img src={flowerDecor} />
             </div>
             <br />
           </div>
