@@ -34,7 +34,7 @@ class LoginPage extends Component {
                   onLogoutSuccess={this.props.handleLogout}
                   onFailure={(err) => console.log(err)}
                   render={(renderProps) => (
-                    <button onClick={renderProps.onClick} className="LoginPage-googleButtonu-pointer">
+                    <button onClick={renderProps.onClick} className="LoginPage-googleButton u-pointer">
                       Logout
                     </button> //FIXME: font is wrong
                   )}
