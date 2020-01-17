@@ -62,12 +62,12 @@ router.post("/timer", (req, res) => {
 
 router.post("/plant/new", async (req, res) =>{
   //WIP, end point for creating a brand new plant
-  const plantName = req.body.name;
-  const plantType = req.body.type;
+  const plantName = req.body.plantName;
+  const plantType = req.body.plantType;
   const subject = req.body.subject;
   const id = req.body.id;
   const creationTime = req.body.time;
-  const goalTime = req.body.goal; //this shouldn't be a date...
+  const goalTime = req.body.goalTime; //this shouldn't be a date...
 
   const newPlant = new Plant({
     plantName: plantName,
