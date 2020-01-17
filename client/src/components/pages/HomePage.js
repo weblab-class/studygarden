@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import { get } from "../../utilities";
 import { navigate } from "@reach/router";
+import initialBench from "../../../img/initialBench.png";
 
 import "../../utilities.css";
 import "./HomePage.css";
@@ -26,14 +27,19 @@ class HomePage extends Component {
   render() {
     return (
       <>
-        {this.state.user ? (
-          <>
-            <h1>Welcome!</h1>
-            <h2>see your garden here.</h2>
-          </>
-        ) : (
-          <div> Please Log In! </div>
-        )}
+        <div className="HomePage-container">
+          {this.state.user ? (
+            <>
+              <h1>Welcome, {this.state.user.name}!</h1>
+              <h2>see your garden here.</h2>
+              <div className="HomePage-windowsill">
+                <img src={initialBench} />
+              </div>
+            </>
+          ) : (
+            <div> Loading... </div>
+          )}
+        </div>
       </>
     );
   }
