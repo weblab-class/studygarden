@@ -35,6 +35,8 @@
   font-size: 18px;
   padding-left: 40px;
   font-weight: bold;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .NavBar-link:hover {
