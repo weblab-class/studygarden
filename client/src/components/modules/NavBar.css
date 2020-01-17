@@ -11,11 +11,11 @@
 
 .NavBar-title {
   color: var(--white);
-  font-size: 20px;
+  font-size: 32px;
   margin-right: auto;
   display: flex;
   flex-flow: row nowrap;
-  margin-top: auto;
+  margin-top: auto-1px;
   margin-bottom: auto;
 }
 

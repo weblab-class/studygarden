@@ -18,7 +18,7 @@ class NavBar extends Component {
   render() {
     return (
       <nav className="NavBar-container">
-        <div className="NavBar-title">
+        <div className="NavBar-title u-extraBold">
           <div>study garden </div>
           <div>
             {" "}
