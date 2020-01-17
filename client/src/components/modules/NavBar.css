@@ -12,7 +12,7 @@
 .NavBar-leftSide {
   display: flex;
   flex-flow: row nowrap;
-  margin-top: auto;
+  margin-top: auto-1px;
   margin-bottom: auto;
   margin-right: auto;
 }

@@ -44,9 +44,9 @@ class NavBar extends Component {
               render={(renderProps) => (
                 <button onClick={renderProps.onClick} className="NavBar-googleButton">
                   logout
-                </button>
+                </button> //FIXME: font is wrong
               )}
-              className="NavBar-link NavBar-login"
+              className="NavBar-link NavBar-login u-pointer"
             />
           ) : (
             <GoogleLogin
@@ -57,7 +57,7 @@ class NavBar extends Component {
               render={(renderProps) => (
                 <button onClick={renderProps.onClick} className="NavBar-googleButton">
                   login
-                </button>
+                </button> //FIXME: font is wrong
               )}
               className="NavBar-link NavBar-login"
             />
