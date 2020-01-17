@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 
-import flowerDecor from "../../../img/peJQgf0.png"
+import flowerDecor from "../../../img/peJQgf0.png";
 import "../../utilities.css";
 import "./LoginPage.css";
 
@@ -25,35 +25,39 @@ class LoginPage extends Component {
       return (
         <>
           <div className="LoginPage-container">
+            <h1 className="LoginPage-title"> study garden </h1>
+            {this.props.userId ? (
+              <GoogleLogout
+                clientId={GOOGLE_CLIENT_ID}
+                buttonText="Logout"
+                onLogoutSuccess={this.props.handleLogout}
+                onFailure={(err) => console.log(err)}
+                render={(renderProps) => (
+                  <button
+                    onClick={renderProps.onClick}
+                    className="LoginPage-googleButton u-pointer"
+                  >
+                    Logout
+                  </button> //FIXME: font is wrong
+                )}
+              />
+            ) : (
+              <GoogleLogin
+                clientId={GOOGLE_CLIENT_ID}
+                buttonText="Login"
+                onSuccess={this.props.handleLogin}
+                onFailure={(err) => console.log(err)}
+                render={(renderProps) => (
+                  <button
+                    onClick={renderProps.onClick}
+                    className="LoginPage-googleButton u-pointer"
+                  >
+                    Log In With Google
+                  </button> //FIXME: font is wrong
+                )}
+              />
+            )}
             <div className="footer">
-              <h1 className="LoginPage-title"> study garden </h1>
-              {this.props.userId ? (
-                <GoogleLogout
-                  clientId={GOOGLE_CLIENT_ID}
-                  buttonText="Logout"
-                  onLogoutSuccess={this.props.handleLogout}
-                  onFailure={(err) => console.log(err)}
-                  render={(renderProps) => (
-                    <button onClick={renderProps.onClick} className="LoginPage-googleButton u-pointer">
-                      Logout
-                    </button> //FIXME: font is wrong
-                  )}
-                  className="LoginPage-googleButton"
-                />
-              ) : (
-                <GoogleLogin
-                  clientId={GOOGLE_CLIENT_ID}
-                  buttonText="Login"
-                  onSuccess={this.props.handleLogin}
-                  onFailure={(err) => console.log(err)}
-                  render={(renderProps) => (
-                    <button onClick={renderProps.onClick} className="LoginPage-googleButton u-pointer">
-                      Log In With Google
-                    </button> //FIXME: font is wrong
-                  )}
-                  className="LoginPage-googleButton" 
-                />
-              )}
               <img src={flowerDecor} />
             </div>
             <br />
