@@ -44,7 +44,7 @@ class NavBar extends Component {
               onFailure={(err) => console.log(err)}
               render={(renderProps) => (
                 <button onClick={renderProps.onClick} className="NavBar-googleButton">
-                  Logout
+                  logout
                 </button>
               )}
               className="NavBar-link NavBar-login"
@@ -57,7 +57,7 @@ class NavBar extends Component {
               onFailure={(err) => console.log(err)}
               render={(renderProps) => (
                 <button onClick={renderProps.onClick} className="NavBar-googleButton">
-                  Login
+                  login
                 </button>
               )}
               className="NavBar-link NavBar-login"

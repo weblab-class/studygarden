@@ -3,9 +3,9 @@ import GoogleLogin, { GoogleLogout } from "react-google-login";
 import { get } from "../../utilities";
 
 import "../../utilities.css";
-import "./HomePage.css";
+import "./StudyPage.css";
 
-class HomePage extends Component {
+class StudyPage extends Component {
   constructor(props) {
     super(props);
     // Initialize Default State
@@ -28,28 +28,18 @@ class HomePage extends Component {
       <>
         {this.state.user ? (
           <>
-            <h1>Welcome, {this.state.user.name}!</h1>
-            <h2>see your garden here.</h2>
+            <h1>name!</h1>
+            <h2>subject.</h2>
+            <button> start studying </button>
+            <button> log study time </button>
+            <div>progress bar goes here, probably as separate component</div>
           </>
         ) : (
-          <div> Please Log In! </div>
+          <div> Loading... </div>
         )}
       </>
     );
-
-    /* {
-    if (!this.state.user) {
-      return <div> Please Log In! </div>;
-    } else {
-      return (
-        <>
-          <h1>Welcome, {user.name}!</h1>
-          <h2> see your garden here.</h2>
-        </>
-      );
-    }
-  } */
   }
 }
 
-export default HomePage;
+export default StudyPage;

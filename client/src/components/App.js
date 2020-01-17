@@ -4,6 +4,7 @@ import NavBar from "./modules/NavBar.js";
 import LoginPage from "./pages/LoginPage.js";
 import HomePage from "./pages/HomePage.js";
 import NewPlantPage from "./pages/NewPlant.js";
+import StudyPage from "./pages/StudyPage.js";
 import NotFound from "./pages/NotFound.js";
 
 import "../utilities.css";
@@ -73,6 +74,7 @@ class App extends Component {
             />
             <HomePage path="/home/:userId" />
             <NewPlantPage path="/home/:userId/newplant" />
+            <StudyPage path="/home/:userId/study/:plantId" />
             <NotFound default />
           </Router>
         </div>
