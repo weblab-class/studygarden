@@ -53,11 +53,17 @@ class SinglePlant extends Component {
   render() {
     return (
       <div className="SinglePlant-plantContainer">
-        <img
-          className="SinglePlant-plant"
-          //src={plantStages[this.props.stage][this.props.plantType]}
-          src={plantStages[2][2]}
-        />
+        <div className="btn btn-primary tooltip">
+          <img
+            className="SinglePlant-plant"
+            src={plantStages[this.props.stage][this.props.plantType]}
+          />
+          <div className="bottom">
+            <h3>{this.props.plantName}</h3>
+            <button className="studyButton"> study! </button>
+            <i />
+          </div>
+        </div>
       </div>
     );
   }
