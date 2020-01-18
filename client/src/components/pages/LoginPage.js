@@ -25,30 +25,6 @@ class LoginPage extends Component {
       return (
         <>
           <div className="LoginPage-container">
-<<<<<<< HEAD
-            <div className="footer">
-              <h1 className="LoginPage-title"> study garden </h1>
-              {this.props.userId ? (
-                <GoogleLogout
-                  clientId={GOOGLE_CLIENT_ID}
-                  buttonText="Logout"
-                  onLogoutSuccess={this.props.handleLogout}
-                  onFailure={(err) => console.log(err)}
-                  className="NavBar-link NavBar-login"
-                />
-              ) : (
-                <GoogleLogin
-                  clientId={GOOGLE_CLIENT_ID}
-                  buttonText="Login"
-                  onSuccess={this.props.handleLogin}
-                  onFailure={(err) => console.log(err)}
-                  className="NavBar-link NavBar-login"
-                />
-              )}
-            <img src="https://i.imgur.com/peJQgf0.png"/>
-            </div>
-            <br/>
-=======
             <h1 className="LoginPage-title"> study garden </h1>
             {this.props.userId ? (
               <GoogleLogout
@@ -85,9 +61,7 @@ class LoginPage extends Component {
               <img src={flowerDecor} />
             </div>
             <br />
->>>>>>> 69e3a01ec36e30dd0ab15c45f9580ef1d00df641
           </div>
-
         </>
       );
     }
