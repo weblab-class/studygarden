@@ -65,9 +65,13 @@ router.post("/plant/new", async (req, res) => {
   const plantType = req.body.plantType;
   const subject = req.body.subject;
   const id = req.body.id;
+  const stage = 0;
   const timeCreated = req.body.timeCreated; //CHANGED FROM time
   const goalTime = req.body.goalTime; //this shouldn't be a date...
-
+  let response = [];
+  if (id === "" || id === undefined) {
+    response.push("creator id was not passed in...FIX THIS bc idk whose plant this is");
+  }
   const newPlant = new Plant({
     plantName: plantName,
     plantType: plantType,
@@ -75,24 +79,49 @@ router.post("/plant/new", async (req, res) => {
     creator_id: id,
     timeCreated: timeCreated,
     goalTime: goalTime,
+    stage: stage,
+    studyTimeCumul: 0,
+    isStudying: 0,
   });
   const plant = await newPlant.save();
-  return res.send(plant);
+  response.push(plant);
+  return res.send(response);
 });
 
 router.post("/plant/update", async (req, res) => {
   //WIP, will handle any update requests for plants
-  const entry = await Plant.findOne({ userId: req.body.id });
+  /* possible inputs (somehow forbid any others)
+  body: 
+    {fields: 
+        {plant: 
+          plantName,
+          subject,
+          goalTime,
+          studyTimeIniti,
+          studyTimeFinal,
+          studyTimeCumul,
+          stage,
+          isStudying,
+          homePageIndex,
+        }
+      }
+          */
+  //console.log(req.body);
+  const entry = await Plant.findById(req.body.plantId);
+  console.log(entry);
   let response = [];
   for (obj in req.body.fields) {
+    console.log("op");
     if (req.body.fields[obj] !== null || req.body.fields[obj] !== "") {
-      entry.obj = req.body.fields[obj];
-      entry.save();
-      response.push(
-        { obj }.toString().concat(" on server updated to ".concat(req.body.fields[obj].toString()))
-      );
+      entry[obj] = req.body.fields[obj];
+      await entry.save();
+      const edited = String(obj); /* .toString(() => {
+        return "" + this.name;
+      }); */
+      console.log(String(obj));
+      response.push({ edited } + " on server updated to " + entry[obj]);
     } else {
-      response.push({ obj }.toString().concat(" was empty, not updating"));
+      response.push({ edited }.concat(" was empty, not updating"));
     }
   }
   //const plant = await newPlant.save();
