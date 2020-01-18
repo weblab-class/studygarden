@@ -7,7 +7,6 @@
 |
 */
 
-
 /**
  * @team doc in drive will eventually contain endpoint documentation
  */
@@ -60,13 +59,13 @@ router.post("/timer", (req, res) => {
 });
 /* plant specific endpoints */
 
-router.post("/plant/new", async (req, res) =>{
+router.post("/plant/new", async (req, res) => {
   //WIP, end point for creating a brand new plant
   const plantName = req.body.plantName;
   const plantType = req.body.plantType;
   const subject = req.body.subject;
   const id = req.body.id;
-  const creationTime = req.body.time;
+  const timeCreated = req.body.timeCreated; //CHANGED FROM time
   const goalTime = req.body.goalTime; //this shouldn't be a date...
 
   const newPlant = new Plant({
@@ -74,25 +73,41 @@ router.post("/plant/new", async (req, res) =>{
     plantType: plantType,
     subject: subject,
     creator_id: id,
-    timeCreated: creationTime,
+    timeCreated: timeCreated,
     goalTime: goalTime,
   });
   const plant = await newPlant.save();
   return res.send(plant);
 });
-router.post("/plant/update", async (req, res) =>{
+
+router.post("/plant/update", async (req, res) => {
   //WIP, will handle any update requests for plants
-  const plant = await newPlant.save();
-  return res.send(plant);
+  const entry = await Plant.findOne({ userId: req.body.userId });
+  let response = [];
+  for (obj in req.body.fields) {
+    if (req.body.fields[obj] !== null || req.body.fields[obj] !== "") {
+      entry.obj = req.body.fields[obj];
+      entry.save();
+      response.push(
+        { obj }.toString().concat(" on server updated to ".concat(req.body.fields[obj].toString()))
+      );
+    } else {
+      response.push({ obj }.toString().concat(" was empty, not updating"));
+    }
+  }
+  //const plant = await newPlant.save();
+  return res.send(response);
 });
 
-router.get("/plant", (req,res) =>{
+router.get("/plant", (req, res) => {
   //WIP, will get all plants from user
-  try{
-  Plant.find({creator_id: req.query.id}).then((plants) =>res.send(plants));
+  try {
+    Plant.find({ creator_id: req.query.id }).then((plants) => {
+      res.send(plants);
+    });
   } catch (err) {
-    res.send(err.concat( " | userid is invalid or user appears to have no plants!"));
-  };
+    res.send(err.concat(" | userid is invalid or user appears to have no plants!"));
+  }
 });
 
 /* END plant specific endpoints */

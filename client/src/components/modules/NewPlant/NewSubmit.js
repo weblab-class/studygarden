@@ -52,15 +52,16 @@ class NewSubmit extends Component {
       plantType: this.props.fields.plantType,
       subject: this.props.fields.subject,
       id: this.props.userId,
-      time: this.state.timeCreated,
+      timeCreated: this.state.timeCreated,
       goalTime: this.props.fields.goalTime,
     };
-    if (plant.plantName.length <=2 || plant.plantType.length <=2 || plant.subject.length <=2 ){ //this feels dumb help me
-      throw new Error("fields must be longer than 2 characters!") 
-    }else{
+    if (plant.plantName.length <= 2 || plant.subject.length <= 2) {
+      //this feels dumb help me
+      throw new Error("fields must be longer than 2 characters!");
+    } else {
       console.log(plant);
       this.postNewPlant(plant);
-    };
+    }
     // this.props.onSubmit && this.props.onSubmit(this.state.value);
     // this.setState({
     //   value: "",
