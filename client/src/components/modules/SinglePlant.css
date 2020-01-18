@@ -1,0 +1,66 @@
+.SinglePlant-plantContainer {
+  overflow: hidden;
+  max-width: 20%;
+}
+
+.SinglePlant-plant {
+  position: relative;
+  width: 100%;
+}
+/*tooltip css copied below*/
+.tooltip {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+}
+
+.tooltip .bottom {
+  width: 50%;
+  margin-top: 8%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  padding: 10px 20px;
+  color: #000000;
+  background-color: #eeeeee;
+  font-weight: normal;
+  font-size: 2vmin;
+  border-radius: 10px;
+  position: absolute;
+  z-index: 999999;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.tooltip:hover .bottom {
+  visibility: visible;
+  opacity: 0.8;
+}
+
+.tooltip .bottom i {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -12px;
+  width: 24px;
+  height: 12px;
+  overflow: hidden;
+}
+
+.tooltip .bottom i::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  left: 50%;
+  transform: translate(-50%, 50%) rotate(45deg);
+  background-color: #eeeeee;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+}
+
+.studyButton {
+  border-radius: 5px;
+  border-color: grey;
+}

@@ -14,6 +14,7 @@ class NewPlantPage extends Component {
     // Initialize Default State
     this.state = {
       user: null,
+      currentIndex: 0,
     };
   }
 
@@ -26,12 +27,19 @@ class NewPlantPage extends Component {
     //get("/api/plant",
   }
 
+  setPlantType = (ind) => {
+    this.setState({
+      currentIndex: ind,
+    });
+    console.log(ind);
+  };
+
   render() {
     return (
       <>
         <div className="NewPlant-container">
-          <NewPlantInput />
-          <PlantSlider />
+          <NewPlantInput plantType={this.state.currentIndex} userId={this.props.userId} />
+          <PlantSlider setPlantType={this.setPlantType} currentIndex={this.state.currentIndex} />
         </div>
       </>
     );
