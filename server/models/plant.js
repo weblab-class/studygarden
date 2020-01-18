@@ -10,9 +10,9 @@ const PlantSchema = new mongoose.Schema({
   goalTime: Number,
   studyTimeIniti: Date,
   studyTimeFinal: Date,
-  studyTimeCumul: { Number, default: 0 },
-  stage: { Number, default: 0 },
-  isStudying: { Boolean, default: false },
+  studyTimeCumul: Number,
+  stage: Number,
+  isStudying: Boolean,
   homePageIndex: Number /* in case we want to
   let people reorder their plants (doesn't seem too hard to implement)*/,
   // famous last words

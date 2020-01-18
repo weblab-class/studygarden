@@ -65,6 +65,7 @@ router.post("/plant/new", async (req, res) => {
   const plantType = req.body.plantType;
   const subject = req.body.subject;
   const id = req.body.id;
+  const stage = 0;
   const timeCreated = req.body.timeCreated; //CHANGED FROM time
   const goalTime = req.body.goalTime; //this shouldn't be a date...
   let response = [];
@@ -78,7 +79,9 @@ router.post("/plant/new", async (req, res) => {
     creator_id: id,
     timeCreated: timeCreated,
     goalTime: goalTime,
-    stage: 0,
+    stage: stage,
+    studyTimeCumul: 0,
+    isStudying: 0,
   });
   const plant = await newPlant.save();
   response.push(plant);
