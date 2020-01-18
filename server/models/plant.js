@@ -10,14 +10,12 @@ const PlantSchema = new mongoose.Schema({
   goalTime: Number,
   studyTimeIniti: Date,
   studyTimeFinal: Date,
-  studyTimeCumul: {Number, default: 0},
-  Stage: {Number, default: 0},
-  isStudying: {Boolean, default: false},
-  homePageIndex: Number, /* in case we want to
-  let people reorder their plants (doesn't seem too hard to implement)*/
+  studyTimeCumul: Number,
+  stage: Number,
+  isStudying: Boolean,
+  homePageIndex: Number /* in case we want to
+  let people reorder their plants (doesn't seem too hard to implement)*/,
   // famous last words
-
-
 });
 
 // compile model from schema

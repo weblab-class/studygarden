@@ -46,7 +46,7 @@ class NewSubmit extends Component {
       plantType: this.props.fields.plantType,
       subject: this.props.fields.subject,
       id: this.props.userId,
-      time: this.state.timeCreated,
+      timeCreated: this.state.timeCreated,
       goalTime: this.props.fields.goalTime,
     };
     if (plant.plantName.length <= 2 || plant.subject.length <= 2) {

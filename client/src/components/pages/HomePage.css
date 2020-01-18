@@ -10,3 +10,8 @@
   text-align: center;
   background-color: #9bbce0;
 }
+
+.HomePage-text {
+  color: white;
+  text-shadow: #577494 1px 0 10px;
+}
