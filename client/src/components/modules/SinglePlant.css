@@ -1,11 +1,15 @@
 .SinglePlant-plantContainer {
-  overflow: hidden;
   max-width: 20%;
+  height: auto;
+  margin-top: auto;
 }
 
 .SinglePlant-plant {
   position: relative;
   width: 100%;
+  height: 100%;
+  margin-top: auto;
+  z-index: 1;
 }
 /*tooltip css copied below*/
 .tooltip {

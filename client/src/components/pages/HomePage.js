@@ -47,6 +47,55 @@ class HomePage extends Component {
           userId={this.props.userId}
         />
       ));
+      /* plantsList = (
+        <>
+          <SinglePlant
+            key={`Plant_41`}
+            _id={1}
+            plantName={"name"}
+            creator_id={"5e1e1865a5e5f1d360758694"}
+            plantType={2}
+            stage={1}
+            userId={this.props.userId}
+          />
+          <SinglePlant
+            key={`Plant_42`}
+            _id={2}
+            plantName={"name"}
+            creator_id={"5e1e1865a5e5f1d360758694"}
+            plantType={2}
+            stage={2}
+            userId={this.props.userId}
+          />
+          <SinglePlant
+            key={`Plant_43`}
+            _id={3}
+            plantName={"name"}
+            creator_id={"5e1e1865a5e5f1d360758694"}
+            plantType={1}
+            stage={3}
+            userId={this.props.userId}
+          />
+          <SinglePlant
+            key={`Plant_44`}
+            _id={4}
+            plantName={"name"}
+            creator_id={"5e1e1865a5e5f1d360758694"}
+            plantType={0}
+            stage={1}
+            userId={this.props.userId}
+          />
+          <SinglePlant
+            key={`Plant_44`}
+            _id={4}
+            plantName={"name"}
+            creator_id={"5e1e1865a5e5f1d360758694"}
+            plantType={3}
+            stage={1}
+            userId={this.props.userId}
+          />
+        </>
+      ); //this is for testing purposes */
     } else {
       plantsList = <div>No plants!</div>;
     }
@@ -60,6 +109,7 @@ class HomePage extends Component {
                 <h2>see your garden here.</h2>{" "}
               </div>
               <div className="HomePage-windowsill">
+                <img src={initialBench} className="HomePage-bench" />
                 <div className="HomePage-plantsContainer">{plantsList}</div>
               </div>
             </>
