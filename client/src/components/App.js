@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage.js";
 import NewPlantPage from "./pages/NewPlant.js";
 import StudyPage from "./pages/StudyPage.js";
 import NotFound from "./pages/NotFound.js";
+import { navigate } from "@reach/router";
 
 import "../utilities.css";
 import "./App.css";
@@ -41,11 +42,9 @@ class App extends Component {
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
       this.setState({ userId: user._id });
-      location.href = `/home/${
+      navigate(`/home/${
         this.state.userId
-      }`; /*todo: change to not use window
-      //  because jenn says it's bad lmao*/
-      //  sort of resolved, location.href acts like a link
+      }`);
       //  post("/api/initsocket", { socketid: socket.id });
     });
   };
@@ -53,7 +52,10 @@ class App extends Component {
   handleLogout = () => {
     console.log("Logged out successfully!");
     this.setState({ userId: null });
-    post("/api/logout");
+    post("/api/logout").then((user)=>{
+      this.setState({userId: null});
+      navigate(`/`);
+    });
   };
 
   render() {
