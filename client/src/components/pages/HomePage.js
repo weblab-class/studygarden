@@ -47,7 +47,7 @@ class HomePage extends Component {
           userId={this.props.userId}
         />
       ));
-      /*  plantsList = (
+      /* plantsList = (
         <>
           <SinglePlant
             key={`Plant_41`}

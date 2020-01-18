@@ -33,6 +33,7 @@
   object-fit: contain;
   position: relative;
   margin-top: auto;
+  margin-bottom: 5%;
 }
 
 .HomePage-plantsContainer {
@@ -40,7 +41,8 @@
   overflow: visible;
   width: 80%;
   height: auto;
-  margin-top: -29%;
+  margin-top: -36%;
+  margin-bottom: 10%;
   margin-left: auto;
   margin-right: auto;
 
