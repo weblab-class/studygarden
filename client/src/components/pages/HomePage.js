@@ -3,6 +3,7 @@ import GoogleLogin, { GoogleLogout } from "react-google-login";
 import { get } from "../../utilities";
 import { navigate } from "@reach/router";
 import initialBench from "../../../img/initialBench.png";
+import SinglePlant from "../modules/SinglePlant.js";
 
 import "../../utilities.css";
 import "./HomePage.css";
@@ -13,6 +14,7 @@ class HomePage extends Component {
     // Initialize Default State
     this.state = {
       user: null,
+      plants: [],
     };
   }
 
@@ -21,10 +23,33 @@ class HomePage extends Component {
     document.title = "Profile Page";
 
     get(`/api/user`, { userId: this.props.userId }).then((user) => this.setState({ user: user }));
-    //why not get user in app.js and pass it down as prop?
+
+    get("/api/plant", { creator_id: this.props.userId }).then((plantObjs) => {
+      let reversedStoryObjs = plantObjs.reverse();
+      reversedStoryObjs.map((plantObj) => {
+        this.setState({ plants: this.state.plants.concat([plantObj]) });
+      });
+    });
   }
 
   render() {
+    let plantsList = null;
+    const hasPlants = this.state.plants.length !== 0;
+    if (hasPlants) {
+      plantsList = this.state.plants.map((plantObj) => (
+        <SinglePlant
+          key={`Plant_${plantObj._id}`}
+          _id={plantObj._id}
+          plantName={plantObj.plantName}
+          creator_id={plantObj.creator_id}
+          plantType={plantObj.plantType}
+          plantStage={plantObj.stage}
+          userId={this.props.userId}
+        />
+      ));
+    } else {
+      plantsList = <div>No plants!</div>;
+    }
     return (
       <>
         <div className="HomePage-container">
@@ -35,7 +60,7 @@ class HomePage extends Component {
                 <h2>see your garden here.</h2>{" "}
               </div>
               <div className="HomePage-windowsill">
-                <img src={initialBench} />
+                <div className="HomePage-plantsContainer">{plantsList}</div>
               </div>
             </>
           ) : (

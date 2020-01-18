@@ -1,0 +1,9 @@
+.SinglePlant-plantContainer {
+  overflow: hidden;
+  width: 25%;
+}
+
+.SinglePlant-plant {
+  position: relative;
+  width: 100%;
+}
