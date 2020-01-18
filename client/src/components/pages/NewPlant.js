@@ -3,8 +3,10 @@ import GoogleLogin, { GoogleLogout } from "react-google-login";
 import { get } from "../../utilities";
 import NewPlantInput from "../modules/NewPlantInput.js";
 
+import PlantSlider from "../modules/PlantSlider.js";
+
 import "../../utilities.css";
-import "./HomePage.css";
+import "./NewPlant.css";
 
 class NewPlantPage extends Component {
   constructor(props) {
@@ -27,7 +29,10 @@ class NewPlantPage extends Component {
   render() {
     return (
       <>
-        <NewPlantInput />
+        <div className="NewPlant-container">
+          <NewPlantInput />
+          <PlantSlider />
+        </div>
       </>
     );
   }

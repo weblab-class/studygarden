@@ -1,0 +1,12 @@
+.HomePage-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  text-align: center;
+  background-color: #9bbce0;
+}
