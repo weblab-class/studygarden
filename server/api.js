@@ -7,7 +7,6 @@
 |
 */
 
-
 /**
  * @team doc in drive will eventually contain endpoint documentation
  */
@@ -60,39 +59,84 @@ router.post("/timer", (req, res) => {
 });
 /* plant specific endpoints */
 
-router.post("/plant/new", async (req, res) =>{
+router.post("/plant/new", async (req, res) => {
   //WIP, end point for creating a brand new plant
   const plantName = req.body.plantName;
   const plantType = req.body.plantType;
   const subject = req.body.subject;
   const id = req.body.id;
-  const creationTime = req.body.time;
+  const stage = 0;
+  const timeCreated = req.body.timeCreated; //CHANGED FROM time
   const goalTime = req.body.goalTime; //this shouldn't be a date...
-
+  let response = [];
+  if (id === "" || id === undefined) {
+    response.push("creator id was not passed in...FIX THIS bc idk whose plant this is");
+  }
   const newPlant = new Plant({
     plantName: plantName,
     plantType: plantType,
     subject: subject,
     creator_id: id,
-    timeCreated: creationTime,
+    timeCreated: timeCreated,
     goalTime: goalTime,
+    stage: stage,
+    studyTimeCumul: 0,
+    isStudying: 0,
   });
   const plant = await newPlant.save();
-  return res.send(plant);
-});
-router.post("/plant/update", async (req, res) =>{
-  //WIP, will handle any update requests for plants
-  const plant = await newPlant.save();
-  return res.send(plant);
+  response.push(plant);
+  return res.send(response);
 });
 
-router.get("/plant", (req,res) =>{
+router.post("/plant/update", async (req, res) => {
+  //WIP, will handle any update requests for plants
+  /* possible inputs (somehow forbid any others)
+  body: 
+    {fields: 
+        {plant: 
+          plantName,
+          subject,
+          goalTime,
+          studyTimeIniti,
+          studyTimeFinal,
+          studyTimeCumul,
+          stage,
+          isStudying,
+          homePageIndex,
+        }
+      }
+          */
+  //console.log(req.body);
+  const entry = await Plant.findById(req.body.plantId);
+  console.log(entry);
+  let response = [];
+  for (obj in req.body.fields) {
+    console.log("op");
+    if (req.body.fields[obj] !== null || req.body.fields[obj] !== "") {
+      entry[obj] = req.body.fields[obj];
+      await entry.save();
+      const edited = String(obj); /* .toString(() => {
+        return "" + this.name;
+      }); */
+      console.log(String(obj));
+      response.push({ edited } + " on server updated to " + entry[obj]);
+    } else {
+      response.push({ edited }.concat(" was empty, not updating"));
+    }
+  }
+  //const plant = await newPlant.save();
+  return res.send(response);
+});
+
+router.get("/plant", (req, res) => {
   //WIP, will get all plants from user
-  try{
-  Plant.find({creator_id: req.query.id}).then((plants) =>res.send(plants));
+  try {
+    Plant.find({ creator_id: req.query.id }).then((plants) => {
+      res.send(plants);
+    });
   } catch (err) {
-    res.send(err.concat( " | userid is invalid or user appears to have no plants!"));
-  };
+    res.send(err.concat(" | userid is invalid or user appears to have no plants!"));
+  }
 });
 
 /* END plant specific endpoints */
