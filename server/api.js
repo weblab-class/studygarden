@@ -82,7 +82,7 @@ router.post("/plant/new", async (req, res) => {
 
 router.post("/plant/update", async (req, res) => {
   //WIP, will handle any update requests for plants
-  const entry = await Plant.findOne({ userId: req.body.userId });
+  const entry = await Plant.findOne({ userId: req.body.id });
   let response = [];
   for (obj in req.body.fields) {
     if (req.body.fields[obj] !== null || req.body.fields[obj] !== "") {
