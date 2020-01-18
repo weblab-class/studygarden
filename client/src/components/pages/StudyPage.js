@@ -16,11 +16,9 @@ class StudyPage extends Component {
 
   componentDidMount() {
     // remember -- api calls go here!
-    document.title = "Profile Page";
+    document.title = "Study Page";
     get(`/api/user`, { userId: this.props.userId }).then((user) => this.setState({ user: user }));
     //why not get user in app.js and pass it down as prop?
-
-    //get("/api/plant",
   }
 
   render() {
@@ -29,15 +27,17 @@ class StudyPage extends Component {
         <div className="StudyPage-container">
           {this.state.user ? (
             <>
-              <h1>name!</h1>
-              <h2>subject.</h2>
-              <button className="StartStudyingButton"> start studying </button>
-              <button className="LogStudyButton"> log study time </button>
-              <div>progress bar goes here, probably as separate component</div>
+              <div className="StudyPage-infoContainer">
+                <h1>name!</h1>
+                <h2>subject.</h2>
+                <button className="StudyPage-studyButton"> start studying </button>
+                <button className="StudyPage-studyButton"> log study time </button>
+                <div>progress bar goes here, probably as separate component</div>
+              </div>
             </>
-        ) : (
-          <div> Loading... </div>
-        )}
+          ) : (
+            <div> Loading... </div>
+          )}
         </div>
       </>
     );
