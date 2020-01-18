@@ -13,7 +13,7 @@ import { post } from "../../../utilities";
  */
 
 //should combine into newplantinput
-import "../../modules/NewPlantInput.css";
+import "../../pages/NewPlant.css";
 import "../../../utilities.css";
 //import "./HomePage.css";
 
@@ -37,12 +37,6 @@ class NewSubmit extends Component {
   componentDidMount() {
     // remember -- api calls go here!
   }
-  /*   // called whenever the user types in the new post input box
-  handleChange = (event) => {
-    this.setState({
-      value: event.target.value,
-    });
-  }; */
 
   // called when the user hits "Submit" for a new post
   handleSubmit = (event) => {
@@ -62,10 +56,6 @@ class NewSubmit extends Component {
       console.log(plant);
       this.postNewPlant(plant);
     }
-    // this.props.onSubmit && this.props.onSubmit(this.state.value);
-    // this.setState({
-    //   value: "",
-    // });
   };
   render() {
     return (
