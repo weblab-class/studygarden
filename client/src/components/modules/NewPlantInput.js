@@ -22,7 +22,7 @@ class NewPlantInput extends Component {
     this.state = {
       plantName: "",
       subject: "",
-      goalTime: 0,
+      goalTime: 1,
     };
     this.handleChange = this.handleChange.bind(this);
   }
