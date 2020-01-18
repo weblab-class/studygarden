@@ -30,8 +30,10 @@ class HomePage extends Component {
         <div className="HomePage-container">
           {this.state.user ? (
             <>
-              <h1>Welcome, {this.state.user.name}!</h1>
-              <h2>see your garden here.</h2>
+              <div className="HomePage-text">
+                <h1>Welcome, {this.state.user.name}!</h1>
+                <h2>see your garden here.</h2>{" "}
+              </div>
               <div className="HomePage-windowsill">
                 <img src={initialBench} />
               </div>
