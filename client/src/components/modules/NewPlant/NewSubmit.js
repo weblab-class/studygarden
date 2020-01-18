@@ -55,7 +55,7 @@ class NewSubmit extends Component {
       time: this.state.timeCreated,
       goalTime: this.props.fields.goalTime,
     };
-    if (plant.plantName.length <=2 || plant.subject.length <=2 ){ //this feels dumb help me
+    if (plant.plantName.length <=2 || plant.plantType.length <=2 || plant.subject.length <=2 ){ //this feels dumb help me
       throw new Error("fields must be longer than 2 characters!") 
     }else{
       console.log(plant);
