@@ -19,6 +19,7 @@ class StudyPage extends Component {
 
   componentDidMount() {
     // remember -- api calls go here!
+
     document.title = "Study Page";
     get(`/api/user`, { userId: this.props.userId }).then((user) => this.setState({ user: user }));
     get(`/api/plant/single`, { plant_id: this.props.plantId }).then((plant) => {
