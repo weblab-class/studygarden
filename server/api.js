@@ -130,7 +130,7 @@ router.post("/plant/update", async (req, res) => {
 
 router.get("/plant/single", (req, res) => {
   try {
-    Plant.findById(req.body.plant_id).then((plant) => {
+    Plant.findById(req.query.plant_id).then((plant) => {
       res.send(plant);
     });
   } catch (err) {
