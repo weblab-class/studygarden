@@ -26,6 +26,7 @@ class SinglePlant extends Component {
           <img
             className="SinglePlant-plant"
             src={PLANT_STAGES[this.props.stage][this.props.plantType]}
+            //  src={PLANT_STAGES[2][0]}
           />
           <div className="bottom">
             <h3>{this.props.plantName}</h3>
