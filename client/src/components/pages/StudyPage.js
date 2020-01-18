@@ -35,11 +35,14 @@ class StudyPage extends Component {
           {this.state.user && this.state.plant ? (
             <>
               <div className="StudyPage-plantContainer">
-                <img src={PLANT_STAGES[this.state.plant.stage][this.state.plant.plantType]} />
+                <img
+                  src={PLANT_STAGES[this.state.plant.stage][this.state.plant.plantType]}
+                  className="StudyPage-plant"
+                />
               </div>
               <div className="StudyPage-infoContainer">
-                <h1>{this.state.plant.plantName}</h1>
-                <h2>{this.state.plant.subject}.</h2>
+                <h2>{this.state.plant.plantName}</h2>
+                <h3>{this.state.plant.subject}.</h3>
                 <button className="StudyPage-studyButton"> start studying </button>
                 <button className="StudyPage-studyButton"> log study time </button>
                 <ProgressBar className="StudyPage-progressBar" />
