@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { Router } from "@reach/router";
-import { Redirect } from "react-router-dom";
 import NavBar from "./modules/NavBar.js";
 import LoginPage from "./pages/LoginPage.js";
 import HomePage from "./pages/HomePage.js";
+import NewPlantPage from "./pages/NewPlant.js";
 import NotFound from "./pages/NotFound.js";
-import Skeleton from "./pages/Skeleton.js";
+import { navigate } from "@reach/router";
 
 import "../utilities.css";
-
+import "./App.css";
 //import { socket } from "../client-socket.js";
 
 import { get, post } from "../utilities";
@@ -21,15 +21,17 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: undefined,
+      userId: null,
     };
   }
 
   componentDidMount() {
+    //make this async eventually
     get("/api/whoami").then((user) => {
       if (user._id) {
         // they are registed in the database, and currently logged in.
         this.setState({ userId: user._id });
+        console.log("user detected");
       }
     });
   }
@@ -39,24 +41,30 @@ class App extends Component {
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
       this.setState({ userId: user._id });
-      window.location = `/home/${this.state.userId}`; /*todo: change to not use window
-      because jenn says it's bad lmao*/
+      navigate(`/home/${
+        this.state.userId
+      }`);
       //  post("/api/initsocket", { socketid: socket.id });
-      // console.log("yeet");
     });
-    // console.log(this.state.userId);
-    
   };
 
   handleLogout = () => {
     console.log("Logged out successfully!");
-    this.setState({ userId: undefined });
-    post("/api/logout");
+    this.setState({ userId: null });
+    post("/api/logout").then((user)=>{
+      this.setState({userId: null});
+      navigate(`/`);
+    });
   };
 
   render() {
     return (
       <>
+        <NavBar
+          handleLogin={this.handleLogin}
+          handleLogout={this.handleLogout}
+          userId={this.state.userId}
+        />
         <div className="App-container">
           <Router>
             <LoginPage
@@ -66,6 +74,7 @@ class App extends Component {
               handleLogout={this.handleLogout}
             />
             <HomePage path="/home/:userId" />
+            <NewPlantPage path="/home/:userId/newplant" />
             <NotFound default />
           </Router>
         </div>

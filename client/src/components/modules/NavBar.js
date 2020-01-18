@@ -18,19 +18,34 @@ class NavBar extends Component {
   render() {
     return (
       <nav className="NavBar-container">
-        <div className="NavBar-title u-inlineBlock">study garden</div>
-        <div className="NavBar-linkContainer u-inlineBlock">
-          {this.props.userId && (
-            <Link to={`/profile/${this.props.userId}`} className="NavBar-link">
-              study garden
-            </Link>
-          )}
+        <div className="NavBar-leftSide">
+          <div className="NavBar-title">study garden </div>
+          <div className="NavBar-linkContainer">
+            {this.props.userId && (
+              <div>
+                <Link to={`/home/${this.props.userId}`} className="NavBar-link">
+                  home
+                </Link>
+                <Link to={`/home/${this.props.userId}/newplant`} className="NavBar-link">
+                  new plant
+                </Link>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="NavBar-logout">
           {this.props.userId ? (
             <GoogleLogout
               clientId={GOOGLE_CLIENT_ID}
               buttonText="Logout"
               onLogoutSuccess={this.props.handleLogout}
               onFailure={(err) => console.log(err)}
+              render={(renderProps) => (
+                <button onClick={renderProps.onClick} className="NavBar-googleButton u-pointer">
+                  logout
+                </button> //FIXME: font is wrong
+              )}
               className="NavBar-link NavBar-login"
             />
           ) : (
@@ -39,6 +54,11 @@ class NavBar extends Component {
               buttonText="Login"
               onSuccess={this.props.handleLogin}
               onFailure={(err) => console.log(err)}
+              render={(renderProps) => (
+                <button onClick={renderProps.onClick} className="NavBar-googleButton u-pointer">
+                  login
+                </button> //FIXME: font is wrong
+              )}
               className="NavBar-link NavBar-login"
             />
           )}

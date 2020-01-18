@@ -14,7 +14,7 @@
 * much after initial creation.
 */
 
-/* TODO: REPLACE WITH YOUR OWN FONT! */
+
 @import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
 
 :root {
@@ -35,7 +35,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Muli", sans-serif;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 form {
@@ -63,8 +63,36 @@ form {
   display: inline-block;
 }
 
-.u-bold {
+.u-extraLight {
+  font-weight: 200;
+}
+
+.u-light {
+  font-weight: 300;
+}
+
+.u-regular {
+  font-weight: 400;
+}
+
+.u-medium {
+  font-weight: 500;
+}
+
+.u-semibold {
   font-weight: 600;
+}
+
+.u-bold {
+  font-weight: 700;
+}
+
+.u-extraBold{
+  font-weight: 800
+}
+
+.u-black{
+  font-weight: 900
 }
 
 .u-textCenter {
