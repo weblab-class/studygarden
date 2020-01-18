@@ -1,0 +1,51 @@
+.StudyPage-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  text-align: center;
+  background-image: linear-gradient(#E4E4E4, #A4DEF9);
+}
+
+
+.StartStudyingButton {
+  background-color: #8F9365;
+  color: var(--white);
+  font-weight: bold;
+  box-shadow: 0px 5px 8px -1px grey;
+  border: 0px;
+  border-radius: 20px;
+  padding: 10px 20px;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-center: auto;
+  width: 30%;
+  z-index: 5;
+  font-size: 3vmin;
+}
+
+.StartStudyingButton:hover {
+  background-color: #cfd896;
+  color: black;
+}
+
+.LogStudyButton {
+  background-color: #8F9365;
+  color: white;
+  border-radius: 20px;
+  border: 0px;
+  font-weight: normal;
+  font-size: 24px;
+  margin-left: auto;
+  padding: 10px 20px;
+  box-shadow: 0px 5px 8px -1px grey;
+}
+
+.LogStudyButton:hover {
+  background-color: #cfd896;
+  color: black;
+}

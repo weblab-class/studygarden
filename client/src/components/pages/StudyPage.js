@@ -26,17 +26,19 @@ class StudyPage extends Component {
   render() {
     return (
       <>
-        {this.state.user ? (
-          <>
-            <h1>name!</h1>
-            <h2>subject.</h2>
-            <button> start studying </button>
-            <button> log study time </button>
-            <div>progress bar goes here, probably as separate component</div>
-          </>
+        <div className="StudyPage-container">
+          {this.state.user ? (
+            <>
+              <h1>name!</h1>
+              <h2>subject.</h2>
+              <button className="StartStudyingButton"> start studying </button>
+              <button className="LogStudyButton"> log study time </button>
+              <div>progress bar goes here, probably as separate component</div>
+            </>
         ) : (
           <div> Loading... </div>
         )}
+        </div>
       </>
     );
   }
