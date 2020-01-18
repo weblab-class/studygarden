@@ -128,6 +128,16 @@ router.post("/plant/update", async (req, res) => {
   return res.send(response);
 });
 
+router.get("/plant/single", (req, res) => {
+  try {
+    Plant.findById(req.body.plant_id).then((plant) => {
+      res.send(plant);
+    });
+  } catch (err) {
+    res.send(err.concat(" Cannot find plant :("));
+  }
+});
+
 router.get("/plant", (req, res) => {
   //WIP, will get all plants from user
   try {
