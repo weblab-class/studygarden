@@ -91,9 +91,9 @@ router.post("/plant/new", async (req, res) => {
 router.post("/plant/update", async (req, res) => {
   //WIP, will handle any update requests for plants
   /* possible inputs (somehow forbid any others)
-  body: 
-    {fields: 
-        {plant: 
+  body:
+    {fields:
+        {plant:
           plantName,
           subject,
           goalTime,
@@ -131,7 +131,7 @@ router.post("/plant/update", async (req, res) => {
 router.get("/plant", (req, res) => {
   //WIP, will get all plants from user
   try {
-    Plant.find({ creator_id: req.query.id }).then((plants) => {
+    Plant.find({ creator_id: req.query.creator_id }).then((plants) => {
       res.send(plants);
     });
   } catch (err) {

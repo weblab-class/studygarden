@@ -15,6 +15,7 @@ import plant4 from "../../../img/flowers/Asset 5.4.png";
  * @param {String} fields.subject
  * @param {Number} fields.goalTime
  * @param {String} creator_id
+ * @param {Function} setPlantType(newplanttype)
  */
 
 //should combine into newplantinput
@@ -35,7 +36,7 @@ class PlantSlider extends Component {
 
   goToPrevSlide = () => {
     if (this.state.currentIndex === 0) {
-      return this.setState({
+      this.setState({
         currentIndex: this.state.images.length - 1,
       });
     }
@@ -44,11 +45,12 @@ class PlantSlider extends Component {
     this.setState((prevState) => ({
       currentIndex: prevState.currentIndex - 1,
     }));
+    return this.props.setPlantType(this.state.currentIndex);
   };
 
   goToNextSlide = () => {
     if (this.state.currentIndex === this.state.images.length - 1) {
-      return this.setState({
+      this.setState({
         currentIndex: 0,
       });
     }
@@ -57,6 +59,7 @@ class PlantSlider extends Component {
     this.setState((prevState) => ({
       currentIndex: prevState.currentIndex + 1,
     }));
+    return this.props.setPlantType(this.state.currentIndex);
   };
 
   componentDidMount() {
