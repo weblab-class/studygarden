@@ -13,7 +13,7 @@ import { post } from "../../../utilities";
  */
 
 //should combine into newplantinput
-import "../../modules/NewPlantInput.css";
+import "../../pages/NewPlant.css";
 import "../../../utilities.css";
 //import "./HomePage.css";
 
@@ -37,12 +37,6 @@ class NewSubmit extends Component {
   componentDidMount() {
     // remember -- api calls go here!
   }
-  /*   // called whenever the user types in the new post input box
-  handleChange = (event) => {
-    this.setState({
-      value: event.target.value,
-    });
-  }; */
 
   // called when the user hits "Submit" for a new post
   handleSubmit = (event) => {
@@ -55,16 +49,13 @@ class NewSubmit extends Component {
       time: this.state.timeCreated,
       goalTime: this.props.fields.goalTime,
     };
-    if (plant.plantName.length <=2 || plant.plantType.length <=2 || plant.subject.length <=2 ){ //this feels dumb help me
-      throw new Error("fields must be longer than 2 characters!") 
-    }else{
+    if (plant.plantName.length <= 2 || plant.plantType.length <= 2 || plant.subject.length <= 2) {
+      //this feels dumb help me
+      throw new Error("fields must be longer than 2 characters!");
+    } else {
       console.log(plant);
       this.postNewPlant(plant);
-    };
-    // this.props.onSubmit && this.props.onSubmit(this.state.value);
-    // this.setState({
-    //   value: "",
-    // });
+    }
   };
   render() {
     return (
