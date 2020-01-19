@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const PlantSchema = new mongoose.Schema({
@@ -20,4 +20,4 @@ const PlantSchema = new mongoose.Schema({
 });
 
 // compile model from schema
-module.exports = mongoose.model('plant', PlantSchema);
+module.exports = mongoose.model("plant", PlantSchema);
