@@ -3,12 +3,12 @@
 const mongoose = require("mongoose");
 
 const StudySessionSchema = new mongoose.Schema({
-	creator_id: String,
-	plantId: String,
-	elapsedTime: { type: Number, default: 0 },
-	timeStarted: { type: Date, default: Date.now },
-	studySessionLength: Number,
-	initCumulativeTime: Number
+  creator_id: String,
+  plantId: String,
+  elapsedTime: { type: Number, default: 0 },
+  timeStarted: { type: Date, default: Date.now },
+  studySessionLength: Number,
+  initCumulativeTime: Number
 });
 
 // compile model from schema
