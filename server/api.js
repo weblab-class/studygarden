@@ -14,7 +14,7 @@ const express = require("express");
 
 // import models so we can interact with the database
 const User = require("./models/user");
-const StudySession = require("./models/studysession");
+const StudySession = require("./models/studysession").default;
 const Plant = require("./models/plant"); //planty bois are coming 👀
 const ProfOrder = require("./models/profileorder");
 // import authentication library
