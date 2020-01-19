@@ -46,7 +46,7 @@ router.get('/whoami', (req, res) => {
 
 //will need sockets don't delete plz :x
 
-router.post('/session', async (req, res) => {
+router.post('/session/update', async (req, res) => {
   //WIP
   if (req.body.delete) {
     StudySession.deleteOne({
@@ -82,6 +82,17 @@ router.post('/session', async (req, res) => {
     res.send(sesStatus);
   }
 });
+
+router.get('/session/', (req, res) => {
+  try {
+    StudySession.find({ plantId: req.query.plantId }).then((session) => {
+      res.send(session);
+    });
+  } catch (err) {
+    //actually not sure if .find() will error if it doesn't find anything
+    res.send(err.concat('| Plant does not have an ongoing study session.'));
+  }
+});
 /* plant specific endpoints */
 
 router.post('/plant/new', async (req, res) => {
@@ -108,7 +119,7 @@ router.post('/plant/new', async (req, res) => {
     goalTime: goalTime,
     stage: stage,
     studyTimeCumul: 0,
-    isStudying: 0,
+    isStudying: false,
   });
   const plant = await newPlant.save();
   response.push(plant);
@@ -124,8 +135,6 @@ router.post('/plant/update', async (req, res) => {
           plantName,
           subject,
           goalTime,
-          studyTimeIniti,
-          studyTimeFinal,
           studyTimeCumul,
           stage,
           isStudying,
@@ -138,22 +147,16 @@ router.post('/plant/update', async (req, res) => {
   console.log(entry);
   let response = [];
   for (obj in req.body.fields) {
-    console.log('op');
     if (req.body.fields[obj] !== null || req.body.fields[obj] !== '') {
       entry[obj] = req.body.fields[obj]; //could replace this with .update() and it would be nice and clean...
       await entry.save();
-      const edited = String(
-        obj
-      ); /* .toString(() => {
-        return "" + this.name;
-      }); */
+      const edited = String(obj);
       console.log(String(obj));
       response.push({ edited } + ' on server updated to ' + entry[obj]);
     } else {
       response.push({ edited }.concat(' was empty, not updating'));
     }
   }
-  //const plant = await newPlant.save();
   return res.send(response);
 });
 
