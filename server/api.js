@@ -48,43 +48,86 @@ router.get("/whoami", (req, res) => {
 
 router.post("/session/update", async (req, res) => {
   //WIP
-  if (req.body.delete) {
-    StudySession.deleteOne({
-      plantId: req.body.plantId
-    });
-    Plant.findByIdAndUpdate(req.body.plantId, { isStudying: false });
-    const plantState = await Plant.save();
-    res.send(plantState);
-  } else {
-    let session = await StudySession.findOne({
-      plantId: req.body.plantId
-    }).orFail(async () => {
-      await Plant.findByIdAndUpdate(req.body.plantId, { isStudying: true });
-      const plantState = await Plant.save();
-      res.send(plantState);
-      return new StudySession({
-        creator_id: req.body.creator_id,
+  //at the beginning of session, create a brand new session, set "isStudying" to true through this
+  //at the end, set "isStudying" to false through /plant/update
+  // try {
+  //   Plant.findById(req.body.plantId).then((plant) => {
+  //     res.send(plant);
+  //   });
+  // } catch (err) {
+  //   res.send(err.concat(" Cannot find plant :("));
+  // }
+  const plant = req.body.plantId;
+  const plantData = await Plant.findById(plant);
+  //res.send(plantData);
+  let session;
+  if (plantData.isStudying === false) {
+    StudySession.findOne({ plantId: plant }, async (err, doc) => {
+      if (err) {
+        return res.status(500).send(err);
+      } else if (doc) {
+        await doc.delete();
+      }
+      session = new StudySession({
+        creator_id: req.body.creatorId,
         plantId: req.body.plantId,
         studySessionLength: req.body.studySessionLength,
-        initCumulativeTime: Plant.findById(req.body.plantId).studyTimeCumul
+        initCumulativeTime: plantData.studyTimeCumul
       });
+      console.log(session);
+      plantData.isStudying = true;
+      plantData.save();
+      return session.save();
     });
+  } else {
+    session = await StudySession.findOne({ plantId: plant });
     if (req.body.elapsedTime) {
-      await session.update({ elapsedTime: req.body.elapsedTime });
+      session.elapsedTime = req.body.elapsedTime;
     }
-    if (req.body.elapsedTime === session.studySessionLength || session.elapsedTime === session.studySessionLength) {
-      //for debugging
-      res.send("session finished");
-    }
+    // if (session.&&(req.body.elapsedTime === session.studySessionLength || session.elapsedTime === session.studySessionLength)) {
+    //   //for debugging
+    //   res.send("session finished");
+    // }
     const sesStatus = await session.save();
     res.send(sesStatus);
   }
 });
+// if (req.body.delete) {
+//   StudySession.deleteOne({
+//     plantId: req.body.plantId
+//   });
+//   Plant.findByIdAndUpdate(req.body.plantId, { isStudying: false });
+//   const plantState = await Plant.save();
+//   res.send(plantState);
+// } else {
+//   let session = await StudySession.findOne({
+//     plantId: req.body.plantId
+//   }).orFail(async () => {
+//     //const plantState = await Plant.findByIdAndUpdate(req.body.plantId, { isStudying: true });
+//     //const plantState = await Plant.save();
+//     //res.send(plantState);
+//     return new StudySession({
+//       creator_id: req.body.creator_id,
+//       plantId: req.body.plantId,
+//       studySessionLength: req.body.studySessionLength,
+//       initCumulativeTime: Plant.findById(req.body.plantId).studyTimeCumul
+//     });
+//   });
+//   if (req.body.elapsedTime) {
+//     await session.update({ elapsedTime: req.body.elapsedTime });
+//   }
+//   if (req.body.elapsedTime === session.studySessionLength || session.elapsedTime === session.studySessionLength) {
+//     //for debugging
+//     res.send("session finished");
+//   }
+//   const sesStatus = await session.save();
+//   res.send(sesStatus);
+// }
 
 router.get("/session/", (req, res) => {
   try {
     StudySession.find({ plantId: req.query.plantId }).then((session) => {
-      res.send(session);
+      res.send(session + "sss");
     });
   } catch (err) {
     //actually not sure if .find() will error if it doesn't find anything
@@ -106,6 +149,7 @@ router.post("/plant/new", async (req, res) => {
   if (id === "" || id === undefined) {
     response.push("creator id was not passed in...FIX THIS bc idk whose plant this is");
   }
+  console.log(req.body);
   const newPlant = new Plant({
     plantName: plantName,
     plantType: plantType,
@@ -158,7 +202,7 @@ router.post("/plant/update", async (req, res) => {
 
 router.get("/plant/single", (req, res) => {
   try {
-    Plant.findById(req.query.plant_id).then((plant) => {
+    Plant.findById(req.query.plantId).then((plant) => {
       res.send(plant);
     });
   } catch (err) {
@@ -169,7 +213,7 @@ router.get("/plant/single", (req, res) => {
 router.get("/plant", (req, res) => {
   //WIP, will get all plants from user
   try {
-    Plant.find({ creator_id: req.query.creator_id }).then((plants) => {
+    Plant.find({ creator_id: req.query.creatorId }).then((plants) => {
       res.send(plants);
     });
   } catch (err) {
