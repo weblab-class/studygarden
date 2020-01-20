@@ -3,7 +3,7 @@ import plant12 from "../../../img/flowers/Asset 1.2.png";
 import plant13 from "../../../img/flowers/Asset 1.3.png";
 import plant14 from "../../../img/flowers/Asset 1.4.png";
 
-import plant21 from "../../../img/flowers/Asset 2.1.png";
+import plant21 from "../../../img/flowers/Asset 2.2.png";
 import plant22 from "../../../img/flowers/Asset 2.2.png";
 import plant23 from "../../../img/flowers/Asset 2.3.png";
 import plant24 from "../../../img/flowers/Asset 2.4.png";
