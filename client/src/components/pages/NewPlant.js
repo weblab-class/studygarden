@@ -37,7 +37,7 @@ class NewPlantPage extends Component {
   render() {
     return (
       <>
-        <div className="NewPlant-container">
+        <div className="NewPlant-container u.no-select">
           <NewPlantInput plantType={this.state.currentIndex} userId={this.props.userId} />
           <PlantSlider setPlantType={this.setPlantType} currentIndex={this.state.currentIndex} />
         </div>
