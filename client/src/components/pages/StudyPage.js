@@ -6,7 +6,7 @@ import ProgressBar from "../modules/ProgressBar.js";
 import "../../utilities.css";
 import "./StudyPage.css";
 import { PLANT_STAGES } from "../modules/PlantStages.js";
-
+import Timer from "../modules/Timer.js"
 class StudyPage extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +14,8 @@ class StudyPage extends Component {
     this.state = {
       user: null,
       plant: undefined,
-      session: undefined, 
+      session: undefined,
+      elapsedTime: 0, 
     };
   }
 
@@ -30,10 +31,13 @@ class StudyPage extends Component {
     get(`/api/session`, {plantId: this.props.plantId}).then((session) => {
       this.setState({session: session });
     });
+    //for testing
+    //this.startStudy(100);
   }
 
   //TODO: make a timer, have corresponding UI pop up while study session is in progress
-  startStudy = async () => {
+  startStudy = async (studyLength) => {
+    sessionTimer = new Timer(()=>{this.elapsedTime++},1000,studyLength,true);
     //TODO: link to api and call starting a new session
   }
 
