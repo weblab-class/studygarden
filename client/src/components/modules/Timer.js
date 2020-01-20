@@ -9,7 +9,7 @@ export default class Timer {
     this.startTime = performance.now();
     this.isRunning = runAtStart;
     const _this = this;
-    console.log("DDD")
+    //console.log("DDD")
     this.timeout = window.setTimeout(
       () => {
         _this.tick();
