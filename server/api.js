@@ -50,13 +50,6 @@ router.post("/session/update", async (req, res) => {
   //WIP
   //at the beginning of session, create a brand new session, set "isStudying" to true through this
   //at the end, set "isStudying" to false through /plant/update
-  // try {
-  //   Plant.findById(req.body.plantId).then((plant) => {
-  //     res.send(plant);
-  //   });
-  // } catch (err) {
-  //   res.send(err.concat(" Cannot find plant :("));
-  // }
   const plant = req.body.plantId;
   const plantData = await Plant.findById(plant);
   //res.send(plantData);
@@ -92,46 +85,17 @@ router.post("/session/update", async (req, res) => {
     res.send(sesStatus);
   }
 });
-// if (req.body.delete) {
-//   StudySession.deleteOne({
-//     plantId: req.body.plantId
-//   });
-//   Plant.findByIdAndUpdate(req.body.plantId, { isStudying: false });
-//   const plantState = await Plant.save();
-//   res.send(plantState);
-// } else {
-//   let session = await StudySession.findOne({
-//     plantId: req.body.plantId
-//   }).orFail(async () => {
-//     //const plantState = await Plant.findByIdAndUpdate(req.body.plantId, { isStudying: true });
-//     //const plantState = await Plant.save();
-//     //res.send(plantState);
-//     return new StudySession({
-//       creator_id: req.body.creator_id,
-//       plantId: req.body.plantId,
-//       studySessionLength: req.body.studySessionLength,
-//       initCumulativeTime: Plant.findById(req.body.plantId).studyTimeCumul
-//     });
-//   });
-//   if (req.body.elapsedTime) {
-//     await session.update({ elapsedTime: req.body.elapsedTime });
-//   }
-//   if (req.body.elapsedTime === session.studySessionLength || session.elapsedTime === session.studySessionLength) {
-//     //for debugging
-//     res.send("session finished");
-//   }
-//   const sesStatus = await session.save();
-//   res.send(sesStatus);
-// }
+
 
 router.get("/session/", (req, res) => {
   try {
     StudySession.find({ plantId: req.query.plantId }).then((session) => {
-      res.send(session + "sss");
+      res.send(session);
     });
   } catch (err) {
     //actually not sure if .find() will error if it doesn't find anything
-    res.send(err.concat("| Plant does not have an ongoing study session."));
+    //it won't
+    res.send(err);
   }
 });
 /* plant specific endpoints */
@@ -217,7 +181,7 @@ router.get("/plant", (req, res) => {
       res.send(plants);
     });
   } catch (err) {
-    res.send(err.concat(" | userid is invalid or user appears to have no plants!"));
+    res.send(err);
   }
 });
 
