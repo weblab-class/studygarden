@@ -22,7 +22,7 @@ class StudyPage extends Component {
 
     document.title = "Study Page";
     get(`/api/user`, { userId: this.props.userId }).then((user) => this.setState({ user: user }));
-    get(`/api/plant/single`, { plant_id: this.props.plantId }).then((plant) => {
+    get(`/api/plant/single`, { plantId: this.props.plantId }).then((plant) => {
       console.log(plant);
       this.setState({ plant: plant });
     });

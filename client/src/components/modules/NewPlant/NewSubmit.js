@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { post } from "../../../utilities";
+import { navigate } from "@reach/router";
 
 /**
  * Component creates a new plant from scratch. input boxes will come from ../modules/NewPlantInput.js
@@ -9,7 +10,7 @@ import { post } from "../../../utilities";
  * @param {Number} fields.plantType
  * @param {String} fields.subject
  * @param {Number} fields.goalTime
- * @param {String} creator_id
+ * @param {String} userid
  */
 
 //should combine into newplantinput
@@ -39,7 +40,7 @@ class NewSubmit extends Component {
   }
 
   // called when the user hits "Submit" for a new post
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
     const plant = {
       plantName: this.props.fields.plantName,
@@ -50,11 +51,11 @@ class NewSubmit extends Component {
       goalTime: this.props.fields.goalTime,
     };
     if (plant.plantName.length <= 2 || plant.subject.length <= 2) {
-      //this feels dumb help me
       throw new Error("fields must be longer than 2 characters!");
     } else {
       console.log(plant);
-      this.postNewPlant(plant);
+      await this.postNewPlant(plant)
+      navigate(`/home/`+ this.props.userId);
     }
   };
   render() {
