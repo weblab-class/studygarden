@@ -48,17 +48,18 @@ class PlantSlider extends Component {
     return this.props.setPlantType(this.state.currentIndex);
   };
 
-  goToNextSlide = () => {
+  goToNextSlide = /* async */ () => {
     if (this.state.currentIndex === this.state.images.length - 1) {
-      this.setState({
+      /* await */ this.setState({
         currentIndex: 0,
       });
-    }
+      //console.log("changed index to " + String(this.state.currentIndex))
+    } else {
 
     // This will not run if we met the if condition above
     this.setState((prevState) => ({
       currentIndex: prevState.currentIndex + 1,
-    }));
+    }))};
     return this.props.setPlantType(this.state.currentIndex);
   };
 

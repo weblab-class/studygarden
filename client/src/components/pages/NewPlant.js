@@ -31,7 +31,7 @@ class NewPlantPage extends Component {
     this.setState({
       currentIndex: ind,
     });
-    console.log(ind);
+    //console.log(ind);
   };
 
   render() {
