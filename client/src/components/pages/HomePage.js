@@ -41,6 +41,7 @@ class HomePage extends Component {
           key={`Plant_${plantObj._id}`}
           _id={plantObj._id}
           plantName={plantObj.plantName}
+          subject={plantObj.subject}
           creator_id={plantObj.creator_id}
           plantType={plantObj.plantType}
           stage={plantObj.stage}
