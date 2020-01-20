@@ -31,6 +31,7 @@ class StudyPage extends Component {
       this.setState({session: session });
     });
   }
+
   //TODO: make a timer, have corresponding UI pop up while study session is in progress
   startStudy = async () => {
     //TODO: link to api and call starting a new session
