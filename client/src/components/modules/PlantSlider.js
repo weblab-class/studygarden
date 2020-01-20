@@ -21,7 +21,7 @@ import plant4 from "../../../img/flowers/Asset 5.4.png";
 //should combine into newplantinput
 import "../pages/NewPlant.css";
 import "../../utilities.css";
-//import "./HomePage.css";
+
 const images = [plant1, plant2, plant3, plant4];
 
 class PlantSlider extends Component {
@@ -37,7 +37,7 @@ class PlantSlider extends Component {
   goToPrevSlide = () => {
     if (this.state.currentIndex === 0) {
       this.setState({
-        currentIndex: this.state.images.length - 1,
+        currentIndex: this.state.images.length,
       });
     }
 
@@ -55,11 +55,11 @@ class PlantSlider extends Component {
       });
       //console.log("changed index to " + String(this.state.currentIndex))
     } else {
-
-    // This will not run if we met the if condition above
-    this.setState((prevState) => ({
-      currentIndex: prevState.currentIndex + 1,
-    }))};
+      // This will not run if we met the if condition above
+      this.setState((prevState) => ({
+        currentIndex: prevState.currentIndex + 1,
+      }));
+    }
     return this.props.setPlantType(this.state.currentIndex);
   };
 
