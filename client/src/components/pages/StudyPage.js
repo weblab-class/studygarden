@@ -25,6 +25,8 @@ class StudyPage extends Component {
       showModal: false,
     };
     this.startStudy = this.startStudy.bind(this);
+    this.stopStudy = this.stopStudy.bind(this);
+    let nMiniDaemon;
   }
 
   //TODO: make a timer, have corresponding UI pop up while study session is in progress
@@ -41,14 +43,14 @@ class StudyPage extends Component {
     //let a = await sessionTimer.tick()
     //console.log(a+"b")
 
-    let nMiniDaemon = new MiniDaemon(this, (index,length,backwards) => {
+    this.nMiniDaemon = new MiniDaemon(this, (index,length,backwards) => {
       console.log("uno");
       this.setState({ elapsedTime: index });
     }, 1000, 123 /*hardcoded*/)
     this.setState({
       isStudying: true,
     });
-    nMiniDaemon.start()
+    this.nMiniDaemon.start()
     post(`/api/session/update`, {
       creatorId: this.props.userId,
       plantId: this.props.plantId,
@@ -56,6 +58,9 @@ class StudyPage extends Component {
     });
     //TODO: link to api and call starting a new session
     //done
+  }
+  stopStudy() {
+    this.nMiniDaemon.pause()
   }
 
   //only use if study session is ended via time expiry or a hypothetical end study session button
@@ -211,7 +216,7 @@ class StudyPage extends Component {
                 </div>
                 <div className="StudyPage-infoContainer">
                   <div>{this.state.timeString}</div>
-                  <button className="StudyPage-studyButton u-pointer" onClick={null}>
+                  <button className="StudyPage-studyButton u-pointer" onClick={this.stopStudy}>
                     stop studying
                   </button>
 
