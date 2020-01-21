@@ -70,10 +70,10 @@ class StudyPage extends Component {
         studyTimeCumul: newCumul,
       },
     }).then(
-      this.setState({
-        plant: {
-          studyTimeCumul: newCumul,
-        },
+      this.setState((prevState,prevProps) => {
+        let out = prevState.plant;
+        out["studyTimeCumul"] = newCumul
+        return {plant: out}
       })
     );
     //console.log("plant:", this.state.plant);
@@ -125,10 +125,10 @@ class StudyPage extends Component {
           studyTimeCumul: newCumul,
         },
       }).then(
-        this.setState({
-          plant: {
-            studyTimeCumul: newCumul,
-          },
+        this.setState((prevState,prevProps) => {
+          let out = prevState.plant;
+          out["studyTimeCumul"] = newCumul
+          return {plant: out}
         })
       );
     }
