@@ -8,14 +8,15 @@ const PlantSchema = new mongoose.Schema({
   creator_id: String, //will hold the user's objectId
   timeCreated: Date,
   goalTime: Number,
-  studyTimeIniti: Date,
-  studyTimeFinal: Date,
   studyTimeCumul: Number,
   stage: Number,
   isStudying: Boolean,
-  homePageIndex: Number /* in case we want to
-  let people reorder their plants (doesn't seem too hard to implement)*/,
-  // famous last words
+  // homePageIndex: Number,
+  // /* in case we want to let people reorder their plants
+  // (doesn't seem too hard to implement)*/
+  // // famous last words
+  //  actually is redundant, oops
+  pomodoroCount: { type: Number, default: 0 },
 });
 
 // compile model from schema

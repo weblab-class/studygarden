@@ -24,7 +24,7 @@ class HomePage extends Component {
 
     get(`/api/user`, { userId: this.props.userId }).then((user) => this.setState({ user: user }));
 
-    get("/api/plant", { creator_id: this.props.userId }).then((plantObjs) => {
+    get("/api/plant", { creatorId: this.props.userId }).then((plantObjs) => {
       let reversedStoryObjs = plantObjs.reverse();
       reversedStoryObjs.map((plantObj) => {
         this.setState({ plants: this.state.plants.concat([plantObj]) });
