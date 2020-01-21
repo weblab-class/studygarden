@@ -22,18 +22,21 @@ class StudyPage extends Component {
       timeString: "0:00",
       showModal: false,
     };
+    this.startStudy=this.startStudy.bind(this);
   }
 
   //TODO: make a timer, have corresponding UI pop up while study session is in progress
   async startStudy(event) {
-    let sessionTimer = await new Timer(
-      () => {
-        this.elapsedTime++;
+    let sessionTimer = new Timer(
+      function(){
+        this.setState( (prevState) => ({elapsedTime: (prevState.elapsedTime + 1)}));
       },
       1000,
       123,
       true
     );
+    let a = await sessionTimer.tick()
+    console.log(a+"b")
     this.setState({
       isStudying: true,
     });
@@ -47,7 +50,7 @@ class StudyPage extends Component {
   }
 
   //only use if study session is ended via time expiry or a hypothetical end study session button
-
+  //needs rewrite bc im bad
   logTime = (studySession) => {
     const newCumul = this.state.plant.studyTimeCumul + studySession.elapsedTime;
     //  console.log("studyTimeCumul:", this.state.plant.studyTimeCumul, studySession.elapsedTime);
