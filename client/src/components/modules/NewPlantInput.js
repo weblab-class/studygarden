@@ -36,7 +36,11 @@ class NewPlantInput extends Component {
     const name = target.name;
     if (target.type === "number") {
       //prevents putting a negative number in
-      if (target.value < 1) {
+      if (target.value === "") {
+        this.setState({
+          [name]: value,
+        });
+      } else if (target.value < 1) {
         this.setState({
           [name]: 1,
         });
