@@ -1,14 +1,15 @@
 // taken and modified from https://stackoverflow.com/a/52685672 and other answers in the question
 
 export default class Timer {
-  constructor(funcToRun, delayInterval, repeat, runAtStart){
-    this.funcToRun = funcToRun;
+  constructor(funcToRun, delayInterval, repeat, runAtStart, out){
+    
     this.delayInterval = delayInterval;
     this.repeat = repeat;
-    this.count = 0;
+    this.count = 10;
     this.startTime = performance.now();
     this.isRunning = runAtStart;
-    const _this = this;
+    this.funcToRun = funcToRun(this.count);
+    let _this = this;
     //console.log("DDD")
     this.timeout = window.setTimeout(
       () => {
@@ -19,17 +20,17 @@ export default class Timer {
   tick(func) {
     if(this.isRunning)  {
       this.funcToRun;
-      
+      func
       this.count++;
     };
     //adjusts delay if previous tick was lagging
     if (this.repeat === -1 || (this.repeat >0 && this.count < this.repeat)){
       let adjustedDelay = Math.max(1,
         this.startTime + ((this.count+1)*this.delayInterval)-performance.now());
-      const _this = this;
-      this.timeout = window.setTimeout( () => {this.tick();}, adjustedDelay)
+      let _this = this;
+      this.timeout = window.setTimeout( function(){_this.tick(this.funcToRun);}, adjustedDelay)
     };
-    return console.log(this.count);
+    return this.count;
     //for testing
     
   };

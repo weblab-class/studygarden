@@ -26,17 +26,18 @@ class StudyPage extends Component {
   }
 
   //TODO: make a timer, have corresponding UI pop up while study session is in progress
-  async startStudy(event) {
+  async startStudy() {
     let sessionTimer = new Timer(
-      function(){
+      () => {
+        console.log("uno")
         this.setState( (prevState) => ({elapsedTime: (prevState.elapsedTime + 1)}));
       },
       1000,
       123,
       true
     );
-    let a = await sessionTimer.tick()
-    console.log(a+"b")
+    //let a = await sessionTimer.tick()
+    //console.log(a+"b")
     this.setState({
       isStudying: true,
     });
