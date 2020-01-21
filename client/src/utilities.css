@@ -42,6 +42,10 @@ form {
   flex-grow: 1;
 }
 
+button {
+  font-family: "Muli";
+  font-weight: bold;
+}
 .u-flex {
   display: flex;
 }
