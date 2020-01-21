@@ -8,6 +8,8 @@ import "../../utilities.css";
 import "./StudyPage.css";
 import { PLANT_STAGES } from "../modules/PlantStages.js";
 import Timer from "../modules/Timer.js";
+import MiniDaemon  from "../modules/MiniDaemon.js";
+
 class StudyPage extends Component {
   constructor(props) {
     super(props);
@@ -27,20 +29,26 @@ class StudyPage extends Component {
 
   //TODO: make a timer, have corresponding UI pop up while study session is in progress
   async startStudy() {
-    let sessionTimer = new Timer(
-      () => {
-        console.log("uno");
-        this.setState((prevState) => ({ elapsedTime: prevState.elapsedTime + 1 }));
-      },
-      1000,
-      123,
-      true
-    );
+    // let sessionTimer = new Timer(
+    //   () => {
+    //     console.log("uno");
+    //     this.setState((prevState) => ({ elapsedTime: prevState.elapsedTime + 1 }));
+    //   },
+    //   1000,
+    //   123,
+    //   true
+    // );
     //let a = await sessionTimer.tick()
     //console.log(a+"b")
+
+    let nMiniDaemon = new MiniDaemon(this, (index,length,backwards) => {
+      console.log("uno");
+      this.setState({ elapsedTime: index });
+    }, 1000, 123 /*hardcoded*/)
     this.setState({
       isStudying: true,
     });
+    nMiniDaemon.start()
     post(`/api/session/update`, {
       creatorId: this.props.userId,
       plantId: this.props.plantId,
@@ -101,7 +109,7 @@ class StudyPage extends Component {
         timeString: this.convertToMinSec(this.state.elapsedTime),
       });
     }
-    if (this.state.elapsedTime > this.state.elapsedTimeHold + 15) {
+    if (this.state.elapsedTime > this.state.elapsedTimeHold + 2) {
       //lets not kill the server too hard
       this.setState({
         elapsedTimeHold: this.state.elapsedTime,
@@ -137,9 +145,7 @@ class StudyPage extends Component {
     };
     let minutes = sec / 60;
     out = String(Math.floor(minutes)) + ":" + String(seconds());
-    this.setState({
-      timeString: out,
-    });
+    return out
   }
 
   //TODO: buttons/popups for continuing or cancelling existing study session
