@@ -22,21 +22,21 @@ class StudyPage extends Component {
       timeString: "0:00",
       showModal: false,
     };
-    this.startStudy=this.startStudy.bind(this);
+    this.startStudy = this.startStudy.bind(this);
   }
 
   //TODO: make a timer, have corresponding UI pop up while study session is in progress
   async startStudy(event) {
     let sessionTimer = new Timer(
-      function(){
-        this.setState( (prevState) => ({elapsedTime: (prevState.elapsedTime + 1)}));
+      function() {
+        this.setState((prevState) => ({ elapsedTime: prevState.elapsedTime + 1 }));
       },
       1000,
       123,
       true
     );
-    let a = await sessionTimer.tick()
-    console.log(a+"b")
+    let a = await sessionTimer.tick();
+    console.log(a + "b");
     this.setState({
       isStudying: true,
     });
@@ -204,25 +204,14 @@ class StudyPage extends Component {
                 <div className="StudyPage-infoContainer">
                   <div>{this.state.timeString}</div>
                   <button className="StudyPage-studyButton u-pointer" onClick={null}>
-                    you should be studying right now!
+                    stop studying
                   </button>
-                  <button
-                    className="StudyPage-studyButton u-pointer"
-                    onClick={(e) => {
-                      this.showModal();
-                    }}
-                  >
-                    you can't log study time because you're studying!
-                  </button>
-                  <LogStudyTime
-                    showModal={this.state.showModal}
-                    onClose={this.showModal}
-                    userId={this.props.userId}
-                    plantId={this.props.plantId}
-                    plant={this.state.plant}
-                    logTime={this.logTime}
+
+                  <ProgressBar
+                    className="StudyPage-progressBar"
+                    studyTimeCumul={this.state.plant.studyTimeCumul}
+                    goalTime={this.state.plant.goalTime}
                   />
-                  <ProgressBar className="StudyPage-progressBar" />
                 </div>
               </>
             ) : (

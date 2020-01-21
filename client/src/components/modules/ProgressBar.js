@@ -14,8 +14,8 @@ class ProgressBar extends Component {
     const style = {
       width: width,
     };
-    console.log(width);
-    console.log(style);
+    //  console.log(width);
+    //console.log(style);
     return (
       <div className="ProgressBar-container">
         <div className="ProgressBar" style={style}>
