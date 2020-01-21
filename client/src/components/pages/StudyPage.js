@@ -4,6 +4,7 @@ import { post, get } from "../../utilities";
 
 import ProgressBar from "../modules/ProgressBar.js";
 import LogStudyTime from "../modules/LogStudyTime.js";
+import EnterSessionLength from "../modules/EnterSessionLength.js";
 import "../../utilities.css";
 import "./StudyPage.css";
 import { PLANT_STAGES } from "../modules/PlantStages.js";
@@ -14,6 +15,7 @@ class StudyPage extends Component {
   constructor(props) {
     super(props);
     // Initialize Default State
+    // ALL TIME IS IN SECONDS
     this.state = {
       user: null,
       plant: undefined,
@@ -22,7 +24,9 @@ class StudyPage extends Component {
       elapsedTimeHold: 0,
       isStudying: false,
       timeString: "0:00",
-      showModal: false,
+      showModalLog: false,
+      showModalStart: false,
+      sessionLength: 0,
     };
     this.startStudy = this.startStudy.bind(this);
     this.stopStudy = this.stopStudy.bind(this);
@@ -30,7 +34,7 @@ class StudyPage extends Component {
   }
 
   //TODO: make a timer, have corresponding UI pop up while study session is in progress
-  async startStudy() {
+  startStudy = (sesLength) => {
     // let sessionTimer = new Timer(
     //   () => {
     //     console.log("uno");
@@ -46,21 +50,23 @@ class StudyPage extends Component {
     this.nMiniDaemon = new MiniDaemon(this, (index,length,backwards) => {
       console.log("uno");
       this.setState({ elapsedTime: index });
-    }, 1000, 123 /*hardcoded*/)
+    }, 1000, sesLength)
     this.setState({
       isStudying: true,
+      sessionLength: sesLength,
     });
     this.nMiniDaemon.start()
     post(`/api/session/update`, {
       creatorId: this.props.userId,
       plantId: this.props.plantId,
-      studySessionLength: 100, //in seconds, change to value of field in form
+      studySessionLength: sesLength, //in seconds, change to value of field in form
     });
     //TODO: link to api and call starting a new session
     //done
   }
   stopStudy() {
-    this.nMiniDaemon.pause()
+    this.nMiniDaemon.pause();
+
   }
 
   //only use if study session is ended via time expiry or a hypothetical end study session button
@@ -85,9 +91,15 @@ class StudyPage extends Component {
     //console.log("plant stage:", this.state.plant.stage);
   };
 
-  showModal = (e) => {
+  showModalLog = (e) => {
     this.setState({
-      showModal: !this.state.showModal,
+      showModalLog: !this.state.showModalLog,
+    });
+  };
+
+  showModalSession = (e) => {
+    this.setState({
+      showModalSession: !this.state.showModalSession,
     });
   };
 
@@ -111,15 +123,15 @@ class StudyPage extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.state.elapsedTime !== prevState.elapsedTime) {
       this.setState({
-        timeString: this.convertToMinSec(this.state.elapsedTime),
+        timeString: this.convertToMinSec(this.state.sessionLength-this.state.elapsedTime),
       });
     }
-    if (this.state.elapsedTime > this.state.elapsedTimeHold + 2) {
+    if (this.state.elapsedTime > this.state.elapsedTimeHold + 15) {
       //lets not kill the server too hard
       this.setState({
         elapsedTimeHold: this.state.elapsedTime,
       });
-      const newCumul = this.state.plant.studyTimeCumul + this.state.elapsedTime;
+      const newCumul = (this.state.plant.studyTimeCumul + this.state.elapsedTime);
       post(`/api/session/update`, {
         plantId: this.props.plantId,
         elapsedTime: this.state.elapsedTime,
@@ -170,24 +182,36 @@ class StudyPage extends Component {
                 <div className="StudyPage-infoContainer">
                   <h2>{this.state.plant.plantName}</h2>
                   <h3>{this.state.plant.subject}.</h3>
-                  <button className="StudyPage-studyButton u-pointer" onClick={this.startStudy}>
+                  <button className="StudyPage-studyButton u-pointer" onClick={
+                    (e) => {
+                      this.showModalSession();
+                    }}>
                     start studying
                   </button>
                   <button
                     className="StudyPage-studyButton u-pointer"
-                    onClick={(e) => {
-                      this.showModal();
+                    onClick={
+                      (e) => {
+                      this.showModalLog();
                     }}
                   >
                     log study time
                   </button>
                   <LogStudyTime
-                    showModal={this.state.showModal}
-                    onClose={this.showModal}
+                    showModal={this.state.showModalLog}
+                    onClose={this.showModalLog}
                     userId={this.props.userId}
                     plantId={this.props.plantId}
                     plant={this.state.plant}
                     logTime={this.logTime}
+                  />
+                  <EnterSessionLength
+                    showModal={this.state.showModalSession}
+                    onClose={this.showModalSession}
+                    userId={this.props.userId}
+                    plantId={this.props.plantId}
+                    plant={this.state.plant}
+                    startStudy={this.startStudy}
                   />
                   <ProgressBar
                     className="StudyPage-progressBar"

@@ -13,14 +13,15 @@ import { post } from "../../utilities";
 import "../../utilities.css";
 import "../pages/StudyPage.css";
 
-class LogStudyTime extends Component {
+class EnterSessionLength extends Component {
   constructor(props) {
     super(props);
     // Initialize Default State
     this.state = {
-      elapsedTime: 1,
+      sessionLength: 1,
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -59,14 +60,7 @@ class LogStudyTime extends Component {
   // called when the user hits "Submit" for a new post
   handleSubmit = (event) => {
     event.preventDefault();
-    const studySession = {
-      elapsedTime: this.state.elapsedTime,
-      creatorId: this.props.userId,
-      plantId: this.props.plantId,
-      plant: this.props.plant,
-    };
-    this.props.logTime(studySession);
-    //console.log(studySession);
+    this.props.startStudy((this.state.sessionLength)*60);
   };
 
   render() {
@@ -85,11 +79,11 @@ class LogStudyTime extends Component {
             X
           </button>
           <label className="LogStudyTime-container">
-            How long did you study (in hours)?
+            How many minutes do you want to study?
             <input
-              name="elapsedTime"
+              name="sessionLength"
               type="number"
-              value={this.state.elapsedTime}
+              value={this.state.sessionLength}
               onChange={this.handleChange}
               className="LogStudyTime-input"
             />
@@ -105,7 +99,7 @@ class LogStudyTime extends Component {
           </button>
         </form>
       </div>
-    );
+    )
   }
 }
-export default LogStudyTime;
+export default EnterSessionLength;
