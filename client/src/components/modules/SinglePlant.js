@@ -31,7 +31,7 @@ class SinglePlant extends Component {
             <p>{this.props.plantName}</p>
             <h3>{this.props.subject}</h3>
             <Link to={`/home/${this.props.userId}/study/${this.props._id}`}>
-              <button className="studyButton"> study! </button>
+              <button className="studyButton"> study </button>
             </Link>
             <i />
           </div>

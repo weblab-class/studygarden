@@ -98,7 +98,7 @@ class HomePage extends Component {
         </>
       ); //this is for testing purposes */
     } else {
-      plantsList = <div>No plants!</div>;
+      plantsList = <div>No plants yet...</div>;
     }
     return (
       <>
@@ -109,10 +109,13 @@ class HomePage extends Component {
                 <h1>Welcome, {this.state.user.name}!</h1>
                 <h2>see your garden here.</h2>{" "}
               </div>
+
               <div className="HomePage-windowsill">
                 <img src={initialBench} className="HomePage-bench" />
                 <div className="HomePage-plantsContainer">{plantsList}</div>
               </div>
+              <div className="backArrow" />
+              <div className="nextArrow" />
             </>
           ) : (
             <div> Loading... </div>
