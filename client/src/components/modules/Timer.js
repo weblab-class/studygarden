@@ -18,7 +18,7 @@ export default class Timer {
   };
   tick() {
     if(this.isRunning)  {
-      this.funcToRun();
+      this.funcToRun;
       this.count++;
     };
     //adjusts delay if previous tick was lagging

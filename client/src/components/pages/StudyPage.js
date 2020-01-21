@@ -17,6 +17,7 @@ class StudyPage extends Component {
       session: undefined,
       elapsedTime: 0, 
       isStudying: false,
+      timeString: "0:00",
     };
   }
 
@@ -37,11 +38,21 @@ class StudyPage extends Component {
   }
 
   //TODO: make a timer, have corresponding UI pop up while study session is in progress
-  startStudy = async (studyLength) => {
-    sessionTimer = new Timer(()=>{this.elapsedTime++},1000,studyLength,true);
+  async startStudy(event) {
+    let sessionTimer = await new Timer(()=>{this.elapsedTime++},1000,123,true);
+    this.setState({
+      isStudying: true
+    })
     //TODO: link to api and call starting a new session
   }
 
+  componentDidUpdate(prevProps,prevState){
+    if (this.state.elapsedTime !== prevState.elapsedTime){
+      this.setState({
+        timeString: this.convertToMinSec(this.state.elapsedTime),
+      })
+    }
+  }
   convertToMinSec(sec){
     let out = ""
     let seconds = () => {
@@ -54,7 +65,9 @@ class StudyPage extends Component {
     }
     let minutes = sec/60
     out = String(Math.floor(minutes)) + ":" + String(seconds())
-    return out
+    this.setState({
+      timeString: out
+    });
   }
 
   logTime = async () => {
@@ -63,7 +76,7 @@ class StudyPage extends Component {
   
 //TODO: buttons/popups for continuing or cancelling existing study session
   render() {
-    if(this.state.isStudying){
+    if(this.state.isStudying !== true){
       return (
         <>
           <div className="StudyPage-container">
@@ -75,7 +88,7 @@ class StudyPage extends Component {
                 <div className="StudyPage-infoContainer">
                   <h1>name!</h1>
                   <h2>subject.</h2>
-                  <button className="StudyPage-studyButton u-pointer" onClick = {this.startStudy(100)}> start studying </button>
+                  <button className="StudyPage-studyButton u-pointer" onClick = {this.startStudy}> start studying </button>
                   <button className="StudyPage-studyButton u-pointer" onClick = {this.logTime}> log study time </button>
                   <ProgressBar className="StudyPage-progressBar" />
                 </div>
@@ -96,10 +109,10 @@ class StudyPage extends Component {
                   <img src={PLANT_STAGES[this.state.plant.stage][this.state.plant.plantType]} />
                 </div>
                 <div className="StudyPage-infoContainer">
-                  <div>{this.convertToMinSec(122)}</div>
-                  <button className="StudyPage-studyButton u-pointer" onClick = {this.startStudy}> start studying </button>
-                  <button className="StudyPage-studyButton u-pointer" onClick = {this.logTime}> log study time </button>
-                  // <ProgressBar className="StudyPage-progressBar" />
+                  <div>{this.state.timeString}</div>
+                  <button className="StudyPage-studyButton u-pointer" onClick = {null}> :0 </button>
+                  <button className="StudyPage-studyButton u-pointer" onClick = {null}> :( </button>
+                  <ProgressBar className="StudyPage-progressBar" />
                 </div>
               </>
             ) : (
