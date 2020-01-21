@@ -24,6 +24,7 @@
   --medgrey: #e0e0e0;
   --grey: #f7f7f7;
   --white: #fff;
+  --text-dark: #4B4B4B;
 
   --xs: 4px;
   --s: 8px;
@@ -115,4 +116,15 @@ form {
 
 .u-link:hover {
   color: var(--primary--dim);
+}
+
+.u-loadingLight {
+  font-weight: 700;
+  color: var(--grey)
+}
+
+.u-loadingDark {
+  font-weight: 700;
+  font-size: 40px;
+  color: var(--text-dark)
 }
