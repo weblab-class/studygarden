@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
-import { get } from "../../utilities";
+import { post, get } from "../../utilities";
 
 import ProgressBar from "../modules/ProgressBar.js";
+import LogStudyTime from "../modules/LogStudyTime.js";
 import "../../utilities.css";
 import "./StudyPage.css";
 import { PLANT_STAGES } from "../modules/PlantStages.js";
@@ -16,8 +17,10 @@ class StudyPage extends Component {
       plant: undefined,
       session: undefined,
       elapsedTime: 0,
-      isStudying: false,
+      elapsedTimeHold: 0,
+      isStudying: true,
       timeString: "0:00",
+      showModal: false,
     };
   }
 
@@ -50,7 +53,13 @@ class StudyPage extends Component {
     this.setState({
       isStudying: true,
     });
+    post(`/api/session/update`, {
+      creatorId: this.props.userId,
+      plantId: this.props.plantId,
+      studySessionLength: 100, //in seconds, change to value of field in form
+    });
     //TODO: link to api and call starting a new session
+    //done
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -58,6 +67,29 @@ class StudyPage extends Component {
       this.setState({
         timeString: this.convertToMinSec(this.state.elapsedTime),
       });
+    }
+    if (this.state.elapsedTime > this.state.elapsedTimeHold + 15) {
+      //lets not kill the server too hard
+      this.setState({
+        elapsedTimeHold: this.state.elapsedTime,
+      });
+      const newCumul = this.state.plant.studyTimeCumul + this.state.elapsedTime;
+      post(`/api/session/update`, {
+        plantId: this.props.plantId,
+        elapsedTime: this.state.elapsedTime,
+      });
+      post(`/api/plant/update`, {
+        plantId: this.props.plantId,
+        fields: {
+          studyTimeCumul: newCumul,
+        },
+      }).then(
+        this.setState({
+          plant: {
+            studyTimeCumul: newCumul,
+          },
+        })
+      );
     }
   }
   convertToMinSec(sec) {
@@ -77,8 +109,28 @@ class StudyPage extends Component {
     });
   }
 
-  logTime = async () => {
-    //TODO: link to api and update cumulative study timer
+  //only use if study session is ended via time expiry or a hypothetical end study session button
+
+  logTime = () => {
+    const newCumul = this.state.plant.studyTimeCumul + this.state.elapsedTime;
+    post(`/api/plant/update`, {
+      plantId: this.props.plantId,
+      fields: {
+        studyTimeCumul: newCumul,
+      },
+    }).then(
+      this.setState({
+        plant: {
+          studyTimeCumul: newCumul,
+        },
+      })
+    );
+  };
+
+  showModal = (e) => {
+    this.setState({
+      showModal: true,
+    });
   };
 
   //TODO: buttons/popups for continuing or cancelling existing study session
@@ -90,7 +142,10 @@ class StudyPage extends Component {
             {this.state.user && this.state.plant ? (
               <>
                 <div className="StudyPage-plantContainer">
-                  <img src={PLANT_STAGES[this.state.plant.stage][this.state.plant.plantType]} />
+                  <img
+                    src={PLANT_STAGES[this.state.plant.stage][this.state.plant.plantType]}
+                    className=".StudyPage-plant"
+                  />
                 </div>
                 <div className="StudyPage-infoContainer">
                   <h2>{this.state.plant.plantName}</h2>
@@ -98,9 +153,15 @@ class StudyPage extends Component {
                   <button className="StudyPage-studyButton u-pointer" onClick={this.startStudy}>
                     start studying
                   </button>
-                  <button className="StudyPage-studyButton u-pointer" onClick={this.logTime}>
+                  <button
+                    className="StudyPage-studyButton u-pointer"
+                    onClick={(e) => {
+                      this.showModal();
+                    }}
+                  >
                     log study time
                   </button>
+                  <LogStudyTime showModal={this.state.showModal} />
                   <ProgressBar className="StudyPage-progressBar" />
                 </div>
               </>
@@ -122,13 +183,17 @@ class StudyPage extends Component {
                 <div className="StudyPage-infoContainer">
                   <div>{this.state.timeString}</div>
                   <button className="StudyPage-studyButton u-pointer" onClick={null}>
-                    {" "}
-                    :0{" "}
+                    start studying!
                   </button>
-                  <button className="StudyPage-studyButton u-pointer" onClick={null}>
-                    {" "}
-                    :({" "}
+                  <button
+                    className="StudyPage-studyButton u-pointer"
+                    onClick={(e) => {
+                      this.showModal();
+                    }}
+                  >
+                    log study time
                   </button>
+                  <LogStudyTime showModal={this.state.showModal} />
                   <ProgressBar className="StudyPage-progressBar" />
                 </div>
               </>

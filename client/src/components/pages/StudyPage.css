@@ -5,23 +5,33 @@
   height: 100%;
   width: 100%;
   display: flex;
-  flex-flow: column;
+  flex-flow: row;
   justify-content: center;
   text-align: center;
   background-image: linear-gradient(#e4e4e4, #a4def9);
 }
 
-.StudyPage-plant {
+.StudyPage-plantContainer {
   width: 50%;
   margin-top: auto;
+  object-fit: contain;
+}
+
+img {
+  position: relative;
+  object-fit: contain;
+  margin: auto;
 }
 
 .StudyPage-infoContainer {
   width: 50%;
   margin-left: auto;
+  margin-top: auto;
+  margin-bottom: auto;
   display: flex;
   flex-direction: column;
   text-shadow: white 1px 0 10px;
+  justify-content: center;
 }
 
 .StudyPage-studyButton {
