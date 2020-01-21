@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import { post, get } from "../../utilities";
-
+import { navigate } from "@reach/router";
 import ProgressBar from "../modules/ProgressBar.js";
 import LogStudyTime from "../modules/LogStudyTime.js";
 import EnterSessionLength from "../modules/EnterSessionLength.js";
@@ -66,13 +66,14 @@ class StudyPage extends Component {
   }
   stopStudy() {
     this.nMiniDaemon.pause();
-
+    navigate(`/home/${this.props.userId}`)
   }
 
   //only use if study session is ended via time expiry or a hypothetical end study session button
   //needs rewrite bc im bad
   logTime = (studySession) => {
     const newCumul = this.state.plant.studyTimeCumul + Number(studySession.elapsedTime);
+    const newStage = Math.min(5,Math.floor((newCumul/this.state.plant.goalTime)*5))
     //  console.log("studyTimeCumul:", this.state.plant.studyTimeCumul, studySession.elapsedTime);
     //  console.log("newCumul:", newCumul);
     post(`/api/plant/update`, {
@@ -84,6 +85,7 @@ class StudyPage extends Component {
       this.setState((prevState,prevProps) => {
         let out = prevState.plant;
         out["studyTimeCumul"] = newCumul
+        out["stage"] = newStage
         return {plant: out}
       })
     );
@@ -126,12 +128,14 @@ class StudyPage extends Component {
         timeString: this.convertToMinSec(this.state.sessionLength-this.state.elapsedTime),
       });
     }
-    if (this.state.elapsedTime > this.state.elapsedTimeHold + 15) {
+    if (this.state.elapsedTime > this.state.elapsedTimeHold + 5) {
       //lets not kill the server too hard
+      //update stage and cumulative study time every so often while studying
       this.setState({
         elapsedTimeHold: this.state.elapsedTime,
       });
       const newCumul = (this.state.plant.studyTimeCumul + this.state.elapsedTime);
+      const newStage = Math.min(5,Math.floor((newCumul/this.state.plant.goalTime)*5))
       post(`/api/session/update`, {
         plantId: this.props.plantId,
         elapsedTime: this.state.elapsedTime,
@@ -140,11 +144,13 @@ class StudyPage extends Component {
         plantId: this.props.plantId,
         fields: {
           studyTimeCumul: newCumul,
+          stage: newStage
         },
       }).then(
         this.setState((prevState,prevProps) => {
           let out = prevState.plant;
           out["studyTimeCumul"] = newCumul
+          out["stage"] = newStage
           return {plant: out}
         })
       );
