@@ -17,9 +17,10 @@ class StudyPage extends Component {
       session: undefined,
       elapsedTime: 0,
       elapsedTimeHold: 0, 
-      isStudying: true,
+      isStudying: false,
       timeString: "0:00",
     };
+    this.startStudy=this.startStudy.bind(this);
   }
 
   componentDidMount() {
@@ -38,48 +39,64 @@ class StudyPage extends Component {
     //this.startStudy(100);
   }
 
+  incrementTime(){
+    this.setState((prevstate) => ({
+      elapsedTime: prevstate.elapsedTime+1}
+      )); 
+  }
+
   //TODO: make a timer, have corresponding UI pop up while study session is in progress
-  async startStudy(event) {
-    let sessionTimer = await new Timer(()=>{this.elapsedTime++},1000,123,true);
+  async startStudy() {
+    let sessionTimer = await new Timer(this.incrementTime(),1000,123 /*hard coded*/,true);
+    //console.log(this)
+    
     this.setState({
       isStudying: true
     })
-    post(`/api/session/update`, {
-      creatorId: this.props.userId,
-      plantId: this.props.plantId,
-      studySessionLength: 100, //in seconds, change to value of field in form    
-    });
+    // post(`/api/session/update`, {
+    //   creatorId: this.props.userId,
+    //   plantId: this.props.plantId,
+    //   studySessionLength: 100, //in seconds, change to value of field in form    
+    // });
     //TODO: link to api and call starting a new session 
     //done
+  };
+  
+
+  isStudying(){
+    this.setState({
+      isStudying: true
+    })
   }
 
   componentDidUpdate(prevProps,prevState){
+    console.log(this.state.elapsedTime+"1212");
     if (this.state.elapsedTime !== prevState.elapsedTime){
       this.setState({
         timeString: this.convertToMinSec(this.state.elapsedTime),
       })
     }
-    if (this.state.elapsedTime > this.state.elapsedTimeHold + 15){
-      //lets not kill the server too hard
-      this.setState({
-        elapsedTimeHold: this.state.elapsedTime,
-      })
-      const newCumul=this.state.plant.studyTimeCumul + this.state.elapsedTime;
-      post(`/api/session/update`, {
-        plantId: this.props.plantId, 
-        elapsedTime: this.state.elapsedTime});
-      post(`/api/plant/update`, {
-        plantId: this.props.plantId, 
-        fields: {
-          studyTimeCumul: newCumul}
-        }).then(
-        this.setState({
-          plant: {
-            studyTimeCumul: newCumul
-          },
-        })
-      );
-    }
+    // if (this.state.elapsedTime > this.state.elapsedTimeHold + 15){
+    //   //lets not kill the server too hard
+    //   this.setState({
+    //     elapsedTimeHold: this.state.elapsedTime,
+    //   })
+    //   const newCumul=this.state.plant.studyTimeCumul + this.state.elapsedTime;
+    //   post(`/api/session/update`, {
+    //     plantId: this.props.plantId, 
+    //     elapsedTime: this.state.elapsedTime});
+    //   post(`/api/plant/update`, {
+    //     plantId: this.props.plantId, 
+    //     fields: {
+    //       studyTimeCumul: newCumul}
+    //     }).then(
+    //     this.setState({
+    //       plant: {
+    //         studyTimeCumul: newCumul
+    //       },
+    //     })
+    //   );
+    // }
   }
   convertToMinSec(sec){
     let out = ""
@@ -100,7 +117,7 @@ class StudyPage extends Component {
 
 
   //only use if study session is ended via time expiry or a hypothetical end study session button
-
+  //TODO write an actual log time function oops
   logTime = () => {
     const newCumul=this.state.plant.studyTimeCumul + this.state.elapsedTime;
     post(`/api/plant/update`, {

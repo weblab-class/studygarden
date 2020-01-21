@@ -16,9 +16,10 @@ export default class Timer {
       }, this.delay
     )
   };
-  tick() {
+  tick(func) {
     if(this.isRunning)  {
       this.funcToRun;
+      
       this.count++;
     };
     //adjusts delay if previous tick was lagging
@@ -26,10 +27,11 @@ export default class Timer {
       let adjustedDelay = Math.max(1,
         this.startTime + ((this.count+1)*this.delayInterval)-performance.now());
       const _this = this;
-      this.timeout = window.setTimeout( () => {_this.tick();}, adjustedDelay)
+      this.timeout = window.setTimeout( () => {this.tick();}, adjustedDelay)
     };
+    return console.log(this.count);
     //for testing
-    //console.log(this.count);
+    
   };
   stop() {
     window.clearTimeout(this.timeout);
