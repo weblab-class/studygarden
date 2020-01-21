@@ -62,11 +62,6 @@ class App extends Component {
     });
   };
 
-  checkUser(id) {
-    if (id === "null"){
-      navigate(`/`);
-    }
-  }
 
   render() {
     //if (location !== "/"){
