@@ -50,6 +50,8 @@ router.post("/session/update", async (req, res) => {
   //WIP
   //at the beginning of session, create a brand new session, set "isStudying" to true through this
   //at the end, set "isStudying" to false through /plant/update
+  //if starting a new study session, send in creatorId, plantId, studySessionLength
+  //if reporting time, send in plantId and elapsedTime
   const plant = req.body.plantId;
   const plantData = await Plant.findById(plant);
   //res.send(plantData);
@@ -135,8 +137,7 @@ router.post("/plant/update", async (req, res) => {
   /* possible inputs (somehow forbid any others)
   body:
     {fields:
-        {plant:
-          plantName,
+        { plantName,
           subject,
           goalTime,
           studyTimeCumul,

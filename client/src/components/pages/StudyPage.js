@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
-import { get } from "../../utilities";
+import { post , get } from "../../utilities";
 
 import ProgressBar from "../modules/ProgressBar.js";
 import "../../utilities.css";
@@ -15,8 +15,9 @@ class StudyPage extends Component {
       user: null,
       plant: undefined,
       session: undefined,
-      elapsedTime: 0, 
-      isStudying: false,
+      elapsedTime: 0,
+      elapsedTimeHold: 0, 
+      isStudying: true,
       timeString: "0:00",
     };
   }
@@ -43,7 +44,13 @@ class StudyPage extends Component {
     this.setState({
       isStudying: true
     })
-    //TODO: link to api and call starting a new session
+    post(`/api/session/update`, {
+      creatorId: this.props.userId,
+      plantId: this.props.plantId,
+      studySessionLength: 100, //in seconds, change to value of field in form    
+    });
+    //TODO: link to api and call starting a new session 
+    //done
   }
 
   componentDidUpdate(prevProps,prevState){
@@ -51,6 +58,27 @@ class StudyPage extends Component {
       this.setState({
         timeString: this.convertToMinSec(this.state.elapsedTime),
       })
+    }
+    if (this.state.elapsedTime > this.state.elapsedTimeHold + 15){
+      //lets not kill the server too hard
+      this.setState({
+        elapsedTimeHold: this.state.elapsedTime,
+      })
+      const newCumul=this.state.plant.studyTimeCumul + this.state.elapsedTime;
+      post(`/api/session/update`, {
+        plantId: this.props.plantId, 
+        elapsedTime: this.state.elapsedTime});
+      post(`/api/plant/update`, {
+        plantId: this.props.plantId, 
+        fields: {
+          studyTimeCumul: newCumul}
+        }).then(
+        this.setState({
+          plant: {
+            studyTimeCumul: newCumul
+          },
+        })
+      );
     }
   }
   convertToMinSec(sec){
@@ -70,8 +98,23 @@ class StudyPage extends Component {
     });
   }
 
-  logTime = async () => {
-    //TODO: link to api and update cumulative study timer
+
+  //only use if study session is ended via time expiry or a hypothetical end study session button
+
+  logTime = () => {
+    const newCumul=this.state.plant.studyTimeCumul + this.state.elapsedTime;
+    post(`/api/plant/update`, {
+      plantId: this.props.plantId, 
+      fields: {
+        studyTimeCumul: newCumul
+      },
+    }).then(
+      this.setState({
+        plant: {
+          studyTimeCumul: newCumul
+        },
+      })
+    );
   }
   
 //TODO: buttons/popups for continuing or cancelling existing study session
