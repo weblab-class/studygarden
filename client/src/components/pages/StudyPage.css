@@ -17,7 +17,8 @@
   object-fit: contain;
 }
 
-img {
+.StudyPage-plantContainer img {
+  max-width: 50%;
   position: relative;
   object-fit: contain;
   margin: auto;

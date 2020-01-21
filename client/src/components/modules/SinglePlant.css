@@ -1,5 +1,6 @@
 .SinglePlant-plantContainer {
   min-width: 20%;
+  max-width: 20%;
   height: auto;
   margin-top: auto;
 }
