@@ -18,26 +18,10 @@ class StudyPage extends Component {
       session: undefined,
       elapsedTime: 0,
       elapsedTimeHold: 0,
-      isStudying: true,
+      isStudying: false,
       timeString: "0:00",
       showModal: false,
     };
-  }
-
-  componentDidMount() {
-    // remember -- api calls go here!
-
-    document.title = "Study Page";
-    get(`/api/user`, { userId: this.props.userId }).then((user) => this.setState({ user: user }));
-    get(`/api/plant/single`, { plantId: this.props.plantId }).then((plant) => {
-      console.log(plant);
-      this.setState({ plant: plant });
-    });
-    get(`/api/session`, { plantId: this.props.plantId }).then((session) => {
-      this.setState({ session: session });
-    });
-    //for testing
-    //this.startStudy(100);
   }
 
   //TODO: make a timer, have corresponding UI pop up while study session is in progress
@@ -60,6 +44,50 @@ class StudyPage extends Component {
     });
     //TODO: link to api and call starting a new session
     //done
+  }
+
+  //only use if study session is ended via time expiry or a hypothetical end study session button
+
+  logTime = (studySession) => {
+    const newCumul = this.state.plant.studyTimeCumul + studySession.elapsedTime;
+    //  console.log("studyTimeCumul:", this.state.plant.studyTimeCumul, studySession.elapsedTime);
+    //  console.log("newCumul:", newCumul);
+    post(`/api/plant/update`, {
+      plantId: this.props.plantId,
+      fields: {
+        studyTimeCumul: newCumul,
+      },
+    }).then(
+      this.setState({
+        plant: {
+          studyTimeCumul: newCumul,
+        },
+      })
+    );
+    //console.log("plant:", this.state.plant);
+    //console.log("plant stage:", this.state.plant.stage);
+  };
+
+  showModal = (e) => {
+    this.setState({
+      showModal: !this.state.showModal,
+    });
+  };
+
+  componentDidMount() {
+    // remember -- api calls go here!
+
+    document.title = "Study Page";
+    get(`/api/user`, { userId: this.props.userId }).then((user) => this.setState({ user: user }));
+    get(`/api/plant/single`, { plantId: this.props.plantId }).then((plant) => {
+      //  console.log(plant);
+      this.setState({ plant: plant });
+    });
+    get(`/api/session`, { plantId: this.props.plantId }).then((session) => {
+      this.setState({ session: session });
+    });
+    //for testing
+    //this.startStudy(100);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -109,33 +137,9 @@ class StudyPage extends Component {
     });
   }
 
-  //only use if study session is ended via time expiry or a hypothetical end study session button
-
-  logTime = () => {
-    const newCumul = this.state.plant.studyTimeCumul + this.state.elapsedTime;
-    post(`/api/plant/update`, {
-      plantId: this.props.plantId,
-      fields: {
-        studyTimeCumul: newCumul,
-      },
-    }).then(
-      this.setState({
-        plant: {
-          studyTimeCumul: newCumul,
-        },
-      })
-    );
-  };
-
-  showModal = (e) => {
-    this.setState({
-      showModal: true,
-    });
-  };
-
   //TODO: buttons/popups for continuing or cancelling existing study session
   render() {
-    if (this.state.isStudying !== true) {
+    if (this.state.isStudying !== true && this.state.plant) {
       return (
         <>
           <div className="StudyPage-container">
@@ -161,7 +165,14 @@ class StudyPage extends Component {
                   >
                     log study time
                   </button>
-                  <LogStudyTime showModal={this.state.showModal} />
+                  <LogStudyTime
+                    showModal={this.state.showModal}
+                    onClose={this.showModal}
+                    userId={this.props.userId}
+                    plantId={this.props.plantId}
+                    plant={this.state.plant}
+                    logTime={this.logTime}
+                  />
                   <ProgressBar className="StudyPage-progressBar" />
                 </div>
               </>
@@ -178,12 +189,15 @@ class StudyPage extends Component {
             {this.state.user && this.state.plant ? (
               <>
                 <div className="StudyPage-plantContainer">
-                  <img src={PLANT_STAGES[this.state.plant.stage][this.state.plant.plantType]} />
+                  <img
+                    src={PLANT_STAGES[this.state.plant.stage][this.state.plant.plantType]}
+                    className=".StudyPage-plant"
+                  />
                 </div>
                 <div className="StudyPage-infoContainer">
                   <div>{this.state.timeString}</div>
                   <button className="StudyPage-studyButton u-pointer" onClick={null}>
-                    start studying!
+                    you should be studying right now!
                   </button>
                   <button
                     className="StudyPage-studyButton u-pointer"
@@ -191,9 +205,16 @@ class StudyPage extends Component {
                       this.showModal();
                     }}
                   >
-                    log study time
+                    you can't log study time because you're studying!
                   </button>
-                  <LogStudyTime showModal={this.state.showModal} />
+                  <LogStudyTime
+                    showModal={this.state.showModal}
+                    onClose={this.showModal}
+                    userId={this.props.userId}
+                    plantId={this.props.plantId}
+                    plant={this.state.plant}
+                    logTime={this.logTime}
+                  />
                   <ProgressBar className="StudyPage-progressBar" />
                 </div>
               </>

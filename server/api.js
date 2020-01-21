@@ -67,9 +67,9 @@ router.post("/session/update", async (req, res) => {
         creator_id: req.body.creatorId,
         plantId: req.body.plantId,
         studySessionLength: req.body.studySessionLength,
-        initCumulativeTime: plantData.studyTimeCumul
+        initCumulativeTime: plantData.studyTimeCumul,
       });
-      console.log(session);
+      console.log("session", session);
       plantData.isStudying = true;
       plantData.save();
       return session.save();
@@ -87,7 +87,6 @@ router.post("/session/update", async (req, res) => {
     res.send(sesStatus);
   }
 });
-
 
 router.get("/session/", (req, res) => {
   try {
@@ -125,7 +124,7 @@ router.post("/plant/new", async (req, res) => {
     goalTime: goalTime,
     stage: stage,
     studyTimeCumul: 0,
-    isStudying: false
+    isStudying: false,
   });
   const plant = await newPlant.save();
   response.push(plant);
@@ -149,7 +148,7 @@ router.post("/plant/update", async (req, res) => {
           */
   //console.log(req.body);
   const entry = await Plant.findById(req.body.plantId);
-  console.log(entry);
+  console.log("entry", entry);
   let response = [];
   for (obj in req.body.fields) {
     if (req.body.fields[obj] !== null || req.body.fields[obj] !== "") {

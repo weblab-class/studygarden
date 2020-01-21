@@ -1,25 +1,24 @@
 //modal
 import React, { Component } from "react";
 import { post } from "../../utilities";
-import StudyTimeSubmit from "./StudyTimeSubmit.js";
 
 /**
- * Component creates a new plant from scratch. input boxes will come from ../modules/NewPlantInput.js
+ * Component creates a new studySession from scratch.
  *
  * Proptypes
  *
- * @param {Number} fields.plantType
- * @param {Number} fields.goalTime
+ * @param {Number} fields.elapsedTime
  * @param {String} creator_id
  */
 import "../../utilities.css";
+import "../pages/StudyPage.css";
 
 class LogStudyTime extends Component {
   constructor(props) {
     super(props);
     // Initialize Default State
     this.state = {
-      studySessionLength: 1,
+      elapsedTime: 1,
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -27,13 +26,6 @@ class LogStudyTime extends Component {
   componentDidMount() {
     // remember -- api calls go here!
   }
-
-  postNewPlant = (body) => {
-    post("/api/plant/new", body).then((plant) => {
-      console.log("plant added?");
-      console.log(plant);
-    });
-  };
 
   handleChange(event) {
     const target = event.target;
@@ -57,32 +49,58 @@ class LogStudyTime extends Component {
     }
   }
 
-  //could use .map() here...
+  onClose = (e) => {
+    this.props.onClose && this.props.onClose(e);
+  };
+  // called when the user hits "Submit" for a new post
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const studySession = {
+      elapsedTime: this.state.elapsedTime,
+      creatorId: this.props.userId,
+      plantId: this.props.plantId,
+      plant: this.props.plant,
+    };
+    this.props.logTime(studySession);
+    //console.log(studySession);
+  };
+
   render() {
     if (!this.props.showModal) {
       return null;
     }
     return (
-      <form className="LogStudyTime-form">
-        <label className="LogStudyTime-container">
-          How long did you study (in hours)?
-          <input
-            name="studySessionLength"
-            type="number"
-            value={this.state.studySessionLength}
-            onChange={this.handleChange}
-            className="LogStudyTime-input"
-          />
-        </label>
+      <div>
+        <form className="LogStudyTime-form">
+          <button
+            onClick={(e) => {
+              this.onClose(e);
+            }}
+            className="LogStudyTime-closeButton u-pointer"
+          >
+            X
+          </button>
+          <label className="LogStudyTime-container">
+            How long did you study (in hours)?
+            <input
+              name="elapsedTime"
+              type="number"
+              value={this.state.elapsedTime}
+              onChange={this.handleChange}
+              className="LogStudyTime-input"
+            />
+          </label>
 
-        <StudyTimeSubmit
-          fields={{
-            studySessionLength: this.state.studySessionLength,
-            plantType: this.props.plantType,
-          }}
-          userId={this.props.userId}
-        />
-      </form>
+          <button
+            type="submit"
+            className="LogStudyTime-submitButton u-pointer"
+            value="Submit"
+            onClick={this.handleSubmit}
+          >
+            submit!
+          </button>
+        </form>
+      </div>
     );
   }
 }
