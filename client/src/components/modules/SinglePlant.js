@@ -26,10 +26,10 @@ class SinglePlant extends Component {
           <img
             className="SinglePlant-plant"
             src={PLANT_STAGES[this.props.stage][this.props.plantType]}
-            //  src={PLANT_STAGES[2][0]}
           />
           <div className="bottom">
-            <h3>{this.props.plantName}</h3>
+            <p>{this.props.plantName}</p>
+            <h3>{this.props.subject}</h3>
             <Link to={`/home/${this.props.userId}/study/${this.props._id}`}>
               <button className="studyButton"> study! </button>
             </Link>
