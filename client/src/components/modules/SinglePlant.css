@@ -11,6 +11,11 @@
   margin-top: auto;
   z-index: 1;
 }
+
+.SinglePlant-plant:hover {
+  -webkit-filter: drop-shadow(3px 3px 8px white) drop-shadow(-3px -3px 8px white);
+  filter: drop-shadow(3px 3px 12px white) drop-shadow(-3px -3px 12px white);
+}
 /*tooltip css copied below*/
 .tooltip {
   display: inline-block;
@@ -36,6 +41,14 @@
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.4s;
+}
+
+p {
+  margin: 0;
+}
+
+h3 {
+  margin: 4px;
 }
 
 .tooltip:hover .bottom {
