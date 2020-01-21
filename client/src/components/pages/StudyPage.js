@@ -173,7 +173,11 @@ class StudyPage extends Component {
                     plant={this.state.plant}
                     logTime={this.logTime}
                   />
-                  <ProgressBar className="StudyPage-progressBar" />
+                  <ProgressBar
+                    className="StudyPage-progressBar"
+                    studyTimeCumul={this.state.plant.studyTimeCumul}
+                    goalTime={this.state.plant.goalTime}
+                  />
                 </div>
               </>
             ) : (
