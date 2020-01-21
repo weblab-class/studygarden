@@ -188,6 +188,14 @@ class StudyPage extends Component {
                     }}>
                     start studying
                   </button>
+                  <EnterSessionLength
+                    showModal={this.state.showModalSession}
+                    onClose={this.showModalSession}
+                    userId={this.props.userId}
+                    plantId={this.props.plantId}
+                    plant={this.state.plant}
+                    startStudy={this.startStudy}
+                  />
                   <button
                     className="StudyPage-studyButton u-pointer"
                     onClick={
@@ -204,14 +212,6 @@ class StudyPage extends Component {
                     plantId={this.props.plantId}
                     plant={this.state.plant}
                     logTime={this.logTime}
-                  />
-                  <EnterSessionLength
-                    showModal={this.state.showModalSession}
-                    onClose={this.showModalSession}
-                    userId={this.props.userId}
-                    plantId={this.props.plantId}
-                    plant={this.state.plant}
-                    startStudy={this.startStudy}
                   />
                   <ProgressBar
                     className="StudyPage-progressBar"
