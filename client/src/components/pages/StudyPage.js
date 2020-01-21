@@ -29,8 +29,8 @@ class StudyPage extends Component {
   async startStudy() {
     let sessionTimer = new Timer(
       () => {
-        console.log("uno")
-        this.setState( (prevState) => ({elapsedTime: (prevState.elapsedTime + 1)}));
+        console.log("uno");
+        this.setState((prevState) => ({ elapsedTime: prevState.elapsedTime + 1 }));
       },
       1000,
       123,
@@ -84,7 +84,8 @@ class StudyPage extends Component {
     document.title = "Study Page";
     get(`/api/user`, { userId: this.props.userId }).then((user) => this.setState({ user: user }));
     get(`/api/plant/single`, { plantId: this.props.plantId }).then((plant) => {
-      //  console.log(plant);
+      console.log(plant);
+
       this.setState({ plant: plant });
     });
     get(`/api/session`, { plantId: this.props.plantId }).then((session) => {

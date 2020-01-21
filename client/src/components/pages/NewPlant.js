@@ -31,13 +31,13 @@ class NewPlantPage extends Component {
     this.setState({
       currentIndex: ind,
     });
-    console.log(ind);
+    //console.log(ind);
   };
 
   render() {
     return (
       <>
-        <div className="NewPlant-container">
+        <div className="NewPlant-container u.no-select">
           <NewPlantInput plantType={this.state.currentIndex} userId={this.props.userId} />
           <PlantSlider setPlantType={this.setPlantType} currentIndex={this.state.currentIndex} />
         </div>
