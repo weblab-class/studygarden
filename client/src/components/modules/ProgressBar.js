@@ -10,11 +10,12 @@ class ProgressBar extends Component {
     const width =
       this.props.studyTimeCumul >= this.props.goalTime
         ? "100%"
-        : "" + this.props.studyTimeCumul / this.props.goalTime + "%";
+        : "" + (this.props.studyTimeCumul * 100) / this.props.goalTime + "%";
     const style = {
       width: width,
     };
-
+    console.log(width);
+    console.log(style);
     return (
       <div className="ProgressBar-container">
         <div className="ProgressBar" style={style}>
