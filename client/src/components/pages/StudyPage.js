@@ -72,7 +72,7 @@ class StudyPage extends Component {
   //only use if study session is ended via time expiry or a hypothetical end study session button
   //needs rewrite bc im bad
   logTime = (studySession) => {
-    const newCumul = this.state.plant.studyTimeCumul + studySession.elapsedTime;
+    const newCumul = this.state.plant.studyTimeCumul + Number(studySession.elapsedTime);
     //  console.log("studyTimeCumul:", this.state.plant.studyTimeCumul, studySession.elapsedTime);
     //  console.log("newCumul:", newCumul);
     post(`/api/plant/update`, {
