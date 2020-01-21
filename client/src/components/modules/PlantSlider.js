@@ -45,7 +45,6 @@ class PlantSlider extends Component {
     this.setState((prevState) => ({
       currentIndex: prevState.currentIndex - 1,
     }));
-    return this.props.setPlantType(this.state.currentIndex);
   };
 
   goToNextSlide = /* async */ () => {
@@ -60,11 +59,16 @@ class PlantSlider extends Component {
         currentIndex: prevState.currentIndex + 1,
       }));
     }
-    return this.props.setPlantType(this.state.currentIndex);
   };
 
   componentDidMount() {
     // remember -- api calls go here!
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.currentIndex !== prevState.currentIndex) {
+      this.props.setPlantType(this.state.currentIndex);
+    }
   }
 
   render() {
