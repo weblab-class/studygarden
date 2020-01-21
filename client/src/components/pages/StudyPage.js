@@ -6,7 +6,7 @@ import ProgressBar from "../modules/ProgressBar.js";
 import "../../utilities.css";
 import "./StudyPage.css";
 import { PLANT_STAGES } from "../modules/PlantStages.js";
-
+import Timer from "../modules/Timer.js";
 class StudyPage extends Component {
   constructor(props) {
     super(props);
@@ -15,6 +15,9 @@ class StudyPage extends Component {
       user: null,
       plant: undefined,
       session: undefined,
+      elapsedTime: 0,
+      isStudying: false,
+      timeString: "0:00",
     };
   }
 
@@ -30,11 +33,49 @@ class StudyPage extends Component {
     get(`/api/session`, { plantId: this.props.plantId }).then((session) => {
       this.setState({ session: session });
     });
+    //for testing
+    //this.startStudy(100);
   }
+
   //TODO: make a timer, have corresponding UI pop up while study session is in progress
-  startStudy = async () => {
+  async startStudy(event) {
+    let sessionTimer = await new Timer(
+      () => {
+        this.elapsedTime++;
+      },
+      1000,
+      123,
+      true
+    );
+    this.setState({
+      isStudying: true,
+    });
     //TODO: link to api and call starting a new session
-  };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.elapsedTime !== prevState.elapsedTime) {
+      this.setState({
+        timeString: this.convertToMinSec(this.state.elapsedTime),
+      });
+    }
+  }
+  convertToMinSec(sec) {
+    let out = "";
+    let seconds = () => {
+      let res = sec % 60;
+      if (res < 10) {
+        return "0" + String(res);
+      } else {
+        return res;
+      }
+    };
+    let minutes = sec / 60;
+    out = String(Math.floor(minutes)) + ":" + String(seconds());
+    this.setState({
+      timeString: out,
+    });
+  }
 
   logTime = async () => {
     //TODO: link to api and update cumulative study timer
@@ -42,35 +83,62 @@ class StudyPage extends Component {
 
   //TODO: buttons/popups for continuing or cancelling existing study session
   render() {
-    return (
-      <>
-        <div className="StudyPage-container">
-          {this.state.user && this.state.plant ? (
-            <>
-              <div className="StudyPage-plantContainer">
-                <img
-                  src={PLANT_STAGES[this.state.plant.stage][this.state.plant.plantType]}
-                  className="StudyPage-plant"
-                />
-              </div>
-              <div className="StudyPage-infoContainer">
-                <h2>{this.state.plant.plantName}</h2>
-                <h3>{this.state.plant.subject}.</h3>
-                <button className="StudyPage-studyButton" onClick={this.startStudy}>
-                  start studying
-                </button>
-                <button className="StudyPage-studyButton" onClick={this.logTime}>
-                  log study time
-                </button>
-                <ProgressBar className="StudyPage-progressBar" />
-              </div>
-            </>
-          ) : (
-            <div> Loading... </div>
-          )}
-        </div>
-      </>
-    );
+    if (this.state.isStudying !== true) {
+      return (
+        <>
+          <div className="StudyPage-container">
+            {this.state.user && this.state.plant ? (
+              <>
+                <div className="StudyPage-plantContainer">
+                  <img src={PLANT_STAGES[this.state.plant.stage][this.state.plant.plantType]} />
+                </div>
+                <div className="StudyPage-infoContainer">
+                  <h2>{this.state.plant.plantName}</h2>
+                  <h3>{this.state.plant.subject}.</h3>
+                  <button className="StudyPage-studyButton u-pointer" onClick={this.startStudy}>
+                    start studying
+                  </button>
+                  <button className="StudyPage-studyButton u-pointer" onClick={this.logTime}>
+                    log study time
+                  </button>
+                  <ProgressBar className="StudyPage-progressBar" />
+                </div>
+              </>
+            ) : (
+              <div className="u-loadingDark"> Loading... </div>
+            )}
+          </div>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <div className="StudyPage-container">
+            {this.state.user && this.state.plant ? (
+              <>
+                <div className="StudyPage-plantContainer">
+                  <img src={PLANT_STAGES[this.state.plant.stage][this.state.plant.plantType]} />
+                </div>
+                <div className="StudyPage-infoContainer">
+                  <div>{this.state.timeString}</div>
+                  <button className="StudyPage-studyButton u-pointer" onClick={null}>
+                    {" "}
+                    :0{" "}
+                  </button>
+                  <button className="StudyPage-studyButton u-pointer" onClick={null}>
+                    {" "}
+                    :({" "}
+                  </button>
+                  <ProgressBar className="StudyPage-progressBar" />
+                </div>
+              </>
+            ) : (
+              <div className="u-loadingDark"> Loading... </div>
+            )}
+          </div>
+        </>
+      );
+    }
   }
 }
 
