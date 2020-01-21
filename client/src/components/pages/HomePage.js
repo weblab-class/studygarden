@@ -97,6 +97,7 @@ class HomePage extends Component {
           />
         </>
       ); //this is for testing purposes */
+      console.log(plantsList);
     } else {
       plantsList = <div>No plants yet...</div>;
     }
@@ -114,8 +115,6 @@ class HomePage extends Component {
                 <img src={initialBench} className="HomePage-bench" />
                 <div className="HomePage-plantsContainer">{plantsList}</div>
               </div>
-              <div className="backArrow" />
-              <div className="nextArrow" />
             </>
           ) : (
             <div> Loading... </div>
