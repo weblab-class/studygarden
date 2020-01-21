@@ -11,7 +11,7 @@ import NewSubmit from "./NewPlant/NewSubmit.js";
  * @param {Number} fields.goalTime
  * @param {String} creator_id
  */
-import "./NewPlantInput.css";
+import "../pages/NewPlant.css";
 import "../../utilities.css";
 //import "./HomePage.css";
 
@@ -22,7 +22,7 @@ class NewPlantInput extends Component {
     this.state = {
       plantName: "",
       subject: "",
-      goalTime: 0,
+      goalTime: 1,
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -34,8 +34,13 @@ class NewPlantInput extends Component {
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
-    if(target.type === "number") { //prevents putting a negative number in
-      if(target.value < 1){
+    if (target.type === "number") {
+      //prevents putting a negative number in
+      if (target.value === "") {
+        this.setState({
+          [name]: value,
+        });
+      } else if (target.value < 1) {
         this.setState({
           [name]: 1,
         });
@@ -48,7 +53,7 @@ class NewPlantInput extends Component {
       this.setState({
         [name]: value,
       });
-    };
+    }
   }
 
   //could use .map() here...

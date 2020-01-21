@@ -3,8 +3,10 @@ import GoogleLogin, { GoogleLogout } from "react-google-login";
 import { get } from "../../utilities";
 import NewPlantInput from "../modules/NewPlantInput.js";
 
+import PlantSlider from "../modules/PlantSlider.js";
+
 import "../../utilities.css";
-import "./HomePage.css";
+import "./NewPlant.css";
 
 class NewPlantPage extends Component {
   constructor(props) {
@@ -12,6 +14,7 @@ class NewPlantPage extends Component {
     // Initialize Default State
     this.state = {
       user: null,
+      currentIndex: 0,
     };
   }
 
@@ -24,10 +27,20 @@ class NewPlantPage extends Component {
     //get("/api/plant",
   }
 
+  setPlantType = (ind) => {
+    this.setState({
+      currentIndex: ind,
+    });
+    //console.log(ind);
+  };
+
   render() {
     return (
       <>
-        <NewPlantInput />
+        <div className="NewPlant-container u-no-select">
+          <NewPlantInput plantType={this.state.currentIndex} userId={this.props.userId} />
+          <PlantSlider setPlantType={this.setPlantType} currentIndex={this.state.currentIndex} />
+        </div>
       </>
     );
   }

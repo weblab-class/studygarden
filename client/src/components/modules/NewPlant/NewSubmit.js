@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { post } from "../../../utilities";
+import { navigate } from "@reach/router";
 
 /**
  * Component creates a new plant from scratch. input boxes will come from ../modules/NewPlantInput.js
@@ -9,11 +10,11 @@ import { post } from "../../../utilities";
  * @param {Number} fields.plantType
  * @param {String} fields.subject
  * @param {Number} fields.goalTime
- * @param {String} creator_id
+ * @param {String} userid
  */
 
 //should combine into newplantinput
-import "../../modules/NewPlantInput.css";
+import "../../pages/NewPlant.css";
 import "../../../utilities.css";
 //import "./HomePage.css";
 
@@ -37,34 +38,25 @@ class NewSubmit extends Component {
   componentDidMount() {
     // remember -- api calls go here!
   }
-  /*   // called whenever the user types in the new post input box
-  handleChange = (event) => {
-    this.setState({
-      value: event.target.value,
-    });
-  }; */
 
   // called when the user hits "Submit" for a new post
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
     const plant = {
       plantName: this.props.fields.plantName,
       plantType: this.props.fields.plantType,
       subject: this.props.fields.subject,
       id: this.props.userId,
-      time: this.state.timeCreated,
+      timeCreated: this.state.timeCreated,
       goalTime: this.props.fields.goalTime,
     };
-    if (plant.plantName.length <=2 || plant.plantType.length <=2 || plant.subject.length <=2 ){ //this feels dumb help me
-      throw new Error("fields must be longer than 2 characters!") 
-    }else{
+    if (plant.plantName.length <= 2 || plant.subject.length <= 2) {
+      throw new Error("fields must be longer than 2 characters!");
+    } else {
       console.log(plant);
-      this.postNewPlant(plant);
-    };
-    // this.props.onSubmit && this.props.onSubmit(this.state.value);
-    // this.setState({
-    //   value: "",
-    // });
+      await this.postNewPlant(plant)
+      navigate(`/home/`+ this.props.userId);
+    }
   };
   render() {
     return (

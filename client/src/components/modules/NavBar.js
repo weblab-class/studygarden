@@ -42,11 +42,11 @@ class NavBar extends Component {
               onLogoutSuccess={this.props.handleLogout}
               onFailure={(err) => console.log(err)}
               render={(renderProps) => (
-                <button onClick={renderProps.onClick} className="NavBar-googleButton">
+                <button onClick={renderProps.onClick} className="NavBar-googleButton u-pointer">
                   logout
                 </button> //FIXME: font is wrong
               )}
-              className="NavBar-link NavBar-login u-pointer"
+              className="NavBar-link NavBar-login"
             />
           ) : (
             <GoogleLogin
@@ -55,7 +55,7 @@ class NavBar extends Component {
               onSuccess={this.props.handleLogin}
               onFailure={(err) => console.log(err)}
               render={(renderProps) => (
-                <button onClick={renderProps.onClick} className="NavBar-googleButton">
+                <button onClick={renderProps.onClick} className="NavBar-googleButton u-pointer">
                   login
                 </button> //FIXME: font is wrong
               )}
