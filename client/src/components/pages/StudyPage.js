@@ -118,6 +118,11 @@ class StudyPage extends Component {
     });
     //for testing
     //this.startStudy(100);
+    get("/api/whoami").then((user) => {
+      if (!user._id) {
+        navigate(`/`);
+      }
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {

@@ -30,6 +30,13 @@ class HomePage extends Component {
         this.setState({ plants: this.state.plants.concat([plantObj]) });
       });
     });
+    get("/api/whoami").then((user) => {
+      if (!user._id) {
+        navigate(`/`);
+      }
+    });
+    //console.log(this.props.userId)
+    //this.props.checkUser(this.props.userId);
   }
 
   render() {

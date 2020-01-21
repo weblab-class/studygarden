@@ -6,7 +6,7 @@ import HomePage from "./pages/HomePage.js";
 import NewPlantPage from "./pages/NewPlant.js";
 import StudyPage from "./pages/StudyPage.js";
 import NotFound from "./pages/NotFound.js";
-import { navigate } from "@reach/router";
+import { navigate, Location } from "@reach/router";
 
 import "../utilities.css";
 import "./App.css";
@@ -35,6 +35,10 @@ class App extends Component {
         console.log("user detected");
       }
     });
+    
+    if (this.state.userId === "null"){
+      navigate(`/`);
+    }
   }
 
   handleLogin = (res) => {
@@ -58,7 +62,13 @@ class App extends Component {
     });
   };
 
+
   render() {
+    //if (location !== "/"){
+      if (this.state.userId === "null"){
+        navigate(`/`);
+      }
+    //}
     return (
       <>
         <NavBar
@@ -74,9 +84,9 @@ class App extends Component {
               handleLogin={this.handleLogin}
               handleLogout={this.handleLogout}
             />
-            <HomePage path="/home/:userId" />
-            <NewPlantPage path="/home/:userId/newplant" />
-            <StudyPage path="/home/:userId/study/:plantId" />
+            <HomePage path="/home/:userId" checkUser = {this.checkUser} />
+            <NewPlantPage path="/home/:userId/newplant" checkUser = {this.checkUser} />
+            <StudyPage path="/home/:userId/study/:plantId" checkUser = {this.checkUser} />
             <NotFound default />
           </Router>
         </div>

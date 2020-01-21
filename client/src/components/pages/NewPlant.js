@@ -25,6 +25,11 @@ class NewPlantPage extends Component {
     //why not get user in app.js and pass it down as prop?
 
     //get("/api/plant",
+    get("/api/whoami").then((user) => {
+      if (!user._id) {
+        navigate(`/`);
+      }
+    });
   }
 
   setPlantType = (ind) => {
