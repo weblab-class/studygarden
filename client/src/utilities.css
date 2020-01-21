@@ -4,16 +4,15 @@
 * and can be used to add general styles; variable definitions
 * for colors; and styles to html, body, and other high level
 * DOMs.
-* 
+*
 * All utility classes start with a `u-` and all do
 * one basic CSS thing (for example, making the font-weight
 * 600 for bolding) or are super generic.
-* 
+*
 * This is 𝙉𝙊𝙏 the place to define classes for components or
 * do rigorous styling. You shoud not need to change this file
 * much after initial creation.
 */
-
 
 @import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
 
@@ -24,6 +23,7 @@
   --medgrey: #e0e0e0;
   --grey: #f7f7f7;
   --white: #fff;
+  --text-dark: #4b4b4b;
 
   --xs: 4px;
   --s: 8px;
@@ -87,12 +87,12 @@ form {
   font-weight: 700;
 }
 
-.u-extraBold{
-  font-weight: 800
+.u-extraBold {
+  font-weight: 800;
 }
 
-.u-black{
-  font-weight: 900
+.u-black {
+  font-weight: 900;
 }
 
 .u-textCenter {
@@ -117,11 +117,22 @@ form {
   color: var(--primary--dim);
 }
 
-.u-no-select{ 
+.u-loadingLight {
+  font-weight: 700;
+  color: var(--grey);
+}
+
+.u-loadingDark {
+  font-weight: 700;
+  font-size: 40px;
+  color: var(--text-dark);
+}
+
+.u-no-select {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none; 
+  -ms-user-select: none;
   user-select: none;
 }
