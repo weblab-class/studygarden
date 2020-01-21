@@ -5,10 +5,10 @@ export default class Timer {
     
     this.delayInterval = delayInterval;
     this.repeat = repeat;
-    this.count = 10;
+    this.count = 0;
     this.startTime = performance.now();
     this.isRunning = runAtStart;
-    this.funcToRun = funcToRun(this.count);
+    this.funcToRun = funcToRun();
     let _this = this;
     //console.log("DDD")
     this.timeout = window.setTimeout(
