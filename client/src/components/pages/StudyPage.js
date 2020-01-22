@@ -46,7 +46,9 @@ class StudyPage extends Component {
     // );
     //let a = await sessionTimer.tick()
     //console.log(a+"b")
-
+    this.setState({
+      timeString: this.convertToMinSec(sesLength),
+    });
     this.nMiniDaemon = new MiniDaemon(
       this,
       (index, length, backwards) => {
@@ -56,10 +58,12 @@ class StudyPage extends Component {
       1000,
       sesLength
     );
+
     this.setState({
       isStudying: true,
       sessionLength: sesLength,
     });
+
     this.nMiniDaemon.start();
     post(`/api/session/update`, {
       creatorId: this.props.userId,
@@ -84,6 +88,7 @@ class StudyPage extends Component {
       plantId: this.props.match.params.plantId,
       fields: {
         studyTimeCumul: newCumul,
+        stage: newStage,
       },
     }).then(
       this.setState((prevState, prevProps) => {
