@@ -22,6 +22,7 @@ class LoginPage extends Component {
 
   render() {
     if (!this.state.user) {
+      console.log(this.props.handleLogin);
       return (
         <>
           <div className="LoginPage-container">
@@ -53,7 +54,7 @@ class LoginPage extends Component {
                     className="LoginPage-googleButton u-pointer"
                   >
                     Log In With Google
-                  </button> //FIXME: font is wrong
+                  </button>
                 )}
               />
             )}

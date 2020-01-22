@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import { get } from "../../utilities";
 import NewPlantInput from "../modules/NewPlantInput.js";
-
+import { Redirect } from "react-router-dom";
 import PlantSlider from "../modules/PlantSlider.js";
 
 import "../../utilities.css";
@@ -27,7 +27,7 @@ class NewPlantPage extends Component {
     //get("/api/plant",
     get("/api/whoami").then((user) => {
       if (!user._id) {
-        navigate(`/`);
+        this.setState({ isLoggedOut: true });
       }
     });
   }
@@ -40,10 +40,17 @@ class NewPlantPage extends Component {
   };
 
   render() {
+    if (this.state.isLoggedOut) {
+      console.log("is logged out!");
+      return <Redirect to="/" />;
+    }
     return (
       <>
         <div className="NewPlant-container u-no-select">
-          <NewPlantInput plantType={this.state.currentIndex} userId={this.props.userId} />
+          <NewPlantInput
+            plantType={this.state.currentIndex}
+            userId={this.props.match.params.userId}
+          />
           <PlantSlider setPlantType={this.setPlantType} currentIndex={this.state.currentIndex} />
         </div>
       </>

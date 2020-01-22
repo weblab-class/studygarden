@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import { get } from "../../utilities";
-import { navigate } from "@reach/router";
 import initialBench from "../../../img/initialBench.png";
 import SinglePlant from "../modules/SinglePlant.js";
+import { Redirect } from "react-router-dom";
 
 import "../../utilities.css";
 import "./HomePage.css";
@@ -22,9 +22,11 @@ class HomePage extends Component {
     // remember -- api calls go here!
     document.title = "Profile Page";
 
-    get(`/api/user`, { userId: this.props.userId }).then((user) => this.setState({ user: user }));
+    get(`/api/user`, { userId: this.props.match.params.userId }).then((user) =>
+      this.setState({ user: user })
+    );
 
-    get("/api/plant", { creatorId: this.props.userId }).then((plantObjs) => {
+    get("/api/plant", { creatorId: this.props.match.params.userId }).then((plantObjs) => {
       let reversedStoryObjs = plantObjs.reverse();
       reversedStoryObjs.map((plantObj) => {
         this.setState({ plants: this.state.plants.concat([plantObj]) });
@@ -32,7 +34,7 @@ class HomePage extends Component {
     });
     get("/api/whoami").then((user) => {
       if (!user._id) {
-        navigate(`/`);
+        this.setState({ isLoggedOut: true });
       }
     });
     //console.log(this.props.userId)
@@ -40,6 +42,10 @@ class HomePage extends Component {
   }
 
   render() {
+    if (this.state.isLoggedOut) {
+      console.log("is logged out!");
+      return <Redirect to="/" />;
+    }
     let plantsList = null;
     const hasPlants = this.state.plants.length !== 0;
     if (hasPlants) {
@@ -52,7 +58,7 @@ class HomePage extends Component {
           creator_id={plantObj.creator_id}
           plantType={plantObj.plantType}
           stage={plantObj.stage}
-          userId={this.props.userId}
+          userId={this.props.match.params.userId}
         />
       ));
       /* plantsList = (
@@ -104,7 +110,7 @@ class HomePage extends Component {
           />
         </>
       ); //this is for testing purposes */
-      console.log(plantsList);
+      //console.log(plantsList);
     } else {
       plantsList = <div>No plants yet...</div>;
     }
