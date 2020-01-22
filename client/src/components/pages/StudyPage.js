@@ -88,6 +88,7 @@ class StudyPage extends Component {
       plantId: this.props.match.params.plantId,
       fields: {
         studyTimeCumul: newCumul,
+        stage: newStage,
       },
     }).then(
       this.setState((prevState, prevProps) => {
