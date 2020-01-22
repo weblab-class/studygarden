@@ -177,7 +177,7 @@ router.get("/plant/single", (req, res) => {
 router.get("/plant", (req, res) => {
   //WIP, will get all plants from user
   try {
-    Plant.find({ creator_id: req.query.creatorId }).then((plants) => {
+    Plant.find({ creator_id: req.query.creatorId }).sort("timeCreated").then((plants) => {
       res.send(plants);
     });
   } catch (err) {
