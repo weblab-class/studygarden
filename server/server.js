@@ -18,6 +18,8 @@
 const validator = require("./validator");
 validator.checkSetup();
 
+require("dotenv").config();
+
 //import libraries needed for the webserver to work!
 const http = require("http");
 const express = require("express"); // backend framework for our node server.
@@ -35,8 +37,7 @@ mongoose.set("useFindAndModify", false);
 // TODO change connection URL after setting up your team database
 //const mongoConnectionURL = "mongodb+srv://admin:XZ9yNb7KaPyEXG9X@cluster0-t5kvp.mongodb.net/test?retryWrites=true&w=majority";
 //  STUDY GARDEN SERVER BELOWO
-const mongoConnectionURL = "mongodb+srv://admin:XZ9yNb7KaPyEXG9X@cluster0-h7gmv.mongodb.net/test?retryWrites=true&w=majority";
-
+const mongoConnectionURL = process.env.ATLAS_SRV
 const databaseName = "Cluster0";
 
 // connect to mongodb
@@ -96,8 +97,8 @@ app.use((err, req, res, next) => {
   });
 });
 
-// hardcode port to 3000 for now
-const port = 3000;
+
+const port = process.env.PORT || 3000;
 const server = http.Server(app);
 //socket.init(server);
 
