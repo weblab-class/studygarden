@@ -21,15 +21,16 @@ class NewPlantPage extends Component {
   componentDidMount() {
     // remember -- api calls go here!
     document.title = "Create New Plant";
-    get(`/api/user`, { userId: this.props.userId }).then((user) => this.setState({ user: user }));
-    //why not get user in app.js and pass it down as prop?
-
-    //get("/api/plant",
     get("/api/whoami").then((user) => {
       if (!user._id) {
         this.setState({ isLoggedOut: true });
       }
     });
+    get(`/api/user`, { userId: this.props.match.params.userId }).then((user) => this.setState({ user: user }));
+    //why not get user in app.js and pass it down as prop?
+
+    //get("/api/plant",
+    
   }
 
   setPlantType = (ind) => {
