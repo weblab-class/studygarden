@@ -56,8 +56,6 @@ class NewSubmit extends Component {
       console.log(plant);
       await this.postNewPlant(plant);
       this.setState({ isSubmitted: true });
-
-      //  navigate(`/home/` + this.props.userId);
     }
   };
   render() {

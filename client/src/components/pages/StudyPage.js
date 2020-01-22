@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import { post, get } from "../../utilities";
-import { navigate } from "@reach/router";
 import ProgressBar from "../modules/ProgressBar.js";
 import LogStudyTime from "../modules/LogStudyTime.js";
 import EnterSessionLength from "../modules/EnterSessionLength.js";
@@ -129,7 +129,7 @@ class StudyPage extends Component {
     //this.startStudy(100);
     get("/api/whoami").then((user) => {
       if (!user._id) {
-        navigate(`/`);
+        this.setState({ isLoggedOut: true });
       }
     });
   }
@@ -186,6 +186,10 @@ class StudyPage extends Component {
 
   //TODO: buttons/popups for continuing or cancelling existing study session
   render() {
+    if (this.state.isLoggedOut) {
+      console.log("is logged out!");
+      return <Redirect to="/" />;
+    }
     if (this.state.isStudying !== true && this.state.plant) {
       return (
         <>

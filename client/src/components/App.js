@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Router } from "@reach/router";
 import NavBar from "./modules/NavBar.js";
 import LoginPage from "./pages/LoginPage.js";
 import HomePage from "./pages/HomePage.js";
@@ -7,7 +6,7 @@ import NewPlantPage from "./pages/NewPlant.js";
 import StudyPage from "./pages/StudyPage.js";
 import NotFound from "./pages/NotFound.js";
 
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import LoginComponent from "./LoginComponent.js";
 import AppComponent from "./AppComponent.js";
 
@@ -33,8 +32,9 @@ class App extends Component {
   render() {
     //if (location !== "/"){
     if (this.state.userId === "null") {
-      navigate(`/`);
+      return <Redirect to="/" />;
     }
+
     //}
     return (
       <>

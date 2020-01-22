@@ -3,6 +3,7 @@ import GoogleLogin, { GoogleLogout } from "react-google-login";
 import { get } from "../../utilities";
 import initialBench from "../../../img/initialBench.png";
 import SinglePlant from "../modules/SinglePlant.js";
+import { Redirect } from "react-router-dom";
 
 import "../../utilities.css";
 import "./HomePage.css";
@@ -33,7 +34,7 @@ class HomePage extends Component {
     });
     get("/api/whoami").then((user) => {
       if (!user._id) {
-        navigate(`/`);
+        this.setState({ isLoggedOut: true });
       }
     });
     //console.log(this.props.userId)
@@ -41,6 +42,10 @@ class HomePage extends Component {
   }
 
   render() {
+    if (this.state.isLoggedOut) {
+      console.log("is logged out!");
+      return <Redirect to="/" />;
+    }
     let plantsList = null;
     const hasPlants = this.state.plants.length !== 0;
     if (hasPlants) {
