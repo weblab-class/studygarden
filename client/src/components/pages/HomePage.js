@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import { get } from "../../utilities";
-import { navigate } from "@reach/router";
 import initialBench from "../../../img/initialBench.png";
 import SinglePlant from "../modules/SinglePlant.js";
 
@@ -22,9 +21,11 @@ class HomePage extends Component {
     // remember -- api calls go here!
     document.title = "Profile Page";
 
-    get(`/api/user`, { userId: this.props.userId }).then((user) => this.setState({ user: user }));
+    get(`/api/user`, { userId: this.props.match.params.userId }).then((user) =>
+      this.setState({ user: user })
+    );
 
-    get("/api/plant", { creatorId: this.props.userId }).then((plantObjs) => {
+    get("/api/plant", { creatorId: this.props.match.params.userId }).then((plantObjs) => {
       let reversedStoryObjs = plantObjs.reverse();
       reversedStoryObjs.map((plantObj) => {
         this.setState({ plants: this.state.plants.concat([plantObj]) });
@@ -45,7 +46,7 @@ class HomePage extends Component {
           creator_id={plantObj.creator_id}
           plantType={plantObj.plantType}
           stage={plantObj.stage}
-          userId={this.props.userId}
+          userId={this.props.match.params.userId}
         />
       ));
       /* plantsList = (
@@ -97,7 +98,7 @@ class HomePage extends Component {
           />
         </>
       ); //this is for testing purposes */
-      console.log(plantsList);
+      //console.log(plantsList);
     } else {
       plantsList = <div>No plants yet...</div>;
     }

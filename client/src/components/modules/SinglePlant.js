@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "@reach/router";
+import { Link } from "react-router-dom";
 import "./SinglePlant.css";
 import { PLANT_STAGES } from "./PlantStages.js";
 
@@ -19,7 +19,7 @@ class SinglePlant extends Component {
   }
 
   render() {
-    console.log(PLANT_STAGES);
+    //console.log(PLANT_STAGES);
     return (
       <div className="SinglePlant-plantContainer">
         <div className="btn btn-primary tooltip">

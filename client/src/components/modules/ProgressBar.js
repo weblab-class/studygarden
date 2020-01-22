@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "@reach/router";
+import { Link } from "react-router-dom";
 import "../pages/StudyPage.css";
 class ProgressBar extends Component {
   constructor(props) {

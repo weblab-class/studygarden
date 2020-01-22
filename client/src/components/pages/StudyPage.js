@@ -9,7 +9,7 @@ import "../../utilities.css";
 import "./StudyPage.css";
 import { PLANT_STAGES } from "../modules/PlantStages.js";
 import Timer from "../modules/Timer.js";
-import MiniDaemon  from "../modules/MiniDaemon.js";
+import MiniDaemon from "../modules/MiniDaemon.js";
 
 class StudyPage extends Component {
   constructor(props) {
@@ -47,26 +47,30 @@ class StudyPage extends Component {
     //let a = await sessionTimer.tick()
     //console.log(a+"b")
 
-    this.nMiniDaemon = new MiniDaemon(this, (index,length,backwards) => {
-      console.log("uno");
-      this.setState({ elapsedTime: index });
-    }, 1000, sesLength)
+    this.nMiniDaemon = new MiniDaemon(
+      this,
+      (index, length, backwards) => {
+        console.log("uno");
+        this.setState({ elapsedTime: index });
+      },
+      1000,
+      sesLength
+    );
     this.setState({
       isStudying: true,
       sessionLength: sesLength,
     });
-    this.nMiniDaemon.start()
+    this.nMiniDaemon.start();
     post(`/api/session/update`, {
       creatorId: this.props.userId,
-      plantId: this.props.plantId,
+      plantId: this.props.match.params.plantId,
       studySessionLength: sesLength, //in seconds, change to value of field in form
     });
     //TODO: link to api and call starting a new session
     //done
-  }
+  };
   stopStudy() {
     this.nMiniDaemon.pause();
-
   }
 
   //only use if study session is ended via time expiry or a hypothetical end study session button
@@ -76,15 +80,15 @@ class StudyPage extends Component {
     //  console.log("studyTimeCumul:", this.state.plant.studyTimeCumul, studySession.elapsedTime);
     //  console.log("newCumul:", newCumul);
     post(`/api/plant/update`, {
-      plantId: this.props.plantId,
+      plantId: this.props.match.params.plantId,
       fields: {
         studyTimeCumul: newCumul,
       },
     }).then(
-      this.setState((prevState,prevProps) => {
+      this.setState((prevState, prevProps) => {
         let out = prevState.plant;
-        out["studyTimeCumul"] = newCumul
-        return {plant: out}
+        out["studyTimeCumul"] = newCumul;
+        return { plant: out };
       })
     );
     //console.log("plant:", this.state.plant);
@@ -107,13 +111,15 @@ class StudyPage extends Component {
     // remember -- api calls go here!
 
     document.title = "Study Page";
-    get(`/api/user`, { userId: this.props.userId }).then((user) => this.setState({ user: user }));
-    get(`/api/plant/single`, { plantId: this.props.plantId }).then((plant) => {
+    get(`/api/user`, { userId: this.props.match.params.userId }).then((user) =>
+      this.setState({ user: user })
+    );
+    get(`/api/plant/single`, { plantId: this.props.match.params.plantId }).then((plant) => {
       console.log(plant);
 
       this.setState({ plant: plant });
     });
-    get(`/api/session`, { plantId: this.props.plantId }).then((session) => {
+    get(`/api/session`, { plantId: this.props.match.params.plantId }).then((session) => {
       this.setState({ session: session });
     });
     //for testing
@@ -123,7 +129,7 @@ class StudyPage extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.state.elapsedTime !== prevState.elapsedTime) {
       this.setState({
-        timeString: this.convertToMinSec(this.state.sessionLength-this.state.elapsedTime),
+        timeString: this.convertToMinSec(this.state.sessionLength - this.state.elapsedTime),
       });
     }
     if (this.state.elapsedTime > this.state.elapsedTimeHold + 15) {
@@ -131,21 +137,21 @@ class StudyPage extends Component {
       this.setState({
         elapsedTimeHold: this.state.elapsedTime,
       });
-      const newCumul = (this.state.plant.studyTimeCumul + this.state.elapsedTime);
+      const newCumul = this.state.plant.studyTimeCumul + this.state.elapsedTime;
       post(`/api/session/update`, {
-        plantId: this.props.plantId,
+        plantId: this.props.match.params.plantId,
         elapsedTime: this.state.elapsedTime,
       });
       post(`/api/plant/update`, {
-        plantId: this.props.plantId,
+        plantId: this.props.match.params.plantId,
         fields: {
           studyTimeCumul: newCumul,
         },
       }).then(
-        this.setState((prevState,prevProps) => {
+        this.setState((prevState, prevProps) => {
           let out = prevState.plant;
-          out["studyTimeCumul"] = newCumul
-          return {plant: out}
+          out["studyTimeCumul"] = newCumul;
+          return { plant: out };
         })
       );
     }
@@ -162,7 +168,7 @@ class StudyPage extends Component {
     };
     let minutes = sec / 60;
     out = String(Math.floor(minutes)) + ":" + String(seconds());
-    return out
+    return out;
   }
 
   //TODO: buttons/popups for continuing or cancelling existing study session
@@ -182,24 +188,25 @@ class StudyPage extends Component {
                 <div className="StudyPage-infoContainer">
                   <h2>{this.state.plant.plantName}</h2>
                   <h3>{this.state.plant.subject}.</h3>
-                  <button className="StudyPage-studyButton u-pointer" onClick={
-                    (e) => {
+                  <button
+                    className="StudyPage-studyButton u-pointer"
+                    onClick={(e) => {
                       this.showModalSession();
-                    }}>
+                    }}
+                  >
                     start studying
                   </button>
                   <EnterSessionLength
                     showModal={this.state.showModalSession}
                     onClose={this.showModalSession}
                     userId={this.props.userId}
-                    plantId={this.props.plantId}
+                    plantId={this.props.match.params.plantId}
                     plant={this.state.plant}
                     startStudy={this.startStudy}
                   />
                   <button
                     className="StudyPage-studyButton u-pointer"
-                    onClick={
-                      (e) => {
+                    onClick={(e) => {
                       this.showModalLog();
                     }}
                   >
@@ -209,7 +216,7 @@ class StudyPage extends Component {
                     showModal={this.state.showModalLog}
                     onClose={this.showModalLog}
                     userId={this.props.userId}
-                    plantId={this.props.plantId}
+                    plantId={this.props.match.params.plantId}
                     plant={this.state.plant}
                     logTime={this.logTime}
                   />

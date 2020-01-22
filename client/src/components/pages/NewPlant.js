@@ -38,7 +38,10 @@ class NewPlantPage extends Component {
     return (
       <>
         <div className="NewPlant-container u-no-select">
-          <NewPlantInput plantType={this.state.currentIndex} userId={this.props.userId} />
+          <NewPlantInput
+            plantType={this.state.currentIndex}
+            userId={this.props.match.params.userId}
+          />
           <PlantSlider setPlantType={this.setPlantType} currentIndex={this.state.currentIndex} />
         </div>
       </>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { post } from "../../../utilities";
-import { navigate } from "@reach/router";
+import { Redirect } from "react-router-dom";
 
 /**
  * Component creates a new plant from scratch. input boxes will come from ../modules/NewPlantInput.js
@@ -54,11 +54,17 @@ class NewSubmit extends Component {
       throw new Error("fields must be longer than 2 characters!");
     } else {
       console.log(plant);
-      await this.postNewPlant(plant)
-      navigate(`/home/`+ this.props.userId);
+      await this.postNewPlant(plant);
+      this.setState({ isSubmitted: true });
+
+      //  navigate(`/home/` + this.props.userId);
     }
   };
   render() {
+    if (this.state.isSubmitted) {
+      console.log(this.state.isSubmitted);
+      return <Redirect to={`/home/${this.props.userId}`} />;
+    }
     return (
       <div className="NewPlantInput-buttonContainer">
         <button
