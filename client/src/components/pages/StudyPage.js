@@ -260,7 +260,7 @@ class StudyPage extends Component {
     }
     if (this.state.goHome === true) {
       console.log("going home!");
-      return <Redirect to={`/home/${this.props.userId}`} />;
+      return <Redirect to={`/home/${this.props.match.params.userId}`} />;
     }
     if (this.state.isStudying !== true && this.state.plant) {
       return (
