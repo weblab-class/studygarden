@@ -276,9 +276,14 @@ class StudyPage extends Component {
                 </div>
                 <div className="StudyPage-infoContainer">
                   <div className="StudyPage-timer">{this.state.timeString}</div>
-                  <button className="StudyPage-studyButton u-pointer" onClick={this.stopStudy}>
-                    stop studying
-                  </button>
+                  <div className="StudyPage-timerButtonContainer u-relative">
+                    <button className="StudyPage-buttonLeft StudyPage-studyButton u-pointer" onClick={this.stopStudy}>
+                      pause
+                    </button>
+                    <button className="StudyPage-buttonLeft StudyPage-studyButton u-pointer" onClick={this.stopStudy}>
+                      end
+                    </button>
+                  </div>
 
                   <ProgressBar
                     className="StudyPage-progressBar"
