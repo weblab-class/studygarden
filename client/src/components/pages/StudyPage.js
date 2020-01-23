@@ -26,12 +26,15 @@ class StudyPage extends Component {
       timeString: "0:00",
       showModalLog: false,
       showModalStart: false,
-      sessionLength: 0,
+      sessionLength: null,
       pauseText: "pause",
+      endText: "end session",
+      goHome: false,
     };
     this.startStudy = this.startStudy.bind(this);
     this.stopStudy = this.stopStudy.bind(this);
     this.resumeStudy = this.resumeStudy.bind(this);
+    this.endStudy = this.endStudy.bind(this);
     let nMiniDaemon;
   }
 
@@ -77,16 +80,49 @@ class StudyPage extends Component {
     //done
   };
   stopStudy() {
-    this.nMiniDaemon.pause();
-    this.setState({pauseText: "resume"});
+    if (this.state.endText === "session over"){
+    }else{
+      this.nMiniDaemon.pause();
+      this.setState({pauseText: "resume"});
+    }
   }
   resumeStudy() {
-    this.nMiniDaemon.start();
-    this.setState({pauseText: "pause"});
+    if (this.state.endText === "session over"){
+    }
+    if(this.state.pauseText === "return home"){
+      this.setState({goHome: true})
+    }else{
+      this.nMiniDaemon.start();
+      this.setState({pauseText: "pause"});
+    }
+  }
+  endStudy() {
+    console.log("wat")
+    if (this.state.endText === "end session"){
+      this.setState({endText: "are you sure?"})
+      setTimeout(
+        ()=>{
+          if (this.state.endText !== "session over"){
+            this.setState({endText: "end session"})
+          }
+        },3000)
+    }else if (this.state.endText === "are you sure?"){
+      this.nMiniDaemon.pause();
+      const newCumul = this.state.plant.studyTimeCumul + Number(this.state.elapsedTime-this.state.elapsedTimeHold);
+      const newStage = Math.min(4, Math.floor((newCumul / this.state.plant.goalTime) * 5));
+      this.setState({endText: "session over"}) //in lieu of fanfare currently
+      post(`/api/plant/update`, {
+        plantId: this.props.match.params.plantId,
+        fields: {
+          studyTimeCumul: newCumul,
+          stage: newStage,
+        },
+      })
+    }
   }
 
   logTime = (studySession) => {
-    const newCumul = this.state.plant.studyTimeCumul + Number(studySession.elapsedTime*60**2);
+    const newCumul = this.state.plant.studyTimeCumul + Number(studySession.elapsedTime*60**2); //child gives us elapsed time in hours
     const newStage = Math.min(4, Math.floor((newCumul / this.state.plant.goalTime) * 5));
     //  console.log("studyTimeCumul:", this.state.plant.studyTimeCumul, studySession.elapsedTime);
     //  console.log("newCumul:", newCumul);
@@ -142,10 +178,16 @@ class StudyPage extends Component {
     //this.startStudy(100);
     get("/api/whoami").then((user) => {
       if (!user._id) {
-        this.setState({ isLoggedOut: false }); //change back to true
-      }else{
-        this.setState({ isLoggedOut: false }); //and remove this
+        this.setState({ isLoggedOut: true }); //change back to true
       }
+      
+      //uncomment below for debugging/testing
+      
+      // if (!user._id) {
+      //   this.setState({ isLoggedOut: false }); //change back to true
+      // }else{
+      //   this.setState({ isLoggedOut: false }); //and remove this
+      // }
     });
   }
 
@@ -154,6 +196,12 @@ class StudyPage extends Component {
       this.setState({
         timeString: this.convertToMinSec(this.state.sessionLength - this.state.elapsedTime),
       });
+    }
+    if (this.state.elapsedTime === this.state.sessionLength){
+      this.setState({endText: "session over"}) //more dull fanfare
+    }
+    if (this.state.endText === "session over" && this.state.pauseText !== "return home"){
+      this.setState({pauseText: "return home"})
     }
     let updateDelay = 5
     if (this.state.elapsedTime > this.state.elapsedTimeHold + updateDelay-1) {
@@ -209,6 +257,10 @@ class StudyPage extends Component {
     if (this.state.isLoggedOut) {
       console.log("is logged out!");
       return <Redirect to="/" />;
+    }
+    if (this.state.goHome === true) {
+      console.log("going home!");
+      return <Redirect to={`/home/${this.props.userId}`} />;
     }
     if (this.state.isStudying !== true && this.state.plant) {
       return (
@@ -288,8 +340,8 @@ class StudyPage extends Component {
                     <button className="StudyPage-buttonLeft StudyPage-studyButton u-pointer" onClick={this.state.pauseText==="pause" ? this.stopStudy : this.resumeStudy}>
                       {this.state.pauseText}
                     </button>
-                    <button className="StudyPage-buttonLeft StudyPage-studyButton u-pointer" onClick={this.stopStudy}>
-                      end
+                    <button className="StudyPage-buttonLeft StudyPage-studyButton u-pointer" onClick={this.endStudy}>
+                    {this.state.endText}
                     </button>
                   </div>
 
