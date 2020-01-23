@@ -31,28 +31,58 @@
   margin-bottom: auto;
   display: flex;
   flex-direction: column;
-  text-shadow: white 1px 0 10px;
+  text-shadow: white 0px 1px 10px;
   justify-content: center;
+}
+
+.StudyPage-plantTitle {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 1% auto;
+  color: var(--text-dark);
+}
+
+.StudyPage-plantSubject {
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--text-dark);
 }
 
 .StudyPage-studyButton {
   background-color: #8f9365;
-  color: var(--white);
+  color: var(--text-light);
   font-weight: bold;
-  box-shadow: 0px 5px 8px -1px grey;
+  box-shadow: 0px 3px 6px 0px rgba(0,0,0,.16);
   border: 0px;
-  border-radius: 20px;
+  border-radius: 24px;
   padding: 10px 20px;
-  margin: auto;
-  margin-top: 10px;
-  margin-bottom: 20px;
+  margin: 15px auto;
+  /* margin-top: 10px;
+  margin-bottom: 20px; */
   width: 60%;
-  font-size: 3vmin;
+  font-size: 24px;
+  justify-content: left;
+  text-shadow: grey 0px 1px 2px;
+  transition: text-shadow 0.2s;
+}
+@media screen and (max-width: 672px){
+  .StudyPage-studyButton {
+    font-size: 15px;
+    border-radius: 48px;
+  }
+  .StudyPage-plantTitle {
+    font-size: 28px;
+  }
+  .StudyPage-plantSubject {
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--text-dark);
+  }
 }
 
 .StudyPage-studyButton:hover {
   text-shadow: white 1px 0 10px;
-  box-shadow: 0px 0px 5px -1px grey;
+  /* box-shadow: 0px 1px 8px -1px white; */
 }
 
 .LogStudyTime-form {
@@ -60,9 +90,9 @@
   flex-direction: column;
   background-color: #9bbce0;
   border-radius: 20px;
-  box-shadow: 0 8px 10px 6px #577494;
-  margin-top: auto;
-  margin-bottom: auto;
+  box-shadow: 0 2px 10px 0 rgba(0,0,0,.16);
+  margin: auto 20%;
+  /* margin; */
   padding: 10px 5px;
 }
 
@@ -70,22 +100,30 @@
   padding: 5px;
   margin: auto;
   font-weight: bold;
+  text-shadow: white 0px 0 0px;
 }
 
 .LogStudyTime-input {
   margin: 10px 5px;
-  border-radius: 10px;
+  border-radius: 100px;
   padding: 5px 10px;
+  border: 0px;
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,.05);
+  -webkit-appearance: none; 
+  appearance: none;
 }
 
 .LogStudyTime-closeButton {
   margin-left: auto;
   font-size: 15px;
   font-weight: bold;
-  color: white;
+  color: var(--text-light);
   border-radius: 20px;
   background-color: #8d945f;
   border: 0px;
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,.07);
+  text-shadow: grey 0px 1px 2px;
+  transition: text-shadow 0.2s;
 }
 
 .LogStudyTime-submitButton {
@@ -94,17 +132,18 @@
   text-align: center;
   font-size: 20px;
   font-weight: bold;
-  color: white;
-  border-radius: 20px;
+  color: var(--text-light);
+  border-radius: 100px;
   background-color: #8d945f;
   border: 0px;
-  box-shadow: 0px 0px 10px -1px grey;
-  text-shadow: grey 1px 0 5px;
+  box-shadow: 0px 1px 6px 0px rgba(0,0,0,.16);
+  text-shadow: grey 0px 1px 2px;
+  transition: text-shadow 0.2s;
 }
 
 .LogStudyTime-submitButton:hover {
   text-shadow: white 1px 0 10px;
-  box-shadow: 0px 0px 5px -1px grey;
+  /* box-shadow: 0px 0px 5px -1px grey; */
 }
 
 .ProgressBar-container {

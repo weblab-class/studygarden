@@ -14,7 +14,7 @@
 * much after initial creation.
 */
 
-@import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Muli:200,300,400,500,600,700,800,900&display=swap");
 
 :root {
   --primary: #396dff;
@@ -23,7 +23,8 @@
   --medgrey: #e0e0e0;
   --grey: #f7f7f7;
   --white: #fff;
-  --text-dark: #4b4b4b;
+  --text-light: rgb(245, 245, 245);
+  --text-dark: #2e2e2e;
 
   --xs: 4px;
   --s: 8px;
@@ -139,4 +140,23 @@ button {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.u-buttonGreen{
+  margin: auto;
+  padding: 10px 15px;
+  text-align: center;
+  /* font-size: 32px; */
+  font-weight: bold;
+  color: var(--text-light);
+  border-radius: 100px;
+  background-color: #8d945f;
+  border: 0px;
+  box-shadow: 0px 1px 6px 0px rgba(0,0,0,.16);
+  text-shadow: grey 0px 1px 2px;
+  transition: text-shadow 0.2s;
+}
+
+.u-buttonGreen:hover{
+  text-shadow: white 1px 0 10px;
 }

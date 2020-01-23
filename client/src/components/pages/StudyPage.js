@@ -134,7 +134,9 @@ class StudyPage extends Component {
     //this.startStudy(100);
     get("/api/whoami").then((user) => {
       if (!user._id) {
-        this.setState({ isLoggedOut: true });
+        this.setState({ isLoggedOut: false }); //change back to true
+      }else{
+        this.setState({ isLoggedOut: false }); //and remove this
       }
     });
   }
@@ -208,8 +210,8 @@ class StudyPage extends Component {
                   />
                 </div>
                 <div className="StudyPage-infoContainer">
-                  <h2>{this.state.plant.plantName}</h2>
-                  <h3>{this.state.plant.subject}.</h3>
+                  <h2 className = "StudyPage-plantTitle">{this.state.plant.plantName}</h2>
+                  <h3 className = "StudyPage-plantSubject">{this.state.plant.subject}.</h3>
                   <button
                     className="StudyPage-studyButton u-pointer"
                     onClick={(e) => {
