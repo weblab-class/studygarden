@@ -27,7 +27,7 @@ class HomePage extends Component {
     );
 
     get("/api/plant", { creatorId: this.props.match.params.userId }).then((plantObjs) => {
-      let reversedStoryObjs = plantObjs.reverse();
+      let reversedStoryObjs = plantObjs.reverse().slice(0,5);
       reversedStoryObjs.map((plantObj) => {
         this.setState({ plants: this.state.plants.concat([plantObj]) });
       });
