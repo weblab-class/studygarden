@@ -111,12 +111,14 @@ class StudyPage extends Component {
 
   showModalLog = (e) => {
     this.setState({
+      showModalSession: false,
       showModalLog: !this.state.showModalLog,
     });
   };
 
   showModalSession = (e) => {
     this.setState({
+      showModalLog: false,
       showModalSession: !this.state.showModalSession,
     });
   };
