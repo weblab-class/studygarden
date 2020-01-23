@@ -134,10 +134,10 @@ class StudyPage extends Component {
     //this.startStudy(100);
     get("/api/whoami").then((user) => {
       if (!user._id) {
-        this.setState({ isLoggedOut: true }); //change back to true
-      }/* else{
+        this.setState({ isLoggedOut: false }); //change back to true
+      }else{
         this.setState({ isLoggedOut: false }); //and remove this
-      } */
+      }
     });
   }
 
@@ -147,13 +147,14 @@ class StudyPage extends Component {
         timeString: this.convertToMinSec(this.state.sessionLength - this.state.elapsedTime),
       });
     }
-    if (this.state.elapsedTime > this.state.elapsedTimeHold + 5) {
+    let updateDelay = 5
+    if (this.state.elapsedTime > this.state.elapsedTimeHold + updateDelay-1) {
       //lets not kill the server too hard
       //update stage and cumulative study time every so often while studying
       this.setState({
         elapsedTimeHold: this.state.elapsedTime,
       });
-      const newCumul = this.state.plant.studyTimeCumul + this.state.elapsedTime;
+      const newCumul = this.state.plant.studyTimeCumul + updateDelay;
       const newStage = Math.min(4, Math.floor((newCumul / this.state.plant.goalTime) * 5));
 
       post(`/api/session/update`, {
@@ -187,7 +188,11 @@ class StudyPage extends Component {
       }
     };
     let minutes = sec / 60;
-    out = String(Math.floor(minutes)) + ":" + String(seconds());
+    if (sec%2 === 1){
+      out = String(Math.floor(minutes)) + ":" + String(seconds());
+    }else{
+      out = String(Math.floor(minutes)) + " " + String(seconds());
+    }
     return out;
   }
 
@@ -270,7 +275,7 @@ class StudyPage extends Component {
                   />
                 </div>
                 <div className="StudyPage-infoContainer">
-                  <div>{this.state.timeString}</div>
+                  <div className="StudyPage-timer">{this.state.timeString}</div>
                   <button className="StudyPage-studyButton u-pointer" onClick={this.stopStudy}>
                     stop studying
                   </button>
