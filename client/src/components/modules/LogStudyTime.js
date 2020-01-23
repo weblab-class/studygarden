@@ -37,9 +37,9 @@ class LogStudyTime extends Component {
         this.setState({
           [name]: value,
         });
-      } else if (target.value < 1) {
+      } else if (target.value < 0) {
         this.setState({
-          [name]: 1,
+          [name]: 0,
         });
       } else {
         this.setState({
