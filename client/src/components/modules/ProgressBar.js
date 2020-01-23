@@ -13,7 +13,7 @@ class ProgressBar extends Component {
 
   render() {
     const width =
-      this.props.studyTimeCumul >= this.props.goalTime
+      this.props.studyTimeCumul/(60**2) >= this.props.goalTime
         ? "100%"
         : "" + (this.props.studyTimeCumul/(60**2) * 100) / this.props.goalTime + "%";
     const style = {

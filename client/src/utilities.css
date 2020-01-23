@@ -44,7 +44,7 @@ form {
 }
 
 button {
-  font-family: "Muli";
+  font-family: "Muli", sans-serif;
   font-weight: bold;
 }
 .u-flex {
@@ -159,4 +159,9 @@ button {
 
 .u-buttonGreen:hover{
   text-shadow: white 1px 0 10px;
+}
+
+input{
+  font-size: 12px;
+  font-family: "Muli", sans-serif;
 }

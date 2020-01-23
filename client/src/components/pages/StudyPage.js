@@ -27,9 +27,11 @@ class StudyPage extends Component {
       showModalLog: false,
       showModalStart: false,
       sessionLength: 0,
+      pauseText: "pause",
     };
     this.startStudy = this.startStudy.bind(this);
     this.stopStudy = this.stopStudy.bind(this);
+    this.resumeStudy = this.resumeStudy.bind(this);
     let nMiniDaemon;
   }
 
@@ -48,6 +50,7 @@ class StudyPage extends Component {
     //console.log(a+"b")
     this.setState({
       timeString: this.convertToMinSec(sesLength),
+      pauseText: "pause",
     });
     this.nMiniDaemon = new MiniDaemon(
       this,
@@ -75,12 +78,15 @@ class StudyPage extends Component {
   };
   stopStudy() {
     this.nMiniDaemon.pause();
+    this.setState({pauseText: "resume"});
+  }
+  resumeStudy() {
+    this.nMiniDaemon.start();
+    this.setState({pauseText: "pause"});
   }
 
-  //only use if study session is ended via time expiry or a hypothetical end study session button
-  //needs rewrite bc im bad
   logTime = (studySession) => {
-    const newCumul = this.state.plant.studyTimeCumul + Number(studySession.elapsedTime);
+    const newCumul = this.state.plant.studyTimeCumul + Number(studySession.elapsedTime*60**2);
     const newStage = Math.min(4, Math.floor((newCumul / this.state.plant.goalTime) * 5));
     //  console.log("studyTimeCumul:", this.state.plant.studyTimeCumul, studySession.elapsedTime);
     //  console.log("newCumul:", newCumul);
@@ -277,8 +283,8 @@ class StudyPage extends Component {
                 <div className="StudyPage-infoContainer">
                   <div className="StudyPage-timer">{this.state.timeString}</div>
                   <div className="StudyPage-timerButtonContainer u-relative">
-                    <button className="StudyPage-buttonLeft StudyPage-studyButton u-pointer" onClick={this.stopStudy}>
-                      pause
+                    <button className="StudyPage-buttonLeft StudyPage-studyButton u-pointer" onClick={this.state.pauseText==="pause" ? this.stopStudy : this.resumeStudy}>
+                      {this.state.pauseText}
                     </button>
                     <button className="StudyPage-buttonLeft StudyPage-studyButton u-pointer" onClick={this.stopStudy}>
                       end
