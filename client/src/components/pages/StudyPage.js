@@ -122,7 +122,7 @@ class StudyPage extends Component {
   }
 
   logTime = (studySession) => {
-    const newCumul = this.state.plant.studyTimeCumul + Number(studySession.elapsedTime*60**2); //child gives us elapsed time in hours
+    const newCumul = this.state.plant.studyTimeCumul + Number(studySession.elapsedTime*(60**2)); //child gives us elapsed time in hours
     const newStage = Math.min(4, Math.floor((newCumul / this.state.plant.goalTime) * 5));
     //  console.log("studyTimeCumul:", this.state.plant.studyTimeCumul, studySession.elapsedTime);
     //  console.log("newCumul:", newCumul);

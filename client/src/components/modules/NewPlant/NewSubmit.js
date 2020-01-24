@@ -48,7 +48,7 @@ class NewSubmit extends Component {
       subject: this.props.fields.subject,
       id: this.props.userId,
       timeCreated: this.state.timeCreated,
-      goalTime: this.props.fields.goalTime,
+      goalTime: this.props.fields.goalTime*(60**2),
     };
     if (plant.plantName.length <= 2 || plant.subject.length <= 2) {
       throw new Error("fields must be longer than 2 characters!");
