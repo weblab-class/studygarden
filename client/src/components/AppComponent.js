@@ -25,6 +25,7 @@ class AppComponent extends Component {
     this.state = {
       userId: null,
       isLoggedOut: null,
+      name: null,
     };
   }
 
@@ -33,7 +34,10 @@ class AppComponent extends Component {
     get("/api/whoami").then((user) => {
       if (user._id) {
         // they are registed in the database, and currently logged in.
-        this.setState({ userId: user._id });
+        this.setState({ 
+          userId: user._id, 
+          name: user.name,
+        });
         console.log("user detected");
       }
     });
@@ -67,6 +71,7 @@ class AppComponent extends Component {
           handleLogin={this.handleLogin}
           handleLogout={this.handleLogout}
           userId={this.state.userId}
+          name={this.state.name}
         />
 
         <Switch>

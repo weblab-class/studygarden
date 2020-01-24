@@ -33,6 +33,11 @@ class NavBar extends Component {
             )}
           </div>
         </div>
+        {/* <div className="NavBar-rightSide">
+          <div className="NavBar-name">
+            hello, {this.props.name}
+          </div>
+        </div> */}
 
         <div className="NavBar-logout">
           {this.props.userId ? (
