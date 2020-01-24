@@ -150,7 +150,13 @@
   padding: 5px;
   margin: auto;
   font-weight: bold;
-  text-shadow: white 0px 0 0px;
+  /* color: var(-white); */
+  /* text-shadow: white 0px 0 0px; */
+}
+
+.LogStudyTime-text{
+  color: var(--white);
+  text-shadow:rgba(0,0,0,.16) 0px 1px 5px;
 }
 
 .LogStudyTime-input {
@@ -158,6 +164,7 @@
   border-radius: 100px;
   padding: 5px 10px;
   border: 0px;
+  width: 60px;
   box-shadow: 0 1px 5px 0 rgba(0,0,0,.05);
   -webkit-appearance: none; 
   appearance: none;

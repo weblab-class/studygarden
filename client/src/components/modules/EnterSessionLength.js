@@ -79,7 +79,8 @@ class EnterSessionLength extends Component {
             X
           </button>
           <label className="LogStudyTime-container">
-            How many minutes do you want to study?
+            <div className="LogStudyTime-text">How many minutes do you want to study?</div>
+            <div>
             <input
               name="sessionLength"
               type="number"
@@ -87,6 +88,7 @@ class EnterSessionLength extends Component {
               onChange={this.handleChange}
               className="LogStudyTime-input"
             />
+            </div>
           </label>
 
           <button

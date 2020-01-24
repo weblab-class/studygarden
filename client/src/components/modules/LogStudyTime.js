@@ -85,7 +85,8 @@ class LogStudyTime extends Component {
             X
           </button>
           <label className="LogStudyTime-container">
-            How long did you study (in hours)?
+          <div className="LogStudyTime-text">How long did you study (in hours)?</div>
+            <div>
             <input
               name="elapsedTime"
               type="number"
@@ -93,6 +94,7 @@ class LogStudyTime extends Component {
               onChange={this.handleChange}
               className="LogStudyTime-input"
             />
+            </div>
           </label>
 
           <button
