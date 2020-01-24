@@ -100,6 +100,7 @@ class NewPlantInput extends Component {
           }}
           userId={this.props.userId}
         />
+        {/* <button className="NewPlantInput-cancel">cancel</button> */}
       </form>
     );
   }

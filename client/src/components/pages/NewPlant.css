@@ -63,6 +63,19 @@
   /* box-shadow: 0px 0px 5px -1px grey; */
 }
 
+.NewPlantInput-cancel{
+  font-weight: 700;
+  color: var(--white);
+  flex: auto auto auto;
+  display: flex;
+  background-color: rgba(0,0,0,0);
+  border: none;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding-bottom: 3.5%;  
+}
+
 .NewPlant-plantSliderContainer {
   display: flex;
   flex-flow: row;
