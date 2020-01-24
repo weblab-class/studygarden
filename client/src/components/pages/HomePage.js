@@ -120,8 +120,8 @@ class HomePage extends Component {
           {this.state.user ? (
             <>
               <div className="HomePage-text">
-                <h1>Welcome, {this.state.user.name}!</h1>
-                <h2>see your garden here.</h2>{" "}
+                <h1 className="Homepage-name">Welcome, {this.state.user.name}!</h1>
+                <h2 className="Homepage-seeYourGarden">Here is your garden.</h2>{" "}
               </div>
 
               <div className="HomePage-windowsill">
