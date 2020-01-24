@@ -44,15 +44,16 @@
 }
 
 .StudyPage-plantTitle {
-  font-size: 36px;
-  font-weight: 700;
-  margin: 1% auto;
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 1.5%;
   color: var(--text-dark);
 }
 
 .StudyPage-plantSubject {
-  font-size: 32px;
-  font-weight: 400;
+  margin: 1% auto -1%;
+  font-size: 36px;
+  font-weight: 700;
   color: var(--text-dark);
 }
 

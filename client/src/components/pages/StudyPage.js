@@ -275,8 +275,8 @@ class StudyPage extends Component {
                   />
                 </div>
                 <div className="StudyPage-infoContainer">
+                  <h3 className = "StudyPage-plantSubject">{this.state.plant.subject}</h3>
                   <h2 className = "StudyPage-plantTitle">{this.state.plant.plantName}</h2>
-                  <h3 className = "StudyPage-plantSubject">{this.state.plant.subject}.</h3>
                   <button
                     className="StudyPage-studyButton u-pointer"
                     onClick={(e) => {
