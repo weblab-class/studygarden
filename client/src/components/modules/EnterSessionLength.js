@@ -68,7 +68,7 @@ class EnterSessionLength extends Component {
       return null;
     }
     return (
-      <div>
+      <div className= "StudyPage-formContainer">
         <form className="LogStudyTime-form">
           <button
             onClick={(e) => {
