@@ -131,6 +131,12 @@ router.post("/plant/new", async (req, res) => {
   return res.send(response);
 });
 
+router.post("/plant/delete", async (req, res)=>{
+  console.log(req.body);
+  console.log(req.body.plantId);
+  Plant.deleteOne({_id: req.body.plantId}, (err)=>{if(err) return handleError(err)}).then((z)=>console.log(z));
+})
+
 router.post("/plant/update", async (req, res) => {
   //WIP, will handle any update requests for plants
   /* possible inputs (somehow forbid any others)

@@ -77,9 +77,35 @@ h3 {
   transform: translate(-50%, 50%) rotate(45deg);
   background-color: #eeeeee;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+  flex: auto;
 }
 
 .studyButton {
-  border-radius: 5px;
-  border-color: grey;
+  border-radius: 10px;
+  border: 0px solid;
+  color: var(--text-light);
+  background-color: var(--green);
+  border-color: rgb(75, 75, 75, 1);
+  padding-top: 2px;
+  padding-bottom: 3px;
+  padding-left: 20%;
+  padding-right: 20%;
+  flex: auto;
+}
+.cancelButton{
+  background-color: rgb(75, 75, 75, 0);
+  border: 2px solid rgb(218, 0, 0);
+  font-weight: 800;
+  padding-top: 0px;
+  padding-bottom: 1px;
+  padding-left: 15%;
+  padding-right: 15%;
+  color: var(--text-dark)
+}
+
+.SinglePlant-buttonContainer{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
 }
