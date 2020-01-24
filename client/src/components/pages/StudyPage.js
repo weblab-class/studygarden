@@ -122,7 +122,7 @@ class StudyPage extends Component {
   }
 
   logTime = (studySession) => {
-    const newCumul = this.state.plant.studyTimeCumul + Number(studySession.elapsedTime*60**2); //child gives us elapsed time in hours
+    const newCumul = this.state.plant.studyTimeCumul + Number(studySession.elapsedTime*(60**2)); //child gives us elapsed time in hours
     const newStage = Math.min(4, Math.floor((newCumul / this.state.plant.goalTime) * 5));
     //  console.log("studyTimeCumul:", this.state.plant.studyTimeCumul, studySession.elapsedTime);
     //  console.log("newCumul:", newCumul);
@@ -275,8 +275,8 @@ class StudyPage extends Component {
                   />
                 </div>
                 <div className="StudyPage-infoContainer">
+                  <h3 className = "StudyPage-plantSubject">{this.state.plant.subject}</h3>
                   <h2 className = "StudyPage-plantTitle">{this.state.plant.plantName}</h2>
-                  <h3 className = "StudyPage-plantSubject">{this.state.plant.subject}.</h3>
                   <button
                     className="StudyPage-studyButton u-pointer"
                     onClick={(e) => {
