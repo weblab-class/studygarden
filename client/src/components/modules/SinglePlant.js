@@ -54,10 +54,10 @@ class SinglePlant extends Component {
             <p>{this.props.plantName}</p>
             <div className="SinglePlant-buttonContainer">
               <Link to={`/home/${this.props.userId}/study/${this.props._id}`}>
-                <button className="studyButton"> study </button>
+                <button className="studyButton u-pointer"> study </button>
               </Link>
               <div>
-                <button className="cancelButton studyButton" onClick={this.deletePlant}> {this.state.deleteText} </button>
+                <button className="cancelButton studyButton u-pointer" onClick={this.deletePlant}> {this.state.deleteText} </button>
               </div>
             </div>
             <i />
