@@ -61,7 +61,7 @@ class NewPlantInput extends Component {
     return (
       <form className="NewPlantInput-form">
         <label className="NewPlantInput-container">
-          Subject:
+          <div className="NewPlantInput-title">subject</div>
           <input
             name="subject"
             type="text"
@@ -71,7 +71,7 @@ class NewPlantInput extends Component {
           />
         </label>
         <label className="NewPlantInput-container">
-          Goal (in hours):
+        <div className="NewPlantInput-title">goal (in hours)</div>
           <input
             name="goalTime"
             type="number"
@@ -81,7 +81,7 @@ class NewPlantInput extends Component {
           />
         </label>
         <label className="NewPlantInput-container">
-          Name Your Plant:
+        <div className="NewPlantInput-title">plant name</div>
           <input
             name="plantName"
             type="text"
@@ -100,6 +100,7 @@ class NewPlantInput extends Component {
           }}
           userId={this.props.userId}
         />
+        {/* <button className="NewPlantInput-cancel">cancel</button> */}
       </form>
     );
   }
