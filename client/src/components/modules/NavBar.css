@@ -16,6 +16,24 @@
   margin-bottom: auto;
   margin-right: auto;
 }
+
+.NavBar-rightSide {
+  display: flex;
+  flex-flow: row nowrap;
+  width: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: 2% ;
+}
+
+.NavBar-name{
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--white);
+  text-shadow: 0 3px 6px rgba(0,0,0,.16);
+}
+
 .NavBar-title {
   color: var(--white);
   font-size: 24px;
@@ -29,18 +47,18 @@
 
 .NavBar-link,
 .NavBar-link:visited {
-  color: var(--white);
-  opacity: 0.6;
+  color: #000;
+  opacity: 0.7;
   text-decoration: none;
   font-size: 18px;
   padding-left: 40px;
-  font-weight: bold;
+  font-weight: 700;
   margin-top: auto;
   margin-bottom: auto;
 }
 
 .NavBar-link:hover {
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .NavBar-link.NavBar-login {
@@ -60,11 +78,11 @@
   font-size: 16px;
   margin-top: 3px;
   padding: 10px 20px;
-  box-shadow: 0px 0px 10px -1px grey;
-  text-shadow: grey 1px 0 5px;
+  box-shadow: 0px 3px 6px 0px rgba(0,0,0,.16);
+  text-shadow: 0px 1px 4px rgba(0,0,0,.16);
 }
 
 .NavBar-googleButton:hover {
   text-shadow: white 1px 0 10px;
-  box-shadow: 0px 0px 5px -1px grey;
+  /* box-shadow: 0px 0px 5px -1px grey; */
 }

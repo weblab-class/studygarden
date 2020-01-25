@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { post } from "../../utilities";
 import "./SinglePlant.css";
 import { PLANT_STAGES } from "./PlantStages.js";
 
@@ -16,6 +17,27 @@ import { PLANT_STAGES } from "./PlantStages.js";
 class SinglePlant extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      deleteText: "delete"
+    };
+    this.deletePlant = this.deletePlant.bind(this);
+  }
+
+  deletePlant(){
+    if (this.state.deleteText==="delete"){
+      this.setState({deleteText: "confirm?"});
+      setTimeout(
+        ()=>{
+          if (this.state.deleteText !== "deleting..."){
+            this.setState({deleteText: "delete"})
+          }
+        },3000)
+    }else if(this.state.deleteText==="confirm?"){
+      this.setState({deleteText: "deleting..."});
+      post(`/api/plant/delete`, {plantId: this.props._id});
+      //console.log(this.props._id);
+      window.location.reload();
+    }
   }
 
   render() {
@@ -28,11 +50,16 @@ class SinglePlant extends Component {
             src={PLANT_STAGES[this.props.stage][this.props.plantType]}
           />
           <div className="bottom">
-            <p>{this.props.plantName}</p>
             <h3>{this.props.subject}</h3>
-            <Link to={`/home/${this.props.userId}/study/${this.props._id}`}>
-              <button className="studyButton"> study </button>
-            </Link>
+            <p>{this.props.plantName}</p>
+            <div className="SinglePlant-buttonContainer">
+              <Link to={`/home/${this.props.userId}/study/${this.props._id}`}>
+                <button className="studyButton u-pointer"> study </button>
+              </Link>
+              <div>
+                <button className="cancelButton studyButton u-pointer" onClick={this.deletePlant}> {this.state.deleteText} </button>
+              </div>
+            </div>
             <i />
           </div>
         </div>

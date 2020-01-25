@@ -13,8 +13,18 @@
 
 .HomePage-text {
   color: white;
-  text-shadow: #577494 1px 0 10px;
+  text-shadow: #577494 0px 1px 10px;
   margin-top: auto;
+  margin-bottom: 2%;
+  z-index: 9999999;
+}
+
+.Homepage-name{
+  font-size: 60px;
+}
+
+.Homepage-seeYourGarden{
+  font-size: 40px;
 }
 
 .HomePage-windowsill {
