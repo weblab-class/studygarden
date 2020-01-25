@@ -19,14 +19,21 @@ class ProgressBar extends Component {
     const style = {
       width: width,
     };
+    let number;
+    if (Math.floor(10*(this.props.studyTimeCumul/(60**2)))/10 < this.props.goalTime/(60**2)){
+      number = String(Math.floor(10*(this.props.studyTimeCumul/(60**2)))/10) +" out of "+ String(this.props.goalTime/(60**2)) +" "+ String(this.hr(this.props.goalTime/(60**2)))
+    } else {
+      number = "complete";
+    }
     //  console.log(width);
     //console.log(style);
     return (
       <div className="ProgressBar-container">
         <div className="ProgressBar" style={style}>
-          <div className="ProgressBar-studyTime">{Math.round(10*(this.props.studyTimeCumul/(60**2)))/10} {this.hr(Math.round(10*(this.props.studyTimeCumul/(60**2)))/10)}</div>
+          <div className="ProgressBar-studyTime"/>
         </div>
-        <div className="ProgressBar-goal">{this.props.goalTime/(60**2)} {this.hr(this.props.goalTime/(60**2))}</div>
+        <div className="ProgressBar-top"/>
+        <div className="ProgressBar-goal">{number /*{(Math.round(10*(this.props.studyTimeCumul/(60**2)))/10} out of {this.props.goalTime/(60**2)} {this.hr(this.props.goalTime/(60**2))}*/}</div>
       </div>
     );
   }
