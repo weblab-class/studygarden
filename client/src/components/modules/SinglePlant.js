@@ -23,7 +23,7 @@ class SinglePlant extends Component {
     this.deletePlant = this.deletePlant.bind(this);
   }
 
-  deletePlant(){
+  async deletePlant(){
     if (this.state.deleteText==="delete"){
       this.setState({deleteText: "confirm?"});
       setTimeout(
@@ -34,7 +34,7 @@ class SinglePlant extends Component {
         },3000)
     }else if(this.state.deleteText==="confirm?"){
       this.setState({deleteText: "deleting..."});
-      post(`/api/plant/delete`, {plantId: this.props._id});
+      await post(`/api/plant/delete`, {plantId: this.props._id});
       //console.log(this.props._id);
       window.location.reload();
     }
