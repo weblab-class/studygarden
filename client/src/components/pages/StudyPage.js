@@ -197,7 +197,7 @@ class StudyPage extends Component {
         timeString: this.convertToMinSec(this.state.sessionLength - this.state.elapsedTime),
       });
     }
-    if (this.state.elapsedTime === this.state.sessionLength){
+    if (this.state.elapsedTime === this.state.sessionLength && this.state.endText !== "session over"){
       this.setState({endText: "session over"}) //more dull fanfare
     }
     if (this.state.endText === "session over" && this.state.pauseText !== "return home"){
