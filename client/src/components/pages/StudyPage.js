@@ -123,7 +123,7 @@ class StudyPage extends Component {
 
   logTime = (studySession) => {
     const newCumul = this.state.plant.studyTimeCumul + Number(studySession.elapsedTime*(60**2)); //child gives us elapsed time in hours
-    const newStage = Math.min(4, Math.floor((newCumul / this.state.plant.goalTime) * 5));
+    const newStage = Math.min(4, Math.floor((newCumul / this.state.plant.goalTime) * 4));
     //  console.log("studyTimeCumul:", this.state.plant.studyTimeCumul, studySession.elapsedTime);
     //  console.log("newCumul:", newCumul);
     post(`/api/plant/update`, {
@@ -211,7 +211,7 @@ class StudyPage extends Component {
         elapsedTimeHold: this.state.elapsedTime,
       });
       const newCumul = this.state.plant.studyTimeCumul + updateDelay;
-      const newStage = Math.min(4, Math.floor((newCumul / this.state.plant.goalTime) * 5));
+      const newStage = Math.min(4, Math.floor((newCumul / this.state.plant.goalTime) * 4));
 
       post(`/api/session/update`, {
         plantId: this.props.match.params.plantId,
