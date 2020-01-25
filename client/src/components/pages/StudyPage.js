@@ -80,14 +80,14 @@ class StudyPage extends Component {
     //done
   };
   stopStudy() {
-    if (this.state.endText === "session over"){
+    if (this.state.endText === "keep studying"){
     }else{
       this.nMiniDaemon.pause();
       this.setState({pauseText: "resume"});
     }
   }
   resumeStudy() {
-    if (this.state.endText === "session over"){
+    if (this.state.endText === "keep studying"){
     }
     if(this.state.pauseText === "return home"){
       this.setState({goHome: true})
@@ -102,7 +102,7 @@ class StudyPage extends Component {
       this.setState({endText: "are you sure?"})
       setTimeout(
         ()=>{
-          if (this.state.endText !== "session over"){
+          if (this.state.endText !== "keep studying"){
             this.setState({endText: "end session"})
           }
         },3000)
@@ -110,7 +110,7 @@ class StudyPage extends Component {
       this.nMiniDaemon.pause();
       const newCumul = this.state.plant.studyTimeCumul + Number(this.state.elapsedTime-this.state.elapsedTimeHold);
       const newStage = Math.min(4, Math.floor((newCumul / this.state.plant.goalTime) * 5));
-      this.setState({endText: "session over"}) //in lieu of fanfare currently
+      this.setState({endText: "keep studying"}) //in lieu of fanfare currently
       post(`/api/plant/update`, {
         plantId: this.props.match.params.plantId,
         fields: {
@@ -118,6 +118,10 @@ class StudyPage extends Component {
           stage: newStage,
         },
       })
+    }else if (this.state.endText === "keep studying"){
+      this.setState({
+        isStudying: false,
+      });
     }
   }
 
@@ -197,10 +201,10 @@ class StudyPage extends Component {
         timeString: this.convertToMinSec(this.state.sessionLength - this.state.elapsedTime),
       });
     }
-    if (this.state.elapsedTime === this.state.sessionLength && this.state.endText !== "session over"){
-      this.setState({endText: "session over"}) //more dull fanfare
+    if (this.state.elapsedTime === this.state.sessionLength && this.state.endText !== "keep studying"){
+      this.setState({endText: "keep studying"}) //more dull fanfare
     }
-    if (this.state.endText === "session over" && this.state.pauseText !== "return home"){
+    if (this.state.endText === "keep studying" && this.state.pauseText !== "return home"){
       this.setState({pauseText: "return home"})
     }
     let updateDelay = 5
