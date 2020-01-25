@@ -58,7 +58,7 @@ class LoginPage extends Component {
                     onClick={renderProps.onClick}
                     className="LoginPage-googleButton u-pointer"
                   >
-                    Logout
+                    log out
                   </button> //FIXME: font is wrong
                 )}
               />
@@ -73,7 +73,7 @@ class LoginPage extends Component {
                     onClick={renderProps.onClick}
                     className="LoginPage-googleButton u-pointer"
                   >
-                    Log In With Google
+                    log in with Google
                   </button>
                 )}
               />
