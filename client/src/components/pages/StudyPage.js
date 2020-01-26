@@ -10,6 +10,7 @@ import "./StudyPage.css";
 import { PLANT_STAGES } from "../modules/PlantStages.js";
 import Timer from "../modules/Timer.js";
 import MiniDaemon from "../modules/MiniDaemon.js";
+import ModularModal from "../modules/ModularModal.js";
 
 class StudyPage extends Component {
   constructor(props) {
@@ -177,17 +178,17 @@ class StudyPage extends Component {
     //for testing
     //this.startStudy(100);
     get("/api/whoami").then((user) => {
-      if (!user._id) {
-        this.setState({ isLoggedOut: true }); //change back to true
-      }
+      // if (!user._id) {
+      //   this.setState({ isLoggedOut: true }); //change back to true
+      // }
       
       //uncomment below for debugging/testing
       
-      // if (!user._id) {
-      //   this.setState({ isLoggedOut: false }); //change back to true
-      // }else{
-      //   this.setState({ isLoggedOut: false }); //and remove this
-      // }
+      if (!user._id) {
+        this.setState({ isLoggedOut: false }); //change back to true
+      }else{
+        this.setState({ isLoggedOut: false }); //and remove this
+      }
     });
   }
 
@@ -265,7 +266,9 @@ class StudyPage extends Component {
     if (this.state.isStudying !== true && this.state.plant) {
       return (
         <>
+        
           <div className="StudyPage-container">
+          
             {this.state.user && this.state.plant ? (
               <>
                 <div className="StudyPage-plantContainer">

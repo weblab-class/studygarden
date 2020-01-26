@@ -1,0 +1,138 @@
+:root {
+  --h: calc(100px + 12%);
+  --w: calc(150px + 12%);
+}
+
+.ModularModal-background{
+  background-color: rgba(0, 0, 0, 0.616);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 12111111;
+  animation: fadein 0.5s;
+  -moz-animation: fadein 0.5s; /* Firefox */
+  -webkit-animation: fadein 0.5s; /* Safari and Chrome */
+  -o-animation: fadein 0.5s; /* Opera */
+}
+
+.ModularModal-container{
+  position: absolute;
+  padding: 8px;
+  width: var(--w);
+  height: var(--h);
+  border: none;
+  background-color: #9bbce0;
+  border-radius: 20px;
+  box-shadow: 0 2px 10px 0 rgba(0,0,0,.16);
+  /* Subtract padding and 1/2 of width */
+  left: calc(50% - var(--w)/2 - 8px);
+
+
+  /* Subtract padding and 1/2 of height */
+  top: calc(50% - var(--h)/2 - 8px);
+
+  z-index: 12121212;
+
+  animation: grow 0.5s;
+  -moz-animation: grow 0.5s;
+}
+
+.ModularModal-promptContainer{
+  color: var(--white);
+  font-size: 16px;
+  display: flex;
+  position: absolute;
+  text-shadow:rgba(0,0,0,.16) 0px 1px 5px;
+  height: calc(100% - 80px);
+  vertical-align: middle;
+  font-weight: bold;
+  left: 0px;
+  padding: 10px;
+  width: calc(100% - 20px);
+  word-break: break-word;
+}
+
+.ModularModal-prompt{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.ModularModal-buttonContainer{
+  /* flex-grow: 1; */
+  display: flex;
+  position: absolute;
+  width: calc(100% - 15px);
+  top: calc(100% - 26px*2 - 10px);
+  /* margin-top: calc(50% - 26px*2); */
+  flex-direction: row;
+  justify-content: center;
+  bottom: 1px;
+}
+
+.ModularModal-button{
+  margin: auto 5px;
+  padding: 10px 15px;
+  text-align: center;
+  font-size: 16px;
+  flex: 1;
+  font-weight: bold;
+  color: var(--text-light);
+  border-radius: 100px;
+  background-color: #577494;
+  border: 0px;
+  box-shadow: 0px 1px 6px 0px rgba(0,0,0,.16);
+  text-shadow: grey 0px 1px 2px;
+  transition: text-shadow 0.2s;
+  cursor: pointer;
+}
+
+@keyframes fadein {
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
+}
+@-moz-keyframes fadein { /* Firefox */
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
+}
+@-o-keyframes fadein { /* Opera */
+  from {
+      opacity:0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+@keyframes grow {
+  from {
+    transform: scale(0, 0);
+    
+  }
+  to{
+    transform: scale(1, 1);
+  }
+}
+@-moz-keyframes grow {
+  from {
+      width:0;
+      height:0;
+  }
+}
