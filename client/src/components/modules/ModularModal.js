@@ -51,11 +51,11 @@ class ModularModal extends Component {
   // called when the user hits "Submit" for a new post
 
   render() {
-    console.log(this.props.showModal);
+    //console.log(this.props.showModal);
     if (!this.props.showModal) {
       return null;
     }else{
-    console.log("OSD")
+    //console.log("OSD")
     return (
       <div className= "ModularModal-background">
         <div className = "ModularModal-container">

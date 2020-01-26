@@ -40,6 +40,7 @@ class StudyPage extends Component {
     this.endStudy = this.endStudy.bind(this);
     this.keepStudying = this.keepStudying.bind(this);
     this.goHome = this.goHome.bind(this);
+    this.timeoutID = undefined;
     let nMiniDaemon;
   }
 
@@ -59,6 +60,7 @@ class StudyPage extends Component {
     this.setState({
       timeString: this.convertToMinSec(sesLength),
       pauseText: "pause",
+      elapsedTime: 0,
     });
     this.nMiniDaemon = new MiniDaemon(
       this,
@@ -106,10 +108,10 @@ class StudyPage extends Component {
     }
   }
   endStudy() {
-    console.log("wat")
+    //console.log("wat")
     if (this.state.endText === "end session"){
       this.setState({endText: "are you sure?"})
-      setTimeout(
+      this.timeoutID = setTimeout(
         ()=>{
           if (this.state.showModalEnd !== true){
             this.setState({endText: "end session"})
@@ -139,7 +141,10 @@ class StudyPage extends Component {
       this.setState({
         isStudying: false,
         showModalEnd: false,
+        endText: "end session",
+        pauseText: "pause"
       });
+      clearTimeout(this.timeoutID)
     }
   }
 
@@ -270,7 +275,7 @@ class StudyPage extends Component {
         })
       );
     }
-    console.log(this.state.showModalEnd)
+    //console.log(this.state.showModalEnd)
   }
   convertToMinSec(sec) {
     let out = "";
