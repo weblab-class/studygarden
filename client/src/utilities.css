@@ -26,6 +26,7 @@
   --text-light: rgb(245, 245, 245);
   --text-dark: #2e2e2e;
   --green: #8d945f;
+  --blue: #577494;
 
   --xs: 4px;
   --s: 8px;
@@ -160,6 +161,13 @@ button {
 
 .u-buttonGreen:hover{
   text-shadow: white 1px 0 10px;
+}
+
+.u-pattern{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
 input{

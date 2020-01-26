@@ -15,16 +15,25 @@
   color: white;
   text-shadow: #577494 0px 1px 10px;
   margin-top: auto;
-  margin-bottom: 2%;
+  margin-bottom: auto;
   z-index: 9999999;
 }
 
 .Homepage-name {
-  font-size: 60px;
+  font-size: 52px;
 }
 
 .Homepage-seeYourGarden {
-  font-size: 40px;
+  font-size: 32px;
+}
+@media screen and (min-aspect-ratio: 13/6) {
+  .Homepage-name {
+    font-size: 40px;
+  }
+
+  .Homepage-seeYourGarden {
+    font-size: 24px;
+  }
 }
 
 .HomePage-windowsill {
