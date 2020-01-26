@@ -149,13 +149,16 @@ class StudyPage extends Component {
 
   keepStudying(){
     if (this.state.showModalEnd === true){
+      post("/api/session/delete", {plantId: this.props.match.params.plantId,});
       this.setState({
         isStudying: false,
         showModalEnd: false,
         showModalResume: false,
         endText: "end session",
         pauseText: "pause",
+        session: undefined,
       });
+
       clearTimeout(this.timeoutID);
     }
   }
@@ -322,6 +325,10 @@ class StudyPage extends Component {
     if (this.nMiniDaemon){
       this.nMiniDaemon.pause();
     }
+    post(`/api/session/update`, {
+      plantId: this.props.match.params.plantId,
+      elapsedTime: this.state.elapsedTime,
+    });
   };
   convertToMinSec(sec) {
     let out = "";
