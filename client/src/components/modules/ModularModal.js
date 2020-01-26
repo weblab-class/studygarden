@@ -33,7 +33,7 @@ class ModularModal extends Component {
   }
 
   componentDidUpdate(){
-    console.log(this.props.showModal);
+    // console.log(this.props.showModal);
   }
   handleChange(event) {
 

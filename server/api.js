@@ -61,7 +61,8 @@ router.post("/session/update", async (req, res) => {
       if (err) {
         return res.status(500).send(err);
       } else if (doc) {
-        await doc.delete();
+        //await doc.delete();
+        await StudySession.deleteMany({ plantId: plant }, () => console.log("deleted many"))
       }
       session = new StudySession({
         creator_id: req.body.creatorId,
@@ -90,7 +91,7 @@ router.post("/session/update", async (req, res) => {
 
 router.get("/session/", (req, res) => {
   try {
-    StudySession.find({ plantId: req.query.plantId }).then((session) => {
+    StudySession.findOne({ plantId: req.query.plantId }).then((session) => {
       res.send(session);
     });
   } catch (err) {

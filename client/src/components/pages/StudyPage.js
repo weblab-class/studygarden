@@ -28,11 +28,14 @@ class StudyPage extends Component {
       showModalLog: false,
       showModalStart: false,
       showModalEnd: false,
+      showModalResume: false,
       sessionLength: null,
       pauseText: "pause",
       endText: "end session",
       goHome: false,
-      prompt: "",
+      endPrompt: "",
+      resumePrompt: "",
+      timeRemaining: 0,
     };
     this.startStudy = this.startStudy.bind(this);
     this.stopStudy = this.stopStudy.bind(this);
@@ -40,6 +43,8 @@ class StudyPage extends Component {
     this.endStudy = this.endStudy.bind(this);
     this.keepStudying = this.keepStudying.bind(this);
     this.goHome = this.goHome.bind(this);
+    this.hideModalResume = this.hideModalResume.bind(this);
+    this.startFromModal = this.startFromModal.bind(this);
     this.timeoutID = undefined;
     let nMiniDaemon;
   }
@@ -85,6 +90,12 @@ class StudyPage extends Component {
     });
     //TODO: link to api and call starting a new session
     //done
+    post(`/api/plant/update`, {
+      plantId: this.props.match.params.plantId,
+      fields: {
+        isStudying: true,
+      },
+    })
   };
   stopStudy() { //should be called pauseStudy oops
     if (this.state.showModalEnd === true){
@@ -122,7 +133,7 @@ class StudyPage extends Component {
       const newCumul = this.state.plant.studyTimeCumul + Number(this.state.elapsedTime-this.state.elapsedTimeHold);
       const newStage = Math.min(4, Math.floor((newCumul / this.state.plant.goalTime) * 5));
       this.setState({
-        prompt: "You have studied for " + (this.getNiceTime(this.state.elapsedTime)) +". Good work! What would you like to do?",
+        endPrompt: "You have studied for " + (this.getNiceTime(this.state.elapsedTime)) +". Good work! What would you like to do?",
         showModalEnd: true,
         endText: "session ended",
       }); //in lieu of fanfare currently
@@ -215,14 +226,36 @@ class StudyPage extends Component {
     get(`/api/user`, { userId: this.props.match.params.userId }).then((user) =>
       this.setState({ user: user })
     );
+    post(`/api/plant/update`, {
+      plantId: this.props.match.params.plantId,
+      fields: {
+        isStudying: false,
+      },
+    });
     get(`/api/plant/single`, { plantId: this.props.match.params.plantId }).then((plant) => {
       console.log(plant);
 
       this.setState({ plant: plant });
     });
     get(`/api/session`, { plantId: this.props.match.params.plantId }).then((session) => {
+      console.log(session);
       this.setState({ session: session });
-    });
+      if (session !== undefined){
+        console.log("11111")
+        if (session.studySessionLength !== undefined && session.elapsedTime !== undefined){
+          console.log("2222")
+          const remTime = session.studySessionLength-session.elapsedTime;
+          if(remTime > 60){
+            console.log("3333")
+            console.log("session found");
+            this.setState({
+              showModalResume: true,
+              resumePrompt: "You have an existing study session with " + this.convertToMinSec(remTime) + " left on the timer. Continue?",
+              timeRemaining: remTime,
+            })
+        }
+      }
+    }})
     //for testing
     //this.startStudy(100);
     get("/api/whoami").then((user) => {
@@ -275,15 +308,20 @@ class StudyPage extends Component {
         })
       );
     }
-    if (!prevState.showModalEnd && this.state.elapsedTime === this.state.sessionLength){
+    if (!prevState.showModalEnd && this.state.elapsedTime === this.state.sessionLength && this.state.isStudying === true){
       this.setState({
-        prompt: "You have studied for " + (this.getNiceTime(this.state.elapsedTime)) +". Good work! What would you like to do?",
+        endPrompt: "You have studied for " + (this.getNiceTime(this.state.elapsedTime)) +". Good work! What would you like to do?",
         showModalEnd: true,
         endText: "session ended",
       });
     }
     //console.log(this.state.showModalEnd)
-  }
+  };
+  componentWillUnmount(){
+    if (this.nMiniDaemon){
+      this.nMiniDaemon.pause();
+    }
+  };
   convertToMinSec(sec) {
     let out = "";
     let seconds = () => {
@@ -298,9 +336,19 @@ class StudyPage extends Component {
     if (sec%2 === 1){
       out = String(Math.floor(minutes)) + ":" + String(seconds());
     }else{
-      out = String(Math.floor(minutes)) + " " + String(seconds());
+      out = String(Math.floor(minutes)) + ":" + String(seconds());
     }
     return out;
+  };
+
+  hideModalResume(){
+    if (this.state.showModalResume === true){
+      this.setState({showModalResume: false,})
+    }
+  }
+
+  startFromModal(){
+    this.startStudy(this.state.timeRemaining);
   }
 
   //TODO: buttons/popups for continuing or cancelling existing study session
@@ -316,6 +364,18 @@ class StudyPage extends Component {
     if (this.state.isStudying !== true && this.state.plant) {
       return (
         <>
+            <ModularModal
+                showModal={this.state.showModalResume}
+                prompt={this.state.resumePrompt}
+                choiceOne={{
+                  choice: "start new",
+                  action: this.hideModalResume,
+                }}
+                choiceTwo={{
+                  choice: "continue",
+                  action: this.startFromModal,
+                }}
+              />
           <div className="StudyPage-container">
           
             {this.state.user && this.state.plant ? (
@@ -380,7 +440,7 @@ class StudyPage extends Component {
         <>
           <ModularModal
             showModal={this.state.showModalEnd}
-            prompt={this.state.prompt}
+            prompt={this.state.endPrompt}
             choiceOne={{
               choice: "return home",
               action: this.goHome,
