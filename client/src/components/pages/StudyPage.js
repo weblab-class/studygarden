@@ -152,6 +152,7 @@ class StudyPage extends Component {
       this.setState({
         isStudying: false,
         showModalEnd: false,
+        showModalResume: false,
         endText: "end session",
         pauseText: "pause",
       });
@@ -177,7 +178,7 @@ class StudyPage extends Component {
     }else if (sec%60 === 0){
       return sec/60 + minuteTxt;
     }else{
-      return sec/60 + minuteTxt + " " + sec%60 + secTxt;
+      return Math.floor(sec/60) + minuteTxt + " " + sec%60 + secTxt;
     }
   }
 
