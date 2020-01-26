@@ -74,7 +74,7 @@ class ArchivePage extends Component {
     }
 
     shelves = plantChunks.map((chunk, i) => (
-      <Shelf bench={genericBench} plantsList={chunk} key={i} />
+      <Shelf img={genericBench} bench={"genericBench"} plantsList={chunk} key={i} />
     ));
 
     return (

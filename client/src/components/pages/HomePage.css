@@ -36,8 +36,16 @@
   }
 }
 
+.HomePage-archiveLink {
+  margin-right: auto;
+  color: white;
+  text-shadow: #577494 0px 1px 10px;
+  z-index: 10;
+  padding: 20px 40px;
+}
+
 .HomePage-windowsill {
-  margin-bottom: 5%;
   width: auto;
   max-height: 30%;
+  margin-bottom: 5%;
 }

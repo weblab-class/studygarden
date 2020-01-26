@@ -17,8 +17,8 @@ class Shelf extends Component {
   render() {
     return (
       <>
-        <div className="Shelf-single">
-          <img src={this.props.bench} className="Shelf-bench" />
+        <div className={`Shelf-${this.props.bench}`}>
+          <img src={this.props.img} className="Shelf-bench" />
           <div className="Shelf-plantsContainer">{this.props.plantsList}</div>
         </div>
       </>

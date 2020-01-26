@@ -1,18 +1,28 @@
-.Shelf-single {
+.Shelf-initialBench {
   overflow: visible;
-  min-width: 80%;
+  width: 90%;
   height: auto;
-  max-width: 100%;
   text-align: center;
   position: relative;
-  margin-bottom: 5%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.Shelf-genericBench {
+  overflow: visible;
+  width: 90%;
+  height: 30%;
+  text-align: center;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .Shelf-bench {
   z-index: 4;
-  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
   position: relative;
-  margin-top: auto;
 }
 
 .Shelf-plantsContainer {

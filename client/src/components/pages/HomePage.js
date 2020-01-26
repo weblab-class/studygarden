@@ -4,7 +4,7 @@ import { get } from "../../utilities";
 import initialBench from "../../../img/initialBench.png";
 import SinglePlant from "../modules/SinglePlant.js";
 import Shelf from "../modules/Shelf.js";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 import "../../utilities.css";
 import "./HomePage.css";
@@ -74,9 +74,16 @@ class HomePage extends Component {
                 <h1 className="Homepage-name">Welcome, {this.state.user.name}!</h1>
                 <h2 className="Homepage-seeYourGarden">Here is your garden.</h2>{" "}
               </div>
+
               <div className="HomePage-windowsill">
-                <Shelf bench={initialBench} plantsList={plantsList} />
+                <Shelf img={initialBench} bench={"initialBench"} plantsList={plantsList} />
               </div>
+              <Link
+                className="HomePage-archiveLink"
+                to={`/home/${this.props.match.params.userId}/archive`}
+              >
+                See the rest of your plants!
+              </Link>
             </>
           ) : (
             <div> Loading... </div>
