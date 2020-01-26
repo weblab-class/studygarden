@@ -1,15 +1,14 @@
 import React, { Component } from "react";
-import GoogleLogin, { GoogleLogout } from "react-google-login";
 import { get } from "../../utilities";
-import initialBench from "../../../img/initialBench.png";
+import genericBench from "../../../img/generic bench.png";
 import SinglePlant from "../modules/SinglePlant.js";
 import Shelf from "../modules/Shelf.js";
 import { Redirect } from "react-router-dom";
 
 import "../../utilities.css";
-import "./HomePage.css";
+import "./ArchivePage.css";
 
-class HomePage extends Component {
+class ArchivePage extends Component {
   constructor(props) {
     super(props);
     // Initialize Default State
@@ -28,7 +27,7 @@ class HomePage extends Component {
     );
 
     get("/api/plant", { creatorId: this.props.match.params.userId }).then((plantObjs) => {
-      let reversedStoryObjs = plantObjs.reverse().slice(0, 5);
+      let reversedStoryObjs = plantObjs.reverse();
       reversedStoryObjs.map((plantObj) => {
         this.setState({ plants: this.state.plants.concat([plantObj]) });
       });
@@ -43,11 +42,13 @@ class HomePage extends Component {
   }
 
   render() {
-    if (this.state.isLoggedOut) {
+    /*if (this.state.isLoggedOut) {
       console.log("is logged out!");
       return <Redirect to="/" />;
-    }
+    }*/
     let plantsList = null;
+    let plantChunks = [];
+    let shelves = null;
     const hasPlants = this.state.plants.length !== 0;
     if (hasPlants) {
       plantsList = this.state.plants.map((plantObj) => (
@@ -62,21 +63,27 @@ class HomePage extends Component {
           userId={this.props.match.params.userId}
         />
       ));
+      //this is for testing purposes
+      //console.log(plantsList);
     } else {
       plantsList = <div>No plants yet...</div>;
     }
+
+    while (plantsList.length) {
+      plantChunks.push(plantsList.splice(0, 5));
+    }
+
+    shelves = plantChunks.map((chunk, i) => (
+      <Shelf bench={genericBench} plantsList={chunk} key={i} />
+    ));
+
     return (
       <>
-        <div className="HomePage-container">
+        <div className="ArchivePage-container">
           {this.state.user ? (
             <>
-              <div className="HomePage-text">
-                <h1 className="Homepage-name">Welcome, {this.state.user.name}!</h1>
-                <h2 className="Homepage-seeYourGarden">Here is your garden.</h2>{" "}
-              </div>
-              <div className="HomePage-windowsill">
-                <Shelf bench={initialBench} plantsList={plantsList} />
-              </div>
+              <h3 className="ArchivePage-text">See all the plants you've grown here!</h3>
+              <div className="ArchivePage-shelfContainer">{shelves}</div>
             </>
           ) : (
             <div> Loading... </div>
@@ -87,4 +94,4 @@ class HomePage extends Component {
   }
 }
 
-export default HomePage;
+export default ArchivePage;

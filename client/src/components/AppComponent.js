@@ -5,6 +5,7 @@ import LoginPage from "./pages/LoginPage.js";
 import HomePage from "./pages/HomePage.js";
 import NewPlantPage from "./pages/NewPlant.js";
 import StudyPage from "./pages/StudyPage.js";
+import ArchivePage from "./pages/ArchivePage.js";
 import NotFound from "./pages/NotFound.js";
 
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
@@ -25,7 +26,6 @@ class AppComponent extends Component {
     this.state = {
       userId: null,
       isLoggedOut: null,
-      name: null,
     };
   }
 
@@ -34,10 +34,7 @@ class AppComponent extends Component {
     get("/api/whoami").then((user) => {
       if (user._id) {
         // they are registed in the database, and currently logged in.
-        this.setState({ 
-          userId: user._id, 
-          name: user.name,
-        });
+        this.setState({ userId: user._id });
         console.log("user detected");
       }
     });
@@ -71,11 +68,12 @@ class AppComponent extends Component {
           handleLogin={this.handleLogin}
           handleLogout={this.handleLogout}
           userId={this.state.userId}
-          name={this.state.name}
         />
 
         <Switch>
           <Route exact path="/home/:userId" component={HomePage} />
+
+          <Route component={ArchivePage} path="/home/:userId/archive" />
           <Route component={NewPlantPage} path="/home/:userId/newplant" />
           <Route component={StudyPage} path="/home/:userId/study/:plantId" />
           <Route component={NotFound} default />
