@@ -86,7 +86,7 @@ class StudyPage extends Component {
     //TODO: link to api and call starting a new session
     //done
   };
-  stopStudy() {
+  stopStudy() { //should be called pauseStudy oops
     if (this.state.showModalEnd === true){
     }else{
       this.nMiniDaemon.pause();
@@ -122,10 +122,10 @@ class StudyPage extends Component {
       const newCumul = this.state.plant.studyTimeCumul + Number(this.state.elapsedTime-this.state.elapsedTimeHold);
       const newStage = Math.min(4, Math.floor((newCumul / this.state.plant.goalTime) * 5));
       this.setState({
-        prompt: "You have studied for " + (this.getNiceTime(this.state.elapsedTime)) +". Plant Status. What would you like to do?",
+        prompt: "You have studied for " + (this.getNiceTime(this.state.elapsedTime)) +". Good work! What would you like to do?",
         showModalEnd: true,
         endText: "session ended",
-      }) //in lieu of fanfare currently
+      }); //in lieu of fanfare currently
       post(`/api/plant/update`, {
         plantId: this.props.match.params.plantId,
         fields: {
@@ -142,9 +142,9 @@ class StudyPage extends Component {
         isStudying: false,
         showModalEnd: false,
         endText: "end session",
-        pauseText: "pause"
+        pauseText: "pause",
       });
-      clearTimeout(this.timeoutID)
+      clearTimeout(this.timeoutID);
     }
   }
 
@@ -246,7 +246,7 @@ class StudyPage extends Component {
         timeString: this.convertToMinSec(this.state.sessionLength - this.state.elapsedTime),
       });
     }
-    let updateDelay = 5
+    let updateDelay = 5;
     if (this.state.elapsedTime > this.state.elapsedTimeHold + updateDelay-1) {
       //lets not kill the server too hard
       //update stage and cumulative study time every so often while studying
@@ -274,6 +274,13 @@ class StudyPage extends Component {
           return { plant: out };
         })
       );
+    }
+    if (!prevState.showModalEnd && this.state.elapsedTime === this.state.sessionLength){
+      this.setState({
+        prompt: "You have studied for " + (this.getNiceTime(this.state.elapsedTime)) +". Good work! What would you like to do?",
+        showModalEnd: true,
+        endText: "session ended",
+      });
     }
     //console.log(this.state.showModalEnd)
   }

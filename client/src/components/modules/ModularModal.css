@@ -90,6 +90,11 @@
   cursor: pointer;
 }
 
+.ModularModal-button:hover {
+  text-shadow: white 1px 0 10px;
+  /* box-shadow: 0px 0px 5px -1px grey; */
+}
+
 @keyframes fadein {
   from {
       opacity:0;
