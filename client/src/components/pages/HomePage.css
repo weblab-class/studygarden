@@ -9,13 +9,14 @@
   justify-content: center;
   text-align: center;
   background-color: #9bbce0;
+  overflow: auto;
 }
 
 .HomePage-text {
   color: white;
   text-shadow: #577494 0px 1px 10px;
-  margin-top: auto;
-  margin-bottom: auto;
+  margin-top: 8vh;
+  margin-bottom: 2vh;
   z-index: 9999999;
 }
 
@@ -41,7 +42,8 @@
   color: white;
   text-shadow: #577494 0px 1px 10px;
   z-index: 10;
-  padding: 20px 40px;
+  position: relative;
+  padding: 5vmin;
 }
 
 .HomePage-windowsill {
