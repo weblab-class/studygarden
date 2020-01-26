@@ -41,7 +41,15 @@
   
 }
   
-
+.Homepage-empty{
+  font-size: 16px;
+  text-align: center;
+  font-weight: 700;
+  display: flex;
+  color: white;
+  margin-top: 10%;
+  text-shadow: #577494 0px 1px 10px;
+}
 .HomePage-windowsill {
   overflow: visible;
   min-width: 80%;
