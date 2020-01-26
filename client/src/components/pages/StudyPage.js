@@ -27,15 +27,19 @@ class StudyPage extends Component {
       timeString: "0:00",
       showModalLog: false,
       showModalStart: false,
+      showModalEnd: false,
       sessionLength: null,
       pauseText: "pause",
       endText: "end session",
       goHome: false,
+      prompt: "",
     };
     this.startStudy = this.startStudy.bind(this);
     this.stopStudy = this.stopStudy.bind(this);
     this.resumeStudy = this.resumeStudy.bind(this);
     this.endStudy = this.endStudy.bind(this);
+    this.keepStudying = this.keepStudying.bind(this);
+    this.goHome = this.goHome.bind(this);
     let nMiniDaemon;
   }
 
@@ -81,20 +85,24 @@ class StudyPage extends Component {
     //done
   };
   stopStudy() {
-    if (this.state.endText === "keep studying"){
+    if (this.state.showModalEnd === true){
     }else{
       this.nMiniDaemon.pause();
       this.setState({pauseText: "resume"});
     }
   }
   resumeStudy() {
-    if (this.state.endText === "keep studying"){
-    }
-    if(this.state.pauseText === "return home"){
+    if(this.state.showModalEnd === true){
       this.setState({goHome: true})
     }else{
       this.nMiniDaemon.start();
       this.setState({pauseText: "pause"});
+    }
+  }
+
+  goHome(){
+    if(this.state.showModalEnd === true){
+      this.setState({goHome: true})
     }
   }
   endStudy() {
@@ -103,7 +111,7 @@ class StudyPage extends Component {
       this.setState({endText: "are you sure?"})
       setTimeout(
         ()=>{
-          if (this.state.endText !== "keep studying"){
+          if (this.state.showModalEnd !== true){
             this.setState({endText: "end session"})
           }
         },3000)
@@ -111,7 +119,11 @@ class StudyPage extends Component {
       this.nMiniDaemon.pause();
       const newCumul = this.state.plant.studyTimeCumul + Number(this.state.elapsedTime-this.state.elapsedTimeHold);
       const newStage = Math.min(4, Math.floor((newCumul / this.state.plant.goalTime) * 5));
-      this.setState({endText: "keep studying"}) //in lieu of fanfare currently
+      this.setState({
+        prompt: "You have studied for " + (this.getNiceTime(this.state.elapsedTime)) +". Plant Status. What would you like to do?",
+        showModalEnd: true,
+        endText: "session ended",
+      }) //in lieu of fanfare currently
       post(`/api/plant/update`, {
         plantId: this.props.match.params.plantId,
         fields: {
@@ -119,10 +131,37 @@ class StudyPage extends Component {
           stage: newStage,
         },
       })
-    }else if (this.state.endText === "keep studying"){
+    }
+  }
+
+  keepStudying(){
+    if (this.state.showModalEnd === true){
       this.setState({
         isStudying: false,
+        showModalEnd: false,
       });
+    }
+  }
+
+  getNiceTime(sec){
+    let minuteTxt;
+    if (sec/60 === 1){
+      minuteTxt = " minute";
+    }else{
+      minuteTxt = " minutes";
+    };
+    let secTxt;
+    if (sec === 1){
+      secTxt = " second";
+    }else{
+      secTxt = " seconds";
+    };
+    if (sec<60){
+      return sec + secTxt;
+    }else if (sec%60 === 0){
+      return sec/60 + minuteTxt;
+    }else{
+      return sec/60 + minuteTxt + " " + sec%60 + secTxt;
     }
   }
 
@@ -202,12 +241,6 @@ class StudyPage extends Component {
         timeString: this.convertToMinSec(this.state.sessionLength - this.state.elapsedTime),
       });
     }
-    if (this.state.elapsedTime === this.state.sessionLength && this.state.endText !== "keep studying"){
-      this.setState({endText: "keep studying"}) //more dull fanfare
-    }
-    if (this.state.endText === "keep studying" && this.state.pauseText !== "return home"){
-      this.setState({pauseText: "return home"})
-    }
     let updateDelay = 5
     if (this.state.elapsedTime > this.state.elapsedTimeHold + updateDelay-1) {
       //lets not kill the server too hard
@@ -237,6 +270,7 @@ class StudyPage extends Component {
         })
       );
     }
+    console.log(this.state.showModalEnd)
   }
   convertToMinSec(sec) {
     let out = "";
@@ -270,11 +304,11 @@ class StudyPage extends Component {
     if (this.state.isStudying !== true && this.state.plant) {
       return (
         <>
-        
           <div className="StudyPage-container">
           
             {this.state.user && this.state.plant ? (
               <>
+             
                 <div className="StudyPage-plantContainer">
                   <img
                     src={PLANT_STAGES[this.state.plant.stage][this.state.plant.plantType]}
@@ -332,6 +366,18 @@ class StudyPage extends Component {
     } else {
       return (
         <>
+          <ModularModal
+            showModal={this.state.showModalEnd}
+            prompt={this.state.prompt}
+            choiceOne={{
+              choice: "return home",
+              action: this.goHome,
+            }}
+            choiceTwo={{
+              choice: "keep studying",
+              action: this.keepStudying,
+            }}
+          />
           <div className="StudyPage-container">
             {this.state.user && this.state.plant ? (
               <>

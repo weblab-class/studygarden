@@ -25,25 +25,37 @@ class ModularModal extends Component {
     super(props);
     // Initialize Default State
     this.handleChange = this.handleChange.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
   componentDidMount() {
     // remember -- api calls go here!
   }
 
+  componentDidUpdate(){
+    console.log(this.props.showModal);
+  }
   handleChange(event) {
 
   }
-
+  onClick(e){
+    if (e===1){
+      this.props.choiceOne.action;
+    }else{
+      this.props.choiceTwo.action;
+    }
+  }
   onClose = (e) => {
     this.props.onClose && this.props.onClose(e);
   };
   // called when the user hits "Submit" for a new post
 
   render() {
+    console.log(this.props.showModal);
     if (!this.props.showModal) {
       return null;
-    }
+    }else{
+    console.log("OSD")
     return (
       <div className= "ModularModal-background">
         <div className = "ModularModal-container">
@@ -54,13 +66,14 @@ class ModularModal extends Component {
             <button className="ModularModal-button" onClick = {this.props.choiceOne.action}>
               {this.props.choiceOne.choice}
             </button>
-            <button className="ModularModal-button"  onClick = {this.props.choiceTwo.action}>
-              {this.props.choiceOne.choice}
+            <button className="ModularModal-button" onClick = {this.props.choiceTwo.action}>
+              {this.props.choiceTwo.choice}
             </button>
           </div>
         </div>
       </div>
     );
   }
+}
 }
 export default ModularModal;

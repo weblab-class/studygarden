@@ -39,16 +39,18 @@
 
 .ModularModal-promptContainer{
   color: var(--white);
-  font-size: 16px;
+  font-size: 20px;
   display: flex;
   position: absolute;
   text-shadow:rgba(0,0,0,.16) 0px 1px 5px;
   height: calc(100% - 80px);
   vertical-align: middle;
-  font-weight: bold;
+  font-weight: 700;
   left: 0px;
   padding: 10px;
-  width: calc(100% - 20px);
+  margin: auto 10px;
+  width: calc(100% - 40px);
+  text-align: center;
   word-break: break-word;
 }
 
