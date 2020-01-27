@@ -75,7 +75,7 @@ class HomePage extends Component {
                 <h2 className="Homepage-seeYourGarden">Here is your garden.</h2>{" "}
               </div>
 
-              <div className="HomePage-windowsill">
+              <div className="HomePage-windowsill u-no-select">
                 <Shelf img={initialBench} bench={"initialBench"} plantsList={plantsList} />
               </div>
               <Link

@@ -46,7 +46,7 @@ class SinglePlant extends Component {
       <div className="SinglePlant-plantContainer">
         <div className="btn btn-primary tooltip">
           <img
-            className="SinglePlant-plant"
+            className="SinglePlant-plant u-no-select"
             src={PLANT_STAGES[this.props.stage][this.props.plantType]}
           />
           <div className="bottom">
