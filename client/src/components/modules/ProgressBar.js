@@ -23,7 +23,7 @@ class ProgressBar extends Component {
     if (Math.floor(10*(this.props.studyTimeCumul/(60**2)))/10 < this.props.goalTime/(60**2)){
       number = String(Math.floor(10*(this.props.studyTimeCumul/(60**2)))/10) +" out of "+ String(this.props.goalTime/(60**2)) +" "+ String(this.hr(this.props.goalTime/(60**2)))
     } else {
-      number = "complete";
+      number = String(this.props.goalTime/(60**2)) +" "+ String(this.hr(this.props.goalTime/(60**2))) + " study complete";
     }
     //  console.log(width);
     //console.log(style);

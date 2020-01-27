@@ -34,7 +34,7 @@
   margin-top: auto;
   margin-bottom: auto;
   padding-top: 50px;
-  padding-bottom: 50px;
+  padding-bottom: 223px;
   display: flex;
   flex-direction: column;
   text-shadow: white 0px 1px 10px;
@@ -196,12 +196,14 @@
 .ProgressBar-container {
   height: 30px;
   background: white;
+  position: absolute;
   border-radius: 20px;
   margin: auto;
-  margin-top: 15%;
+  margin-top: calc(530px);
+  margin-left: 10%;
   padding: 0px;
   box-shadow: 0 1px 6px rgba(0,0,0, 0.3);
-  width: 80%;
+  width: 30%;
 }
 
 .ProgressBar {
