@@ -263,19 +263,19 @@ class StudyPage extends Component {
     //for testing
     //this.startStudy(100);
     get("/api/whoami").then((user) => {
-      // if (!user._id) {
-      //   this.setState({ isLoggedOut: true }); //change back to true
-      // }
-      
+      if (!user._id) {
+        this.setState({ isLoggedOut: true }); 
+      }
+    })
       //uncomment below for debugging/testing
       
-      if (!user._id) {
-        this.setState({ isLoggedOut: false }); //change back to true
-      }else{
-        this.setState({ isLoggedOut: false }); //and remove this
-      }
-    });
-  }
+    //   if (!user._id) {
+    //     this.setState({ isLoggedOut: false }); //change back to true
+    //   }else{
+    //     this.setState({ isLoggedOut: false }); //and remove this
+    //   }
+    // });
+  };
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.elapsedTime !== prevState.elapsedTime) {
