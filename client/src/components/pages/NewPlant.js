@@ -51,7 +51,7 @@ class NewPlantPage extends Component {
         <svg viewBox="0 0 100% 100%" xmlns="http://www.w3.org/2000/svg" className="u-pattern">
               <defs>
                 <pattern id="circle" width="200" height="200" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-                <circle cx="45" cy="45" r="30" fill="rgba(255,209,224,0.5)" stroke-width="0"/>
+                <circle cx="45" cy="45" r="30" fill="rgba(255,209,224,0.5)"/>
                 </pattern>
               </defs>
               <rect x="0" y="0" width="100%" height="100%" fill="url(#circle)"/>
