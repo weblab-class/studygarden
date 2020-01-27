@@ -1,0 +1,41 @@
+.Shelf-initialBench {
+  overflow: visible;
+  width: 90%;
+  height: auto;
+  text-align: center;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.Shelf-genericBench {
+  overflow: visible;
+  min-width: 80%;
+  height: auto;
+  max-width: 90%;
+  text-align: center;
+  position: relative;
+  margin-bottom: 5%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.Shelf-bench {
+  z-index: 4;
+  object-fit: contain;
+  position: relative;
+  margin-top: auto;
+}
+
+.Shelf-plantsContainer {
+  overflow: visible;
+  z-index: 2;
+  width: 80%;
+  height: auto;
+  margin-top: -30%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}

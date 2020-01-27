@@ -29,6 +29,9 @@ class NavBar extends Component {
                 <Link to={`/home/${this.props.userId}/newplant`} className="NavBar-link">
                   new plant
                 </Link>
+                <Link to={`/home/${this.props.userId}/archive`} className="NavBar-link">
+                  archive
+                </Link>
               </div>
             )}
           </div>
