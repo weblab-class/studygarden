@@ -46,6 +46,12 @@ router.get("/whoami", (req, res) => {
 
 //will need sockets don't delete plz :x
 
+router.post("/session/delete", async (req, res) => {
+  const plant = req.body.plantId;
+  await StudySession.deleteMany({ plantId: plant })
+  res.send("deleted sessions!");
+});
+
 router.post("/session/update", async (req, res) => {
   //WIP
   //at the beginning of session, create a brand new session, set "isStudying" to true through this
@@ -61,7 +67,8 @@ router.post("/session/update", async (req, res) => {
       if (err) {
         return res.status(500).send(err);
       } else if (doc) {
-        await doc.delete();
+        //await doc.delete();
+        await StudySession.deleteMany({ plantId: plant }, () => console.log("deleted many"))
       }
       session = new StudySession({
         creator_id: req.body.creatorId,
@@ -90,7 +97,7 @@ router.post("/session/update", async (req, res) => {
 
 router.get("/session/", (req, res) => {
   try {
-    StudySession.find({ plantId: req.query.plantId }).then((session) => {
+    StudySession.findOne({ plantId: req.query.plantId }).then((session) => {
       res.send(session);
     });
   } catch (err) {
