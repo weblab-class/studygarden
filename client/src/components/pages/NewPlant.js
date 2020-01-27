@@ -54,10 +54,7 @@ class NewPlantPage extends Component {
                 <circle cx="45" cy="45" r="30" fill="rgba(255,209,224,0.5)" stroke-width="0"/>
                 </pattern>
               </defs>
-
-              {/* <circle cx="50" cy="50" r="50" fill="url(#circle)"/> */}
               <rect x="0" y="0" width="100%" height="100%" fill="url(#circle)"/>
-              {/* <circle cx="180" cy="50" r="40" fill="none" stroke-width="20" stroke="url(#star)"/> */}
             </svg>
           <NewPlantInput
             plantType={this.state.currentIndex}
