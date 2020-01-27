@@ -63,7 +63,7 @@ class HomePage extends Component {
         />
       ));
     } else {
-      plantsList = <div>No plants yet...</div>;
+      plantsList = <div style={{display: "flex", width: "100%", justifyContent: "center"}}> <div className = "Homepage-empty">No plants found! Click "new plant" to fix that.</div></div>;
     }
     return (
       <>
