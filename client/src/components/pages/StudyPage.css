@@ -30,10 +30,10 @@
 }
 
 .StudyPage-infoContainer {
-  width: 60%;
+  width: 50%;
   margin-left: auto;
   margin-bottom: auto;
-  margin-top: auto;
+  margin-top: 28vh;
   margin-bottom: auto;
   /* padding-top: 80px; */
   display: flex;
