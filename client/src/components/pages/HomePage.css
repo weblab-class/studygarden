@@ -22,18 +22,23 @@
 
 .Homepage-name {
   font-size: 52px;
+  padding: 2vmin;
 }
 
 .Homepage-seeYourGarden {
   font-size: 32px;
+  margin-bottom: 3%;
 }
+
 @media screen and (min-aspect-ratio: 13/6) {
   .Homepage-name {
     font-size: 40px;
+    padding: 2vmin;
   }
 
   .Homepage-seeYourGarden {
     font-size: 24px;
+    margin-bottom: 3%;
   }
 }
 
