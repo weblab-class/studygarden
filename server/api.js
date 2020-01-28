@@ -134,7 +134,8 @@ router.post("/plant/new", async (req, res) => {
 router.post("/plant/delete", async (req, res)=>{
   console.log(req.body);
   console.log(req.body.plantId);
-  Plant.deleteOne({_id: req.body.plantId}, (err)=>{if(err) return handleError(err)}).then((z)=>console.log(z));
+  Plant.deleteOne({_id: req.body.plantId}).then((z)=>res.send({y: req.body.plantId}));
+  //return res.send("deleted a plant :'(");
 })
 
 router.post("/plant/update", async (req, res) => {

@@ -56,6 +56,7 @@
   border: 0px;
   box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.16);
   text-shadow: grey 1px 0 5px;
+  transition: text-shadow 0.2s;
 }
 
 .NewPlantInput-submitButton:hover {
@@ -139,4 +140,78 @@
   font-size: 24px;
   font-weight: 700;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.32);
+}
+
+.NewPlant-err {
+  position: absolute;
+  top: calc(250px + 50%);
+  color: rgb(156, 0, 0);
+  width: 30%;
+  font-weight: 600;
+  align-self: center;
+  text-align: center;
+  animation: 6s fadeInOut 0s 1 normal both;
+  -moz-animation: 6s fadeInOut 0s 1 normal both;
+  -webkit-animation: 6s fadeInOut 0s 1 normal both;
+  -o-animation: 6s fadeInOut 0s 1 normal both;
+}
+.NewPlant-submitted {
+  color: var(--text-dark);
+}
+
+@keyframes fadeInOut {
+  from {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@-moz-keyframes fadeInOut {
+  from {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes fadeInOut {
+  from {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@-o-keyframes fadeInOut {
+  from {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }

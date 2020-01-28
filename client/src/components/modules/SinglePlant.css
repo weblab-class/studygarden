@@ -11,6 +11,7 @@
   height: 100%;
   margin-top: auto;
   z-index: 4;
+  transition: filter 0.1s, webkit-filter 0.1s;
 }
 
 .SinglePlant-plant:hover {
@@ -27,7 +28,7 @@
 
 .tooltip .bottom {
   width: 50%;
-  margin-top: 8%;
+  margin-top: 0%;
   left: 50%;
   transform: translate(-50%, -21%);
   padding: 10px 20px;
@@ -85,22 +86,35 @@ h3 {
   border: 0px solid;
   color: var(--text-light);
   background-color: var(--green);
+  opacity: 1;
   border-color: rgb(75, 75, 75, 1);
   padding-top: 2px;
   padding-bottom: 3px;
   padding-left: 20%;
   padding-right: 20%;
   flex: auto;
+  transition: text-shadow 0.2s;
 }
+
+.studyButton:hover {
+  text-shadow: white 1px 0 10px;
+}
+
 .cancelButton{
   background-color: rgb(75, 75, 75, 0);
   border: 2px solid rgb(218, 0, 0);
   font-weight: 800;
   padding-top: 0px;
+  opacity: 1;
   padding-bottom: 1px;
   padding-left: 15%;
   padding-right: 15%;
-  color: var(--text-dark)
+  color: var(--text-dark);
+  transition: text-shadow 0.2s;
+}
+
+.cancelButton:hover {
+  text-shadow: rgb(197, 197, 197) 1px 0 10px;
 }
 
 .SinglePlant-buttonContainer{

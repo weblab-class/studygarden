@@ -24,8 +24,11 @@ class NewSubmit extends Component {
     // Initialize Default State
     this.state = {
       timeCreated: Date.now(),
+      errState: false,
+      submitWait: false,
       // Goal: "",
     };
+    this.handleSubmit=this.handleSubmit.bind(this);
   }
 
   postNewPlant = (body) => {
@@ -40,7 +43,7 @@ class NewSubmit extends Component {
   }
 
   // called when the user hits "Submit" for a new post
-  handleSubmit = async (event) => {
+  handleSubmit =  (event) => {
     event.preventDefault();
     const plant = {
       plantName: this.props.fields.plantName,
@@ -50,12 +53,23 @@ class NewSubmit extends Component {
       timeCreated: this.state.timeCreated,
       goalTime: this.props.fields.goalTime*(60**2),
     };
-    if (plant.plantName.length <= 2 || plant.subject.length <= 2) {
+    if (plant.plantName.length <= 2 || plant.subject.length <= 2 || plant.plantName.length > 16 || plant.subject.length > 16)  {
+      if(this.state.errState === false){
+        this.setState({ errState: true });
+        setTimeout(()=>{
+          this.setState({
+            errState: false,
+          })
+        },6000);
+      }
       throw new Error("fields must be longer than 2 characters!");
+      
     } else {
       console.log(plant);
-      await this.postNewPlant(plant);
-      this.setState({ isSubmitted: true });
+      this.postNewPlant(plant);
+      this.setState({submitWait: true, errState: false,})
+      setTimeout(() => this.setState({ isSubmitted: true }),500)
+      
     }
   };
   render() {
@@ -64,6 +78,7 @@ class NewSubmit extends Component {
       return <Redirect to={`/home/${this.props.userId}`} />;
     }
     return (
+      <>
       <div className="NewPlantInput-buttonContainer">
         <button
           type="submit"
@@ -73,7 +88,14 @@ class NewSubmit extends Component {
         >
           plant!
         </button>
+      
       </div>
+      
+        {this.state.errState &&
+        <div className= "NewPlant-err"> Name and subject fields must be 3-16 characters long! </div>}
+        {this.state.submitWait &&
+        <div className= "NewPlant-submitted NewPlant-err"> Submitting plant... </div>}
+      </>
     );
   }
 }
