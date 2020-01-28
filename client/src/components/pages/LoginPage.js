@@ -78,7 +78,7 @@ class LoginPage extends Component {
                 )}
               />
             )}
-            <div className="footer">
+            <div className="footer u-no-select">
               <img src={flowerDecor} />
             </div>
             <br />

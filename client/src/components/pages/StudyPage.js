@@ -101,7 +101,7 @@ class StudyPage extends Component {
     if (this.state.showModalEnd === true){
     }else{
       this.nMiniDaemon.pause();
-      this.setState({pauseText: "resume"});
+      this.setState({ pauseText: "resume" });
     }
   }
   resumeStudy() {
@@ -109,7 +109,7 @@ class StudyPage extends Component {
       this.setState({goHome: true})
     }else{
       this.nMiniDaemon.start();
-      this.setState({pauseText: "pause"});
+      this.setState({ pauseText: "pause" });
     }
   }
 
@@ -130,7 +130,9 @@ class StudyPage extends Component {
         },3000)
     }else if (this.state.endText === "are you sure?"){
       this.nMiniDaemon.pause();
-      const newCumul = this.state.plant.studyTimeCumul + Number(this.state.elapsedTime-this.state.elapsedTimeHold);
+      const newCumul =
+        this.state.plant.studyTimeCumul +
+        Number(this.state.elapsedTime - this.state.elapsedTimeHold);
       const newStage = Math.min(4, Math.floor((newCumul / this.state.plant.goalTime) * 5));
       this.setState({
         endPrompt: "You have studied for " + (this.getNiceTime(this.state.elapsedTime)) +". Good work! What would you like to do?",
@@ -186,7 +188,7 @@ class StudyPage extends Component {
   }
 
   logTime = (studySession) => {
-    const newCumul = this.state.plant.studyTimeCumul + Number(studySession.elapsedTime*(60**2)); //child gives us elapsed time in hours
+    const newCumul = this.state.plant.studyTimeCumul + Number(studySession.elapsedTime * 60 ** 2); //child gives us elapsed time in hours
     const newStage = Math.min(4, Math.floor((newCumul / this.state.plant.goalTime) * 4));
     //  console.log("studyTimeCumul:", this.state.plant.studyTimeCumul, studySession.elapsedTime);
     //  console.log("newCumul:", newCumul);
@@ -341,7 +343,7 @@ class StudyPage extends Component {
       }
     };
     let minutes = sec / 60;
-    if (sec%2 === 1){
+    if (sec % 2 === 1) {
       out = String(Math.floor(minutes)) + ":" + String(seconds());
     }else{
       out = String(Math.floor(minutes)) + ":" + String(seconds());
@@ -385,7 +387,11 @@ class StudyPage extends Component {
                 }}
               />
           <div className="StudyPage-container">
-          
+            <div class="cloud x1"></div>
+            <div class="cloud x2"></div>
+            <div class="cloud x3"></div>
+            <div class="cloud x4"></div>
+            <div class="cloud x5"></div>
             {this.state.user && this.state.plant ? (
               <>
              
@@ -396,8 +402,8 @@ class StudyPage extends Component {
                   />
                 </div>
                 <div className="StudyPage-infoContainer">
-                  <h3 className = "StudyPage-plantSubject">{this.state.plant.subject}</h3>
-                  <h2 className = "StudyPage-plantTitle">{this.state.plant.plantName}</h2>
+                  <h3 className="StudyPage-plantSubject">{this.state.plant.subject}</h3>
+                  <h2 className="StudyPage-plantTitle">{this.state.plant.plantName}</h2>
                   <button
                     className="StudyPage-studyButton u-pointer"
                     onClick={(e) => {
@@ -470,11 +476,17 @@ class StudyPage extends Component {
                 <div className="StudyPage-infoContainer">
                   <div className="StudyPage-timer">{this.state.timeString}</div>
                   <div className="StudyPage-timerButtonContainer u-relative">
-                    <button className="StudyPage-buttonLeft StudyPage-studyButton u-pointer" onClick={this.state.pauseText==="pause" ? this.stopStudy : this.resumeStudy}>
+                    <button
+                      className="StudyPage-buttonLeft StudyPage-studyButton u-pointer"
+                      onClick={this.state.pauseText === "pause" ? this.stopStudy : this.resumeStudy}
+                    >
                       {this.state.pauseText}
                     </button>
-                    <button className="StudyPage-buttonLeft StudyPage-studyButton u-pointer" onClick={this.endStudy}>
-                    {this.state.endText}
+                    <button
+                      className="StudyPage-buttonLeft StudyPage-studyButton u-pointer"
+                      onClick={this.endStudy}
+                    >
+                      {this.state.endText}
                     </button>
                   </div>
 

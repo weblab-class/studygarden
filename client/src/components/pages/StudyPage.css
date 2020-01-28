@@ -9,7 +9,6 @@
   justify-content: center;
   text-align: center;
   background-image: linear-gradient(#e4e4e4, #a4def9);
-  overflow: auto;
 }
 
 .StudyPage-plantContainer {
@@ -30,12 +29,12 @@
 }
 
 .StudyPage-infoContainer {
-  width: 50%;
+  width: 60%;
   margin-left: auto;
+  margin-top: auto;
   margin-bottom: auto;
-  margin-top: 28vh;
-  margin-bottom: auto;
-  /* padding-top: 80px; */
+  padding-top: 50px;
+  padding-bottom: 50px;
   display: flex;
   flex-direction: column;
   text-shadow: white 0px 1px 10px;
@@ -44,6 +43,7 @@
   -moz-animation: fadein 1s; /* Firefox */
   -webkit-animation: fadein 1s; /* Safari and Chrome */
   -o-animation: fadein 1s; /* Opera */
+  position: relative;
 }
 
 .StudyPage-plantTitle {
@@ -68,14 +68,14 @@
   border: 0px;
   border-radius: 24px;
   padding: 10px 20px;
-  margin: 15px auto;
-  width: 60%;
-  font-size: 24px;
+  margin: 2% auto;
+  width: 70%;
+  height: auto;
+  font-size: 3vh;
   justify-content: center;
   text-shadow: grey 0px 1px 2px;
   transition: text-shadow 0.2s;
   flex: 1;
-  animation: fadein 1s;
 }
 .StudyPage-buttonLeft {
   margin-right: 1%;
@@ -85,6 +85,24 @@
 .StudyPage-buttonRight {
   margin-left: 1%;
   width: 100%;
+}
+
+@media screen and (max-width: 672px) {
+  .StudyPage-studyButton {
+    font-size: 15px;
+    border-radius: 48px;
+  }
+  .StudyPage-timerButtonContainer {
+    flex-direction: column;
+  }
+  .StudyPage-plantTitle {
+    font-size: 28px;
+  }
+  .StudyPage-plantSubject {
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--text-dark);
+  }
 }
 
 .StudyPage-studyButton:hover {
@@ -112,20 +130,20 @@
   font-size: 14vw;
   font-weight: 200;
   color: var(--text-dark);
-  animation: fadein 1s;
 }
+
 .StudyPage-formContainer {
-  margin: 15px 12.5%;
-  
+  margin: auto;
+  width: 70%;
 }
+
 .LogStudyTime-form {
   display: flex;
   flex-direction: column;
   background-color: #9bbce0;
   border-radius: 20px;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16);
-  margin: auto 10%;
-  /* margin; */
+  margin: auto;
   padding: 10px 5px;
   animation: fadein 1s;
   -moz-animation: fadein 1s; /* Firefox */
@@ -134,22 +152,19 @@
 }
 
 .LogStudyTime-container {
-  padding: 5px;
   margin: auto;
   font-weight: bold;
-
-  /* color: var(-white); */
-  /* text-shadow: white 0px 0 0px; */
+  padding-bottom: 5px;
 }
 
 .LogStudyTime-text {
   color: var(--white);
-  font-size: 16px;
   text-shadow: rgba(0, 0, 0, 0.16) 0px 1px 5px;
+  margin: auto;
 }
 
 .LogStudyTime-input {
-  margin: 10px 5px;
+  margin: auto;
   border-radius: 100px;
   padding: 5px 10px;
   border: 0px;
@@ -176,7 +191,7 @@
   margin: auto;
   padding: 10px 15px;
   text-align: center;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   color: var(--text-light);
   border-radius: 100px;
@@ -194,25 +209,22 @@
 
 .ProgressBar-container {
   height: 30px;
-  position: absolute;
-  width: 30%;
   background: white;
   border-radius: 20px;
-  top: 86vh;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: auto;
-  align-self: center;
+  margin: auto;
+  margin-top: 4%;
   padding: 0px;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
-  /* width: 70%; */
+  width: 70%;
 }
 
 .ProgressBar {
   position: relative;
   height: 30px;
+  /* top: 1px; */
   background: #577494;
   border-radius: 20px;
+  margin-top: auto;
   margin-bottom: auto;
   margin-right: auto;
   box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
@@ -236,25 +248,6 @@
 .ProgressBar-goal {
   text-align: center;
   margin-top: -20px;
-  padding-bottom: 10px;
-}
-
-@media screen and (max-width: 672px) {
-  .StudyPage-studyButton {
-    font-size: 16px;
-    border-radius: 48px;
-  }
-  .StudyPage-timerButtonContainer {
-    flex-direction: column;
-  }
-  .StudyPage-plantTitle {
-    font-size: 28px;
-  }
-  .StudyPage-plantSubject {
-    font-size: 24px;
-    font-weight: 400;
-    color: var(--text-dark);
-  }
 }
 
 @keyframes fadein {
@@ -290,5 +283,162 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+/* For clouds */
+/*Lets start with the cloud formation rather*/
+
+/*The container will also serve as the SKY*/
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /*To hide the horizontal scroller appearing during the animation*/
+  overflow: hidden;
+}
+
+#clouds {
+  padding: 100px 0;
+  background: #c9dbe9;
+  background: -webkit-linear-gradient(top, #c9dbe9 0%, #fff 100%);
+  background: -linear-gradient(top, #c9dbe9 0%, #fff 100%);
+  background: -moz-linear-gradient(top, #c9dbe9 0%, #fff 100%);
+}
+
+/*Time to finalise the cloud shape*/
+.cloud {
+  width: 200px;
+  height: 60px;
+  background: #fff;
+  top: 200px;
+
+  border-radius: 200px;
+  -moz-border-radius: 200px;
+  -webkit-border-radius: 200px;
+
+  position: absolute;
+}
+
+.cloud:before,
+.cloud:after {
+  content: "";
+  position: absolute;
+  background: #fff;
+  width: 100px;
+  height: 80px;
+  position: absolute;
+  top: -15px;
+  left: 10px;
+
+  border-radius: 100px;
+  -moz-border-radius: 100px;
+  -webkit-border-radius: 100px;
+
+  -webkit-transform: rotate(30deg);
+  transform: rotate(30deg);
+  -moz-transform: rotate(30deg);
+}
+
+.cloud:after {
+  width: 120px;
+  height: 120px;
+  top: -55px;
+  left: auto;
+  right: 15px;
+}
+
+/*Time to animate*/
+.x1 {
+  -webkit-animation: moveclouds 40s linear infinite;
+  -moz-animation: moveclouds 40s linear infinite;
+  -o-animation: moveclouds 40s linear infinite;
+  animation-delay: -0.5s;
+}
+
+/*variable speed, opacity, and position of clouds for realistic effect*/
+.x2 {
+  top: 200px;
+
+  -webkit-transform: scale(0.6);
+  -moz-transform: scale(0.6);
+  transform: scale(1.2);
+  opacity: 0.6; /*opacity proportional to the size*/
+
+  /*Speed will also be proportional to the size and opacity*/
+  /*More the speed. Less the time in 's' = seconds*/
+  -webkit-animation: moveclouds 35s linear infinite;
+  -moz-animation: moveclouds 35s linear infinite;
+  -o-animation: moveclouds 35s linear infinite;
+  animation-delay: -3.5s;
+}
+
+.x3 {
+  top: 200px;
+
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  transform: scale(1.6);
+  opacity: 0.8; /*opacity proportional to the size*/
+
+  -webkit-animation: moveclouds 40s linear infinite;
+  -moz-animation: moveclouds 40s linear infinite;
+  -o-animation: moveclouds 40s linear infinite;
+  animation-delay: -20s;
+}
+
+.x4 {
+  top: 250px;
+
+  -webkit-transform: scale(0.75);
+  -moz-transform: scale(0.75);
+  transform: scale(1.5);
+  opacity: 0.75; /*opacity proportional to the size*/
+
+  -webkit-animation: moveclouds 35s linear infinite;
+  -moz-animation: moveclouds 35s linear infinite;
+  -o-animation: moveclouds 35s linear infinite;
+  animation-delay: -15s;
+}
+
+.x5 {
+  top: 150px;
+
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  transform: scale(1.6);
+  opacity: 0.8; /*opacity proportional to the size*/
+
+  -webkit-animation: moveclouds 50s linear infinite;
+  -moz-animation: moveclouds 50s linear infinite;
+  -o-animation: moveclouds 50s linear infinite;
+  animation-delay: -10s;
+}
+
+@-webkit-keyframes moveclouds {
+  0% {
+    margin-left: 1000px;
+  }
+  100% {
+    margin-left: -1000px;
+  }
+}
+@-moz-keyframes moveclouds {
+  0% {
+    margin-left: 1000px;
+  }
+  100% {
+    margin-left: -1000px;
+  }
+}
+@-o-keyframes moveclouds {
+  0% {
+    margin-left: 1000px;
+  }
+  100% {
+    margin-left: -1000px;
   }
 }
