@@ -44,8 +44,6 @@
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.4s;
-
-
 }
 
 p {
@@ -96,11 +94,8 @@ h3 {
   background-color: var(--green);
   opacity: 1;
   border-color: rgb(75, 75, 75, 1);
-  padding-top: 2px;
-  padding-bottom: 3px;
-  padding-left: 20%;
-  padding-right: 20%;
-  flex: auto;
+  padding: 2px 1vmin;
+  margin: auto;
   transition: text-shadow 0.2s;
 }
 
@@ -108,15 +103,13 @@ h3 {
   text-shadow: white 1px 0 10px;
 }
 
-.cancelButton{
+.cancelButton {
   background-color: rgb(75, 75, 75, 0);
   border: 2px solid rgb(218, 0, 0);
   font-weight: 800;
-  padding-top: 0px;
   opacity: 1;
-  padding-bottom: 1px;
-  padding-left: 15%;
-  padding-right: 15%;
+  margin: 1px;
+  padding: 1px 2px;
   color: var(--text-dark);
   transition: text-shadow 0.2s;
 }
@@ -125,9 +118,10 @@ h3 {
   text-shadow: rgb(197, 197, 197) 1px 0 10px;
 }
 
-.SinglePlant-buttonContainer{
+.SinglePlant-buttonContainer {
   display: flex;
   justify-content: center;
   flex-direction: column;
   width: 100%;
+  margin: auto;
 }

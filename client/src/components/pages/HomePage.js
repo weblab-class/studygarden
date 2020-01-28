@@ -28,7 +28,7 @@ class HomePage extends Component {
     );
 
     get("/api/plant", { creatorId: this.props.match.params.userId }).then((plantObjs) => {
-      let reversedStoryObjs = plantObjs.reverse().slice(0, 5);
+      let reversedStoryObjs = plantObjs.reverse();
       reversedStoryObjs.map((plantObj) => {
         this.setState({ plants: this.state.plants.concat([plantObj]) });
       });
@@ -44,26 +44,33 @@ class HomePage extends Component {
 
   render() {
     if (this.state.isLoggedOut) {
-      console.log("is logged out!");
+      //console.log("is logged out!");
       return <Redirect to="/" />;
     }
     let plantsList = null;
     const hasPlants = this.state.plants.length !== 0;
     if (hasPlants) {
-      plantsList = this.state.plants.map((plantObj) => (
-        <SinglePlant
-          key={`Plant_${plantObj._id}`}
-          _id={plantObj._id}
-          plantName={plantObj.plantName}
-          subject={plantObj.subject}
-          creator_id={plantObj.creator_id}
-          plantType={plantObj.plantType}
-          stage={plantObj.stage}
-          userId={this.props.match.params.userId}
-        />
-      ));
+      plantsList = this.state.plants
+        .filter((plant) => plant.stage < 4)
+        .slice(0, 5)
+        .map((plantObj) => (
+          <SinglePlant
+            key={`Plant_${plantObj._id}`}
+            _id={plantObj._id}
+            plantName={plantObj.plantName}
+            subject={plantObj.subject}
+            creator_id={plantObj.creator_id}
+            plantType={plantObj.plantType}
+            stage={plantObj.stage}
+            userId={this.props.match.params.userId}
+          />
+        ));
     } else {
-      plantsList = <div style={{display: "flex", width: "100%", justifyContent: "center"}}> <div className = "Homepage-empty">No plants found! Click "new plant" to fix that.</div></div>;
+      plantsList = (
+        <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
+          <div className="Homepage-empty">No plants found! Click "new plant" to fix that.</div>
+        </div>
+      );
     }
     return (
       <>
@@ -72,7 +79,7 @@ class HomePage extends Component {
             <>
               <div className="HomePage-text">
                 <h1 className="Homepage-name">Welcome, {this.state.user.name}!</h1>
-                <h2 className="Homepage-seeYourGarden">Here is your garden.</h2>{" "}
+                <h2 className="Homepage-seeYourGarden">See your most recent plants here.</h2>{" "}
               </div>
 
               <div className="HomePage-windowsill u-no-select">
