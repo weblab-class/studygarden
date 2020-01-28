@@ -33,7 +33,9 @@
   width: 60%;
   margin-left: auto;
   margin-bottom: auto;
-  padding-top: 80px;
+  margin-top: auto;
+  margin-bottom: auto;
+  /* padding-top: 80px; */
   display: flex;
   flex-direction: column;
   text-shadow: white 0px 1px 10px;
@@ -67,12 +69,13 @@
   border-radius: 24px;
   padding: 10px 20px;
   margin: 15px auto;
-  width: 80%;
+  width: 60%;
   font-size: 24px;
   justify-content: center;
   text-shadow: grey 0px 1px 2px;
   transition: text-shadow 0.2s;
   flex: 1;
+  animation: fadein 1s;
 }
 .StudyPage-buttonLeft {
   margin-right: 1%;
@@ -109,9 +112,11 @@
   font-size: 14vw;
   font-weight: 200;
   color: var(--text-dark);
+  animation: fadein 1s;
 }
 .StudyPage-formContainer {
-  margin: 15px 0px;
+  margin: 15px 12.5%;
+  
 }
 .LogStudyTime-form {
   display: flex;
@@ -189,15 +194,18 @@
 
 .ProgressBar-container {
   height: 30px;
+  position: absolute;
+  width: 30%;
   background: white;
   border-radius: 20px;
-  margin-top: 5%;
+  top: 86vh;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: auto;
+  align-self: center;
   padding: 0px;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
-  width: 70%;
+  /* width: 70%; */
 }
 
 .ProgressBar {
