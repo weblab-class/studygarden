@@ -68,10 +68,11 @@ class NewPlantInput extends Component {
             value={this.state.subject}
             onChange={this.handleChange}
             className="NewPlantInput-input"
+            placeholder="What subject would you like to study?"
           />
         </label>
         <label className="NewPlantInput-container">
-        <div className="NewPlantInput-title">goal (in hours)</div>
+          <div className="NewPlantInput-title">goal (in hours)</div>
           <input
             name="goalTime"
             type="number"
@@ -81,13 +82,14 @@ class NewPlantInput extends Component {
           />
         </label>
         <label className="NewPlantInput-container">
-        <div className="NewPlantInput-title">plant name</div>
+          <div className="NewPlantInput-title">plant name</div>
           <input
             name="plantName"
             type="text"
             value={this.state.plantName}
             onChange={this.handleChange}
             className="NewPlantInput-input"
+            placeholder="Give your cute new plant a name!"
           />
         </label>
 

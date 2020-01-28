@@ -8,19 +8,19 @@
   flex-flow: row;
   justify-content: space-between;
   background-color: #cfd896;
+  padding-top: 3vh;
 }
 
 .NewPlantInput-form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   background-color: #9bbce0;
   max-width: 35%;
-  max-height: 70%;
-  margin-left: 5%;
+  height: auto;
   border-radius: 20px;
-  box-shadow: 0 2px 50px 1px rgba(0,0,0,.16);
-  margin-top: auto;
-  margin-bottom: auto;
+  box-shadow: 0 2px 50px 1px rgba(0, 0, 0, 0.16);
+  margin: auto;
 }
 
 .NewPlantInput-container {
@@ -54,7 +54,7 @@
   border-radius: 40px;
   background-color: #577494;
   border: 0px;
-  box-shadow: 0px 3px 6px 0px rgba(0,0,0,.16);
+  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.16);
   text-shadow: grey 1px 0 5px;
   transition: text-shadow 0.2s;
 }
@@ -64,17 +64,17 @@
   /* box-shadow: 0px 0px 5px -1px grey; */
 }
 
-.NewPlantInput-cancel{
+.NewPlantInput-cancel {
   font-weight: 700;
   color: var(--white);
   flex: auto auto auto;
   display: flex;
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
   border: none;
   align-items: center;
   justify-content: center;
   position: relative;
-  padding-bottom: 3.5%;  
+  padding-bottom: 3.5%;
 }
 
 .NewPlant-plantSliderContainer {
@@ -92,6 +92,7 @@
   display: flex;
   flex-flow: column nowrap;
   margin: auto;
+  transition: all;
 }
 
 .NewPlant-singlePlant {
@@ -138,5 +139,79 @@
   color: var(--white);
   font-size: 24px;
   font-weight: 700;
-  text-shadow: 0 1px 3px rgba(0,0,0,.32);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.32);
+}
+
+.NewPlant-err {
+  position: absolute;
+  top: calc(250px + 50%);
+  color: rgb(156, 0, 0);
+  width: 30%;
+  font-weight: 600;
+  align-self: center;
+  text-align: center;
+  animation: 6s fadeInOut 0s 1 normal both;
+  -moz-animation: 6s fadeInOut 0s 1 normal both;
+  -webkit-animation: 6s fadeInOut 0s 1 normal both;
+  -o-animation: 6s fadeInOut 0s 1 normal both;
+}
+.NewPlant-submitted {
+  color: var(--text-dark);
+}
+
+@keyframes fadeInOut {
+  from {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@-moz-keyframes fadeInOut {
+  from {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes fadeInOut {
+  from {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@-o-keyframes fadeInOut {
+  from {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
