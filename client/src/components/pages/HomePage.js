@@ -79,7 +79,7 @@ class HomePage extends Component {
             <>
               <div className="HomePage-text">
                 <h1 className="Homepage-name">Welcome, {this.state.user.name}!</h1>
-                <h2 className="Homepage-seeYourGarden">Here is your garden.</h2>{" "}
+                <h2 className="Homepage-seeYourGarden">See your most recent plants here.</h2>{" "}
               </div>
 
               <div className="HomePage-windowsill u-no-select">
