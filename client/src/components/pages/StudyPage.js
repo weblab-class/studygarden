@@ -80,45 +80,46 @@ class StudyPage extends Component {
     //done
   };
   stopStudy() {
-    if (this.state.endText === "keep studying"){
-    }else{
+    if (this.state.endText === "keep studying") {
+    } else {
       this.nMiniDaemon.pause();
-      this.setState({pauseText: "resume"});
+      this.setState({ pauseText: "resume" });
     }
   }
   resumeStudy() {
-    if (this.state.endText === "keep studying"){
+    if (this.state.endText === "keep studying") {
     }
-    if(this.state.pauseText === "return home"){
-      this.setState({goHome: true})
-    }else{
+    if (this.state.pauseText === "return home") {
+      this.setState({ goHome: true });
+    } else {
       this.nMiniDaemon.start();
-      this.setState({pauseText: "pause"});
+      this.setState({ pauseText: "pause" });
     }
   }
   endStudy() {
-    console.log("wat")
-    if (this.state.endText === "end session"){
-      this.setState({endText: "are you sure?"})
-      setTimeout(
-        ()=>{
-          if (this.state.endText !== "keep studying"){
-            this.setState({endText: "end session"})
-          }
-        },3000)
-    }else if (this.state.endText === "are you sure?"){
+    console.log("wat");
+    if (this.state.endText === "end session") {
+      this.setState({ endText: "are you sure?" });
+      setTimeout(() => {
+        if (this.state.endText !== "keep studying") {
+          this.setState({ endText: "end session" });
+        }
+      }, 3000);
+    } else if (this.state.endText === "are you sure?") {
       this.nMiniDaemon.pause();
-      const newCumul = this.state.plant.studyTimeCumul + Number(this.state.elapsedTime-this.state.elapsedTimeHold);
+      const newCumul =
+        this.state.plant.studyTimeCumul +
+        Number(this.state.elapsedTime - this.state.elapsedTimeHold);
       const newStage = Math.min(4, Math.floor((newCumul / this.state.plant.goalTime) * 5));
-      this.setState({endText: "keep studying"}) //in lieu of fanfare currently
+      this.setState({ endText: "keep studying" }); //in lieu of fanfare currently
       post(`/api/plant/update`, {
         plantId: this.props.match.params.plantId,
         fields: {
           studyTimeCumul: newCumul,
           stage: newStage,
         },
-      })
-    }else if (this.state.endText === "keep studying"){
+      });
+    } else if (this.state.endText === "keep studying") {
       this.setState({
         isStudying: false,
       });
@@ -126,7 +127,7 @@ class StudyPage extends Component {
   }
 
   logTime = (studySession) => {
-    const newCumul = this.state.plant.studyTimeCumul + Number(studySession.elapsedTime*(60**2)); //child gives us elapsed time in hours
+    const newCumul = this.state.plant.studyTimeCumul + Number(studySession.elapsedTime * 60 ** 2); //child gives us elapsed time in hours
     const newStage = Math.min(4, Math.floor((newCumul / this.state.plant.goalTime) * 4));
     //  console.log("studyTimeCumul:", this.state.plant.studyTimeCumul, studySession.elapsedTime);
     //  console.log("newCumul:", newCumul);
@@ -184,9 +185,9 @@ class StudyPage extends Component {
       if (!user._id) {
         this.setState({ isLoggedOut: true }); //change back to true
       }
-      
+
       //uncomment below for debugging/testing
-      
+
       // if (!user._id) {
       //   this.setState({ isLoggedOut: false }); //change back to true
       // }else{
@@ -201,14 +202,17 @@ class StudyPage extends Component {
         timeString: this.convertToMinSec(this.state.sessionLength - this.state.elapsedTime),
       });
     }
-    if (this.state.elapsedTime === this.state.sessionLength && this.state.endText !== "keep studying"){
-      this.setState({endText: "keep studying"}) //more dull fanfare
+    if (
+      this.state.elapsedTime === this.state.sessionLength &&
+      this.state.endText !== "keep studying"
+    ) {
+      this.setState({ endText: "keep studying" }); //more dull fanfare
     }
-    if (this.state.endText === "keep studying" && this.state.pauseText !== "return home"){
-      this.setState({pauseText: "return home"})
+    if (this.state.endText === "keep studying" && this.state.pauseText !== "return home") {
+      this.setState({ pauseText: "return home" });
     }
-    let updateDelay = 5
-    if (this.state.elapsedTime > this.state.elapsedTimeHold + updateDelay-1) {
+    let updateDelay = 5;
+    if (this.state.elapsedTime > this.state.elapsedTimeHold + updateDelay - 1) {
       //lets not kill the server too hard
       //update stage and cumulative study time every so often while studying
       this.setState({
@@ -248,9 +252,9 @@ class StudyPage extends Component {
       }
     };
     let minutes = sec / 60;
-    if (sec%2 === 1){
+    if (sec % 2 === 1) {
       out = String(Math.floor(minutes)) + ":" + String(seconds());
-    }else{
+    } else {
       out = String(Math.floor(minutes)) + " " + String(seconds());
     }
     return out;
@@ -270,6 +274,11 @@ class StudyPage extends Component {
       return (
         <>
           <div className="StudyPage-container">
+            <div class="cloud x1"></div>
+            <div class="cloud x2"></div>
+            <div class="cloud x3"></div>
+            <div class="cloud x4"></div>
+            <div class="cloud x5"></div>
             {this.state.user && this.state.plant ? (
               <>
                 <div className="StudyPage-plantContainer">
@@ -279,8 +288,8 @@ class StudyPage extends Component {
                   />
                 </div>
                 <div className="StudyPage-infoContainer">
-                  <h3 className = "StudyPage-plantSubject">{this.state.plant.subject}</h3>
-                  <h2 className = "StudyPage-plantTitle">{this.state.plant.plantName}</h2>
+                  <h3 className="StudyPage-plantSubject">{this.state.plant.subject}</h3>
+                  <h2 className="StudyPage-plantTitle">{this.state.plant.plantName}</h2>
                   <button
                     className="StudyPage-studyButton u-pointer"
                     onClick={(e) => {
@@ -341,11 +350,17 @@ class StudyPage extends Component {
                 <div className="StudyPage-infoContainer">
                   <div className="StudyPage-timer">{this.state.timeString}</div>
                   <div className="StudyPage-timerButtonContainer u-relative">
-                    <button className="StudyPage-buttonLeft StudyPage-studyButton u-pointer" onClick={this.state.pauseText==="pause" ? this.stopStudy : this.resumeStudy}>
+                    <button
+                      className="StudyPage-buttonLeft StudyPage-studyButton u-pointer"
+                      onClick={this.state.pauseText === "pause" ? this.stopStudy : this.resumeStudy}
+                    >
                       {this.state.pauseText}
                     </button>
-                    <button className="StudyPage-buttonLeft StudyPage-studyButton u-pointer" onClick={this.endStudy}>
-                    {this.state.endText}
+                    <button
+                      className="StudyPage-buttonLeft StudyPage-studyButton u-pointer"
+                      onClick={this.endStudy}
+                    >
+                      {this.state.endText}
                     </button>
                   </div>
 

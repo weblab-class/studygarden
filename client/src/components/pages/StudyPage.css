@@ -43,6 +43,7 @@
   -moz-animation: fadein 1s; /* Firefox */
   -webkit-animation: fadein 1s; /* Safari and Chrome */
   -o-animation: fadein 1s; /* Opera */
+  position: relative;
 }
 
 .StudyPage-plantTitle {
@@ -63,7 +64,7 @@
   background-color: #8f9365;
   color: var(--text-light);
   font-weight: bold;
-  box-shadow: 0px 3px 6px 0px rgba(0,0,0,.16);
+  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.16);
   border: 0px;
   border-radius: 24px;
   padding: 10px 20px;
@@ -77,23 +78,22 @@
   transition: text-shadow 0.2s;
   flex: 1;
 }
-.StudyPage-buttonLeft{
+.StudyPage-buttonLeft {
   margin-right: 1%;
   width: 100%;
 }
 
-.StudyPage-buttonRight{
+.StudyPage-buttonRight {
   margin-left: 1%;
   width: 100%;
 }
 
-
-@media screen and (max-width: 672px){
+@media screen and (max-width: 672px) {
   .StudyPage-studyButton {
     font-size: 15px;
     border-radius: 48px;
   }
-  .StudyPage-timerButtonContainer{
+  .StudyPage-timerButtonContainer {
     flex-direction: column;
   }
   .StudyPage-plantTitle {
@@ -111,16 +111,16 @@
   /* box-shadow: 0px 1px 8px -1px white; */
 }
 
-.StudyPage-buttonContainer{
+.StudyPage-buttonContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row
+  flex-direction: row;
 }
 
-.StudyPage-timerButtonContainer{
+.StudyPage-timerButtonContainer {
   display: flex;
-  flex: 1 0 ;
+  flex: 1 0;
   justify-content: center;
   align-items: center;
   width: 75%;
@@ -130,17 +130,17 @@
 .StudyPage-timer {
   font-size: 14vw;
   font-weight: 200;
-  color: var(--text-dark)
+  color: var(--text-dark);
 }
-.StudyPage-formContainer{
-  margin: 15px 0px
+.StudyPage-formContainer {
+  margin: 15px 0px;
 }
 .LogStudyTime-form {
   display: flex;
   flex-direction: column;
   background-color: #9bbce0;
   border-radius: 20px;
-  box-shadow: 0 2px 10px 0 rgba(0,0,0,.16);
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16);
   margin: auto 20%;
   /* margin; */
   padding: 10px 5px;
@@ -158,9 +158,9 @@
   /* text-shadow: white 0px 0 0px; */
 }
 
-.LogStudyTime-text{
+.LogStudyTime-text {
   color: var(--white);
-  text-shadow:rgba(0,0,0,.16) 0px 1px 5px;
+  text-shadow: rgba(0, 0, 0, 0.16) 0px 1px 5px;
 }
 
 .LogStudyTime-input {
@@ -169,8 +169,8 @@
   padding: 5px 10px;
   border: 0px;
   width: 60px;
-  box-shadow: 0 1px 5px 0 rgba(0,0,0,.05);
-  -webkit-appearance: none; 
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.05);
+  -webkit-appearance: none;
   appearance: none;
 }
 
@@ -182,7 +182,7 @@
   border-radius: 20px;
   background-color: #8d945f;
   border: 0px;
-  box-shadow: 0 1px 5px 0 rgba(0,0,0,.07);
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.07);
   text-shadow: grey 0px 1px 2px;
   transition: text-shadow 0.2s;
 }
@@ -197,7 +197,7 @@
   border-radius: 100px;
   background-color: #577494;
   border: 0px;
-  box-shadow: 0px 1px 6px 0px rgba(0,0,0,.16);
+  box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.16);
   text-shadow: grey 0px 1px 2px;
   transition: text-shadow 0.2s;
 }
@@ -214,7 +214,7 @@
   margin: auto;
   margin-top: 15%;
   padding: 0px;
-  box-shadow: 0 1px 6px rgba(0,0,0, 0.3);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
   width: 80%;
 }
 
@@ -230,7 +230,7 @@
   box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
 }
 
-.ProgressBar-top{
+.ProgressBar-top {
   position: relative;
   height: 30px;
   top: -30px;
@@ -250,36 +250,195 @@
   margin-top: -20px;
 }
 
-
 @keyframes fadein {
   from {
-      opacity:0;
+    opacity: 0;
   }
   to {
-      opacity:1;
+    opacity: 1;
   }
 }
-@-moz-keyframes fadein { /* Firefox */
+@-moz-keyframes fadein {
+  /* Firefox */
   from {
-      opacity:0;
+    opacity: 0;
   }
   to {
-      opacity:1;
+    opacity: 1;
   }
 }
-@-webkit-keyframes fadein { /* Safari and Chrome */
+@-webkit-keyframes fadein {
+  /* Safari and Chrome */
   from {
-      opacity:0;
+    opacity: 0;
   }
   to {
-      opacity:1;
+    opacity: 1;
   }
 }
-@-o-keyframes fadein { /* Opera */
+@-o-keyframes fadein {
+  /* Opera */
   from {
-      opacity:0;
+    opacity: 0;
   }
   to {
-      opacity: 1;
+    opacity: 1;
+  }
+}
+
+/* For clouds */
+/*Lets start with the cloud formation rather*/
+
+/*The container will also serve as the SKY*/
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /*To hide the horizontal scroller appearing during the animation*/
+  overflow: hidden;
+}
+
+#clouds {
+  padding: 100px 0;
+  background: #c9dbe9;
+  background: -webkit-linear-gradient(top, #c9dbe9 0%, #fff 100%);
+  background: -linear-gradient(top, #c9dbe9 0%, #fff 100%);
+  background: -moz-linear-gradient(top, #c9dbe9 0%, #fff 100%);
+}
+
+/*Time to finalise the cloud shape*/
+.cloud {
+  width: 200px;
+  height: 60px;
+  background: #fff;
+  top: 200px;
+
+  border-radius: 200px;
+  -moz-border-radius: 200px;
+  -webkit-border-radius: 200px;
+
+  position: absolute;
+}
+
+.cloud:before,
+.cloud:after {
+  content: "";
+  position: absolute;
+  background: #fff;
+  width: 100px;
+  height: 80px;
+  position: absolute;
+  top: -15px;
+  left: 10px;
+
+  border-radius: 100px;
+  -moz-border-radius: 100px;
+  -webkit-border-radius: 100px;
+
+  -webkit-transform: rotate(30deg);
+  transform: rotate(30deg);
+  -moz-transform: rotate(30deg);
+}
+
+.cloud:after {
+  width: 120px;
+  height: 120px;
+  top: -55px;
+  left: auto;
+  right: 15px;
+}
+
+/*Time to animate*/
+.x1 {
+  -webkit-animation: moveclouds 40s linear infinite;
+  -moz-animation: moveclouds 40s linear infinite;
+  -o-animation: moveclouds 40s linear infinite;
+  animation-delay: -0.5s;
+}
+
+/*variable speed, opacity, and position of clouds for realistic effect*/
+.x2 {
+  top: 200px;
+
+  -webkit-transform: scale(0.6);
+  -moz-transform: scale(0.6);
+  transform: scale(1.2);
+  opacity: 0.6; /*opacity proportional to the size*/
+
+  /*Speed will also be proportional to the size and opacity*/
+  /*More the speed. Less the time in 's' = seconds*/
+  -webkit-animation: moveclouds 35s linear infinite;
+  -moz-animation: moveclouds 35s linear infinite;
+  -o-animation: moveclouds 35s linear infinite;
+  animation-delay: -3.5s;
+}
+
+.x3 {
+  top: 200px;
+
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  transform: scale(1.6);
+  opacity: 0.8; /*opacity proportional to the size*/
+
+  -webkit-animation: moveclouds 40s linear infinite;
+  -moz-animation: moveclouds 40s linear infinite;
+  -o-animation: moveclouds 40s linear infinite;
+  animation-delay: -20s;
+}
+
+.x4 {
+  top: 250px;
+
+  -webkit-transform: scale(0.75);
+  -moz-transform: scale(0.75);
+  transform: scale(1.5);
+  opacity: 0.75; /*opacity proportional to the size*/
+
+  -webkit-animation: moveclouds 35s linear infinite;
+  -moz-animation: moveclouds 35s linear infinite;
+  -o-animation: moveclouds 35s linear infinite;
+  animation-delay: -15s;
+}
+
+.x5 {
+  top: 150px;
+
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  transform: scale(1.6);
+  opacity: 0.8; /*opacity proportional to the size*/
+
+  -webkit-animation: moveclouds 50s linear infinite;
+  -moz-animation: moveclouds 50s linear infinite;
+  -o-animation: moveclouds 50s linear infinite;
+  animation-delay: -10s;
+}
+
+@-webkit-keyframes moveclouds {
+  0% {
+    margin-left: 1000px;
+  }
+  100% {
+    margin-left: -1000px;
+  }
+}
+@-moz-keyframes moveclouds {
+  0% {
+    margin-left: 1000px;
+  }
+  100% {
+    margin-left: -1000px;
+  }
+}
+@-o-keyframes moveclouds {
+  0% {
+    margin-left: 1000px;
+  }
+  100% {
+    margin-left: -1000px;
   }
 }
