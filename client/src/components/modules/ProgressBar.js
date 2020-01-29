@@ -11,6 +11,11 @@ class ProgressBar extends Component {
     return out
   }
 
+  minutes(time){
+    const out = time === 1 ? "minute" : "minutes"
+    return out
+  }
+
   render() {
     const width =
       this.props.studyTimeCumul >= this.props.goalTime
@@ -21,9 +26,17 @@ class ProgressBar extends Component {
     };
     let number;
     if (Math.floor(10*(this.props.studyTimeCumul/(60**2)))/10 < this.props.goalTime/(60**2)){
-      number = String(Math.floor(10*(this.props.studyTimeCumul/(60**2)))/10) +" out of "+ String(this.props.goalTime/(60**2)) +" "+ String(this.hr(this.props.goalTime/(60**2)))
+      number = "time studied: " + String(Math.floor((this.props.studyTimeCumul/(60**2)))) + " " + //num hours
+      this.hr(Math.floor((this.props.studyTimeCumul/(60**2)))) + //"hours" or "hour"
+      " and " + 
+      String(Math.floor(this.props.studyTimeCumul/60-60*Math.floor((this.props.studyTimeCumul/(60**2))))) + //num minutes
+      " "+
+      this.minutes(Math.floor(this.props.studyTimeCumul/60-60*Math.floor((this.props.studyTimeCumul/(60**2))))) + // "minutes" or "minute"
+      " | goal: "+ 
+      String(this.props.goalTime/(60**2)) +" "+ //goal num hours
+      String(this.hr(this.props.goalTime/(60**2))) //"hours" or "hour"
     } else {
-      number = String(this.props.goalTime/(60**2)) +" "+ String(this.hr(this.props.goalTime/(60**2))) + " study complete";
+      number = String(this.props.goalTime/(60**2)) +" hour goal reached";
     }
     //  console.log(width);
     //console.log(style);
