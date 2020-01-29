@@ -42,10 +42,10 @@ class ArchivePage extends Component {
   }
 
   render() {
-    /*if (this.state.isLoggedOut) {
-      console.log("is logged out!");
+    if (this.state.isLoggedOut) {
+      //console.log("is logged out!");
       return <Redirect to="/" />;
-    }*/
+    }
     let plantsList = null;
     let plantChunks = [];
     let shelves = null;
@@ -65,17 +65,23 @@ class ArchivePage extends Component {
       ));
       //this is for testing purposes
       //console.log(plantsList);
+      while (plantsList.length) {
+        plantChunks.push(plantsList.splice(0, 5));
+      }
+
+      shelves = plantChunks.map((chunk, i) => (
+        <Shelf img={genericBench} bench={"genericBench"} plantsList={chunk} key={i} />
+      ));
     } else {
-      plantsList = null;
+      return (
+        <div className="ArchivePage-container">
+          <div className="ArchivePage-text">
+            You have no plants right now! Click 'new plant' in the navigation bar to create a new
+            one, then come back here to see all your plants.
+          </div>
+        </div>
+      );
     }
-
-    while (plantsList.length) {
-      plantChunks.push(plantsList.splice(0, 5));
-    }
-
-    shelves = plantChunks.map((chunk, i) => (
-      <Shelf img={genericBench} bench={"genericBench"} plantsList={chunk} key={i} />
-    ));
 
     return (
       <>
