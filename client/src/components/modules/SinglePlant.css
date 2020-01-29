@@ -16,8 +16,24 @@
 
 .SinglePlant-plant:hover {
   cursor: pointer;
-  -webkit-filter: drop-shadow(3px 3px 8px white) drop-shadow(-3px -3px 8px white);
-  filter: drop-shadow(3px 3px 12px white) drop-shadow(-3px -3px 12px white);
+  -webkit-filter: drop-shadow(3px 3px 8px var(--white)) drop-shadow(-3px -3px 8px var(--white));
+  filter: drop-shadow(3px 3px 12px var(--white)) drop-shadow(-3px -3px 12px var(--white));
+}
+
+.SinglePlant-plantGreen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin-top: auto;
+  z-index: 4;
+  transition: filter 0.1s, webkit-filter 0.1s;
+}
+
+.SinglePlant-plantGreen:hover {
+  cursor: pointer;
+  -webkit-filter: drop-shadow(3px 3px 8px var(--lightgreen))
+    drop-shadow(-3px -3px 8px var(--lightgreen));
+  filter: drop-shadow(3px 3px 12px var(--lightgreen)) drop-shadow(-3px -3px 12px var(--lightgreen));
 }
 /*tooltip css copied below*/
 .tooltip {
@@ -35,15 +51,24 @@
   color: #000000;
   background-color: #eeeeee;
   font-weight: normal;
-  font-size: 2vmin;
+  font-size: 1.8vmin;
   border-radius: 10px;
   position: absolute;
-  z-index: 999999;
+  z-index: 99;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
   text-align: center;
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.4s;
+}
+
+.bottom-grown {
+  color: var(--green);
+  font-weight: 800;
+  padding-top: 0.5vmin;
+  font-size: calc(8px + 0.9vmin);
+  text-shadow: rgb(197, 197, 197) 1px 0 10px;
+  opacity: 1;
 }
 
 p {
@@ -90,11 +115,8 @@ h3 {
 .studyButton {
   border-radius: 10px;
   border: 0px solid;
-  color: var(--text-light);
-  background-color: var(--green);
   opacity: 1;
   border-color: rgb(75, 75, 75, 1);
-  padding: 2px 1vmin;
   margin: auto;
   transition: text-shadow 0.2s;
 }
@@ -105,12 +127,13 @@ h3 {
 
 .cancelButton {
   background-color: rgb(75, 75, 75, 0);
+  border-radius: 20px;
   border: 2px solid rgb(218, 0, 0);
   font-weight: 800;
   opacity: 1;
   margin-top: 5px;
   font-size: 2vmin;
-  padding: 1px 2px;
+  padding: 1px 10%;
   color: var(--text-dark);
   transition: text-shadow 0.2s;
 }

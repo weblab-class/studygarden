@@ -41,22 +41,21 @@ class SinglePlant extends Component {
 
   render() {
     //console.log(PLANT_STAGES);
+    const plantComplete = this.props.stage == 4;
     return (
       <div className="SinglePlant-plantContainer">
         <div className="btn btn-primary tooltip">
           <Link to={`/home/${this.props.userId}/study/${this.props._id}`}>
             <img
-              className="SinglePlant-plant u-no-select"
+              className={plantComplete ? `SinglePlant-plantGreen` : `SinglePlant-plant u-no-select`}
               src={PLANT_STAGES[this.props.stage][this.props.plantType]}
             />
           </Link>
           <div className="bottom">
             <h3>{this.props.subject}</h3>
             <p>{this.props.plantName}</p>
+            {plantComplete && <p className="bottom-grown">fully grown!</p>}
             <div className="SinglePlant-buttonContainer">
-              {/*<Link to={`/home/${this.props.userId}/study/${this.props._id}`}>
-                <button className="studyButton u-pointer"> study </button>
-              </Link>*/}
               <div>
                 <button className="cancelButton studyButton u-pointer" onClick={this.deletePlant}>
                   {this.state.deleteText}

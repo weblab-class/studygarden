@@ -50,16 +50,23 @@
   font-size: 32px;
   font-weight: 400;
   margin: auto;
-  padding: 2%;
+  padding: 0;
+  padding-bottom: 1%;
   color: var(--text-dark);
 }
 
 .StudyPage-plantSubject {
-  margin: auto;
-  padding: 2%;
+  margin-top: 0;
+  margin-bottom: auto;
+  padding: 1vh;
   font-size: 36px;
   font-weight: 700;
   color: var(--text-dark);
+}
+
+.StudyPage-plantDone {
+  margin: auto;
+  padding: 5%;
 }
 
 .StudyPage-studyButton {
@@ -70,10 +77,10 @@
   border: 0px;
   border-radius: 24px;
   padding: 10px 20px;
-  margin: 2% auto;
+  margin: 1vh auto;
   width: 70%;
   height: auto;
-  font-size: 3vh;
+  font-size: 24px;
   justify-content: center;
   text-shadow: grey 0px 1px 2px;
   transition: text-shadow 0.2s;
@@ -98,11 +105,11 @@
     flex-direction: column;
   }
   .StudyPage-plantTitle {
-    font-size: 28px;
+    font-size: 24px;
   }
   .StudyPage-plantSubject {
     font-size: 24px;
-    font-weight: 400;
+    font-weight: 700;
     color: var(--text-dark);
   }
 }
@@ -135,11 +142,12 @@
 }
 
 .StudyPage-formContainer {
-  margin: auto;
+  margin: 2% auto;
   width: 70%;
 }
 
 .LogStudyTime-form {
+  position: relative;
   display: flex;
   flex-direction: column;
   background-color: #9bbce0;
@@ -162,11 +170,12 @@
 .LogStudyTime-text {
   color: var(--white);
   text-shadow: rgba(0, 0, 0, 0.16) 0px 1px 5px;
+  line-height: 1.2;
   margin: auto;
 }
 
 .LogStudyTime-input {
-  margin: auto;
+  margin: 2% auto;
   border-radius: 100px;
   padding: 5px 10px;
   border: 0px;
@@ -178,11 +187,13 @@
 
 .LogStudyTime-closeButton {
   margin-left: auto;
+  margin-right: 2px;
+  padding: 0.25em 0.6em;
   font-size: 15px;
   font-weight: bold;
   color: var(--text-light);
   border-radius: 20px;
-  background-color: #8d945f;
+  background-color: #577494;
   border: 0px;
   box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.07);
   text-shadow: grey 0px 1px 2px;
@@ -191,6 +202,7 @@
 
 .LogStudyTime-submitButton {
   margin: auto;
+  margin-bottom: 1vh;
   padding: 10px 15px;
   text-align: center;
   font-size: 20px;
@@ -252,6 +264,20 @@
   margin-top: -20px;
 }
 
+.LogStudyTime-err {
+  position: absolute;
+  bottom: -15%;
+  color: rgb(206, 19, 19);
+  text-shadow: none;
+  width: 100%;
+  place-self: center;
+  font-weight: 600;
+  animation: 6s fadeInOut 0s 1 normal both;
+  -moz-animation: 6s fadeInOut 0s 1 normal both;
+  -webkit-animation: 6s fadeInOut 0s 1 normal both;
+  -o-animation: 6s fadeInOut 0s 1 normal both;
+}
+
 @keyframes fadein {
   from {
     opacity: 0;
@@ -285,6 +311,63 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes fadeInOut {
+  from {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@-moz-keyframes fadeInOut {
+  from {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes fadeInOut {
+  from {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@-o-keyframes fadeInOut {
+  from {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 

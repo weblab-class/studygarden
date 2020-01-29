@@ -72,7 +72,7 @@ class StudyPage extends Component {
     this.nMiniDaemon = new MiniDaemon(
       this,
       (index, length, backwards) => {
-        console.log("uno");
+        // console.log("uno");
         this.setState({ elapsedTime: index });
       },
       1000,
@@ -188,7 +188,7 @@ class StudyPage extends Component {
     } else if (sec % 60 === 0) {
       return sec / 60 + minuteTxt;
     } else {
-      return Math.floor(sec / 60) + minuteTxt + " " + (sec % 60) + secTxt;
+      return Math.floor(sec / 60) + minuteTxt + " and " + (sec % 60) + secTxt;
     }
   }
 
@@ -252,12 +252,12 @@ class StudyPage extends Component {
       //console.log(session);
       this.setState({ session: session });
       if (session !== undefined) {
-        console.log("11111");
+        // console.log("11111");
         if (session.studySessionLength !== undefined && session.elapsedTime !== undefined) {
-          console.log("2222");
+          // console.log("2222");
           const remTime = session.studySessionLength - session.elapsedTime;
           if (remTime > 60) {
-            console.log("3333");
+            // console.log("3333");
             console.log("session found");
             this.setState({
               showModalResume: true,
@@ -386,6 +386,47 @@ class StudyPage extends Component {
     if (this.state.goHome === true) {
       //console.log("going home!");
       return <Redirect to={`/home/${this.props.match.params.userId}`} />;
+    }
+    if (this.state.plant && this.state.plant.stage == 4) {
+      return (
+        <div className="StudyPage-container">
+          <div className="cloud x1" />
+          <div className="cloud x2" />
+          <div className="cloud x3" />
+          <div className="cloud x4" />
+          <div className="cloud x5" />
+          {this.state.user && this.state.plant ? (
+            <>
+              <div className="StudyPage-plantContainer">
+                <img
+                  src={PLANT_STAGES[this.state.plant.stage][this.state.plant.plantType]}
+                  className=".StudyPage-plant"
+                />
+              </div>
+              <div className="StudyPage-infoContainer">
+                <h3 className="StudyPage-plantSubject">{this.state.plant.subject}</h3>
+                <h2 className="StudyPage-plantTitle">{this.state.plant.plantName}</h2>
+                <div className="StudyPage-plantDone">
+                  <h4>Woohoo! You've finished growing your plant!</h4>
+                  <p> You won't be able to study this plant anymore.</p>
+                  <p>
+                    Don't worry, you can still see {this.state.plant.plantName} in your plant
+                    archive!
+                  </p>
+                </div>
+
+                <ProgressBar
+                  className="StudyPage-progressBar"
+                  studyTimeCumul={this.state.plant.studyTimeCumul}
+                  goalTime={this.state.plant.goalTime}
+                />
+              </div>
+            </>
+          ) : (
+            <div className="u-loadingDark"> Loading... </div>
+          )}
+        </div>
+      );
     }
     if (this.state.isStudying !== true && this.state.plant) {
       return (
