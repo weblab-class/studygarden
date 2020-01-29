@@ -11,7 +11,6 @@ import LoginComponent from "./LoginComponent.js";
 import AppComponent from "./AppComponent.js";
 
 import "../utilities.css";
-import "./App.css";
 //import { socket } from "../client-socket.js";
 
 import { get, post } from "../utilities";

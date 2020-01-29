@@ -48,7 +48,7 @@ router.get("/whoami", (req, res) => {
 
 router.post("/session/delete", async (req, res) => {
   const plant = req.body.plantId;
-  await StudySession.deleteMany({ plantId: plant })
+  await StudySession.deleteMany({ plantId: plant });
   res.send("deleted sessions!");
 });
 
@@ -68,7 +68,7 @@ router.post("/session/update", async (req, res) => {
         return res.status(500).send(err);
       } else if (doc) {
         //await doc.delete();
-        await StudySession.deleteMany({ plantId: plant }, () => console.log("deleted many"))
+        await StudySession.deleteMany({ plantId: plant });
       }
       session = new StudySession({
         creator_id: req.body.creatorId,
@@ -76,7 +76,7 @@ router.post("/session/update", async (req, res) => {
         studySessionLength: req.body.studySessionLength,
         initCumulativeTime: plantData.studyTimeCumul,
       });
-      console.log("session", session);
+      //console.log("session", session);
       plantData.isStudying = true;
       plantData.save();
       return session.save();
@@ -121,7 +121,7 @@ router.post("/plant/new", async (req, res) => {
   if (id === "" || id === undefined) {
     response.push("creator id was not passed in...FIX THIS bc idk whose plant this is");
   }
-  console.log(req.body);
+  //console.log(req.body);
   const newPlant = new Plant({
     plantName: plantName,
     plantType: plantType,
@@ -138,12 +138,12 @@ router.post("/plant/new", async (req, res) => {
   return res.send(response);
 });
 
-router.post("/plant/delete", async (req, res)=>{
-  console.log(req.body);
-  console.log(req.body.plantId);
-  Plant.deleteOne({_id: req.body.plantId}).then((z)=>res.send({y: req.body.plantId}));
+router.post("/plant/delete", async (req, res) => {
+  //console.log(req.body);
+  //console.log(req.body.plantId);
+  Plant.deleteOne({ _id: req.body.plantId }).then((z) => res.send({ y: req.body.plantId }));
   //return res.send("deleted a plant :'(");
-})
+});
 
 router.post("/plant/update", async (req, res) => {
   //WIP, will handle any update requests for plants
@@ -162,14 +162,12 @@ router.post("/plant/update", async (req, res) => {
           */
   //console.log(req.body);
   const entry = await Plant.findById(req.body.plantId);
-  console.log("entry", entry);
   let response = [];
   for (obj in req.body.fields) {
     if (req.body.fields[obj] !== null || req.body.fields[obj] !== "") {
       entry[obj] = req.body.fields[obj]; //could replace this with .update() and it would be nice and clean...
       await entry.save();
       const edited = String(obj);
-      console.log(String(obj));
       response.push({ edited } + " on server updated to " + entry[obj]);
     } else {
       response.push({ edited }.concat(" was empty, not updating"));
@@ -191,9 +189,11 @@ router.get("/plant/single", (req, res) => {
 router.get("/plant", (req, res) => {
   //WIP, will get all plants from user
   try {
-    Plant.find({ creator_id: req.query.creatorId }).sort("timeCreated").then((plants) => {
-      res.send(plants);
-    });
+    Plant.find({ creator_id: req.query.creatorId })
+      .sort("timeCreated")
+      .then((plants) => {
+        res.send(plants);
+      });
   } catch (err) {
     res.send(err);
   }
@@ -209,7 +209,7 @@ router.get("/user", (req, res) => {
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
-  console.log(`API route not found: ${req.method} ${req.url}`);
+  //console.log(`API route not found: ${req.method} ${req.url}`);
   res.status(404).send({ msg: "API route not found" });
 });
 
