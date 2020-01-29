@@ -19,6 +19,7 @@ class LogStudyTime extends Component {
     // Initialize Default State
     this.state = {
       elapsedTime: 1,
+      errStateBadNumber: false,
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -60,7 +61,7 @@ class LogStudyTime extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const studySession = {
-      elapsedTime: this.state.elapsedTime,
+      elapsedTime: this.state.elapsedTime/60,
       creatorId: this.props.userId,
       plantId: this.props.plantId,
       plant: this.props.plant,
@@ -85,7 +86,7 @@ class LogStudyTime extends Component {
             close
           </button>
           <label className="LogStudyTime-container">
-          <div className="LogStudyTime-text">How long did you study (in hours)?</div>
+          <div className="LogStudyTime-text">How many minutes did you study?</div>
             <div>
             <input
               name="elapsedTime"
@@ -106,6 +107,7 @@ class LogStudyTime extends Component {
             submit!
           </button>
         </form>
+        
       </div>
     );
   }
