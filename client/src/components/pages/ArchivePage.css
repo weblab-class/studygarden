@@ -10,6 +10,7 @@
   text-align: center;
   background-color: #9bbce0;
   scrollbar-color: green;
+  overflow: visible;
 }
 
 .ArchivePage-text {
@@ -18,7 +19,7 @@
   margin: auto;
   margin-top: 80px;
   padding: 2% 5%;
-  z-index: 9999999;
+  z-index: 1;
 }
 
 .ArchivePage-shelfContainer {
@@ -26,6 +27,7 @@
   height: 80%;
   margin: auto;
   overflow: auto;
+  padding-top: 5%;
 }
 
 .ArchivePage-shelfContainer::-webkit-scrollbar-track {
