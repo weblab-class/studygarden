@@ -15,8 +15,8 @@
 .HomePage-text {
   color: white;
   text-shadow: #577494 0px 1px 10px;
-  margin-top: 8vh;
-  margin-bottom: 2vh;
+  margin-top: 18vh;
+  margin-bottom: 4vh;
   z-index: 9999999;
 }
 
@@ -31,11 +31,16 @@
 
 .Homepage-seeYourGarden {
   font-size: 32px;
-  margin-bottom: 3%;
+  margin-bottom: 3vh;
   animation: fadein 1s;
   -moz-animation: fadein 1s; /* Firefox */
   -webkit-animation: fadein 1s; /* Safari and Chrome */
   -o-animation: fadein 1s; /* Opera */
+}
+
+.Homepage-seeYourGarden p {
+  font-size: 25px;
+  margin-top: 2vh;
 }
 
 @media screen and (min-aspect-ratio: 13/6) {

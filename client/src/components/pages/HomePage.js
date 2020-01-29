@@ -80,7 +80,8 @@ class HomePage extends Component {
               <div className="HomePage-text">
                 <h1 className="Homepage-name">Welcome, {this.state.user.name}!</h1>
                 <h2 className="Homepage-seeYourGarden">
-                  See your most recent plants here. Click one to start studying!
+                  See your most recent plants here.
+                  <p>Click one to start studying!</p>
                 </h2>
               </div>
 
