@@ -108,7 +108,8 @@ h3 {
   border: 2px solid rgb(218, 0, 0);
   font-weight: 800;
   opacity: 1;
-  margin: 1px;
+  margin-top: 5px;
+  font-size: 2vmin;
   padding: 1px 2px;
   color: var(--text-dark);
   transition: text-shadow 0.2s;

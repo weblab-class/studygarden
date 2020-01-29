@@ -18,23 +18,22 @@ class SinglePlant extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      deleteText: "delete"
+      deleteText: "delete",
     };
     this.deletePlant = this.deletePlant.bind(this);
   }
 
-  async deletePlant(){
-    if (this.state.deleteText==="delete"){
-      this.setState({deleteText: "confirm?"});
-      setTimeout(
-        ()=>{
-          if (this.state.deleteText !== "deleting..."){
-            this.setState({deleteText: "delete"})
-          }
-        },3000)
-    }else if(this.state.deleteText==="confirm?"){
-      this.setState({deleteText: "deleting..."});
-      await post(`/api/plant/delete`, {plantId: this.props._id});
+  async deletePlant() {
+    if (this.state.deleteText === "delete") {
+      this.setState({ deleteText: "confirm?" });
+      setTimeout(() => {
+        if (this.state.deleteText !== "deleting...") {
+          this.setState({ deleteText: "delete" });
+        }
+      }, 3000);
+    } else if (this.state.deleteText === "confirm?") {
+      this.setState({ deleteText: "deleting..." });
+      await post(`/api/plant/delete`, { plantId: this.props._id });
       //console.log(this.props._id);
       window.location.reload();
     }
@@ -45,19 +44,23 @@ class SinglePlant extends Component {
     return (
       <div className="SinglePlant-plantContainer">
         <div className="btn btn-primary tooltip">
-          <img
-            className="SinglePlant-plant u-no-select"
-            src={PLANT_STAGES[this.props.stage][this.props.plantType]}
-          />
+          <Link to={`/home/${this.props.userId}/study/${this.props._id}`}>
+            <img
+              className="SinglePlant-plant u-no-select"
+              src={PLANT_STAGES[this.props.stage][this.props.plantType]}
+            />
+          </Link>
           <div className="bottom">
             <h3>{this.props.subject}</h3>
             <p>{this.props.plantName}</p>
             <div className="SinglePlant-buttonContainer">
-              <Link to={`/home/${this.props.userId}/study/${this.props._id}`}>
+              {/*<Link to={`/home/${this.props.userId}/study/${this.props._id}`}>
                 <button className="studyButton u-pointer"> study </button>
-              </Link>
+              </Link>*/}
               <div>
-                <button className="cancelButton studyButton u-pointer" onClick={this.deletePlant}> {this.state.deleteText} </button>
+                <button className="cancelButton studyButton u-pointer" onClick={this.deletePlant}>
+                  {this.state.deleteText}
+                </button>
               </div>
             </div>
             <i />
