@@ -389,11 +389,8 @@ class StudyPage extends Component {
     if (this.state.plant && this.state.plant.stage == 4) {
       return (
         <div className="StudyPage-container">
-          <div className="cloud x1" />
-          <div className="cloud x2" />
-          <div className="cloud x3" />
-          <div className="cloud x4" />
-          <div className="cloud x5" />
+          <Clouds/>
+          <TheSun/>
           {this.state.user && this.state.plant ? (
             <>
               <div className="StudyPage-plantContainer">
