@@ -65,17 +65,18 @@ class ArchivePage extends Component {
       ));
       //this is for testing purposes
       //console.log(plantsList);
+      while (plantsList.length) {
+        plantChunks.push(plantsList.splice(0, 5));
+      }
+  
+      shelves = plantChunks.map((chunk, i) => (
+        <Shelf img={genericBench} bench={"genericBench"} plantsList={chunk} key={i} />
+      ));
     } else {
       plantsList = null;
     }
 
-    while (plantsList.length) {
-      plantChunks.push(plantsList.splice(0, 5));
-    }
-
-    shelves = plantChunks.map((chunk, i) => (
-      <Shelf img={genericBench} bench={"genericBench"} plantsList={chunk} key={i} />
-    ));
+    
 
     return (
       <>
