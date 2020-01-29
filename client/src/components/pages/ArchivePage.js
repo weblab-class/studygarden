@@ -66,7 +66,7 @@ class ArchivePage extends Component {
       //this is for testing purposes
       //console.log(plantsList);
     } else {
-      plantsList = <div>No plants yet...</div>;
+      plantsList = null;
     }
 
     while (plantsList.length) {

@@ -95,47 +95,50 @@ class StudyPage extends Component {
       fields: {
         isStudying: true,
       },
-    })
+    });
   };
-  stopStudy() { //should be called pauseStudy oops
-    if (this.state.showModalEnd === true){
-    }else{
+  stopStudy() {
+    //should be called pauseStudy oops
+    if (this.state.showModalEnd === true) {
+    } else {
       this.nMiniDaemon.pause();
       this.setState({ pauseText: "resume" });
     }
   }
   resumeStudy() {
-    if(this.state.showModalEnd === true){
-      this.setState({goHome: true})
-    }else{
+    if (this.state.showModalEnd === true) {
+      this.setState({ goHome: true });
+    } else {
       this.nMiniDaemon.start();
       this.setState({ pauseText: "pause" });
     }
   }
 
-  goHome(){
-    if(this.state.showModalEnd === true){
-      this.setState({goHome: true})
+  goHome() {
+    if (this.state.showModalEnd === true) {
+      this.setState({ goHome: true });
     }
   }
   endStudy() {
     //console.log("wat")
-    if (this.state.endText === "end session"){
-      this.setState({endText: "are you sure?"})
-      this.timeoutID = setTimeout(
-        ()=>{
-          if (this.state.showModalEnd !== true){
-            this.setState({endText: "end session"})
-          }
-        },3000)
-    }else if (this.state.endText === "are you sure?"){
+    if (this.state.endText === "end session") {
+      this.setState({ endText: "are you sure?" });
+      this.timeoutID = setTimeout(() => {
+        if (this.state.showModalEnd !== true) {
+          this.setState({ endText: "end session" });
+        }
+      }, 3000);
+    } else if (this.state.endText === "are you sure?") {
       this.nMiniDaemon.pause();
       const newCumul =
         this.state.plant.studyTimeCumul +
         Number(this.state.elapsedTime - this.state.elapsedTimeHold);
       const newStage = Math.min(4, Math.floor((newCumul / this.state.plant.goalTime) * 5));
       this.setState({
-        endPrompt: "You have studied for " + (this.getNiceTime(this.state.elapsedTime)) +". Good work! What would you like to do?",
+        endPrompt:
+          "You have studied for " +
+          this.getNiceTime(this.state.elapsedTime) +
+          ". Good work! What would you like to do?",
         showModalEnd: true,
         endText: "session ended",
       }); //in lieu of fanfare currently
@@ -145,13 +148,13 @@ class StudyPage extends Component {
           studyTimeCumul: newCumul,
           stage: newStage,
         },
-      })
+      });
     }
   }
 
-  keepStudying(){
-    if (this.state.showModalEnd === true){
-      post("/api/session/delete", {plantId: this.props.match.params.plantId,});
+  keepStudying() {
+    if (this.state.showModalEnd === true) {
+      post("/api/session/delete", { plantId: this.props.match.params.plantId });
       this.setState({
         isStudying: false,
         showModalEnd: false,
@@ -165,25 +168,25 @@ class StudyPage extends Component {
     }
   }
 
-  getNiceTime(sec){
+  getNiceTime(sec) {
     let minuteTxt;
-    if (sec/60 === 1){
+    if (sec / 60 === 1) {
       minuteTxt = " minute";
-    }else{
+    } else {
       minuteTxt = " minutes";
-    };
+    }
     let secTxt;
-    if (sec === 1){
+    if (sec === 1) {
       secTxt = " second";
-    }else{
+    } else {
       secTxt = " seconds";
-    };
-    if (sec<60){
+    }
+    if (sec < 60) {
       return sec + secTxt;
-    }else if (sec%60 === 0){
-      return sec/60 + minuteTxt;
-    }else{
-      return Math.floor(sec/60) + minuteTxt + " and " + sec%60 + secTxt;
+    } else if (sec % 60 === 0) {
+      return sec / 60 + minuteTxt;
+    } else {
+      return Math.floor(sec / 60) + minuteTxt + " and " + (sec % 60) + secTxt;
     }
   }
 
@@ -239,45 +242,49 @@ class StudyPage extends Component {
       },
     });
     get(`/api/plant/single`, { plantId: this.props.match.params.plantId }).then((plant) => {
-      console.log(plant);
+      //console.log(plant);
 
       this.setState({ plant: plant });
     });
     get(`/api/session`, { plantId: this.props.match.params.plantId }).then((session) => {
-      console.log(session);
+      //console.log(session);
       this.setState({ session: session });
-      if (session !== undefined){
-        // console.log("11111")
-        if (session.studySessionLength !== undefined && session.elapsedTime !== undefined){
-          // console.log("2222")
-          const remTime = session.studySessionLength-session.elapsedTime;
-          if(remTime > 60){
-            // console.log("3333")
+      if (session !== undefined) {
+        // console.log("11111");
+        if (session.studySessionLength !== undefined && session.elapsedTime !== undefined) {
+          // console.log("2222");
+          const remTime = session.studySessionLength - session.elapsedTime;
+          if (remTime > 60) {
+            // console.log("3333");
             console.log("session found");
             this.setState({
               showModalResume: true,
-              resumePrompt: "You have an existing study session with " + this.convertToMinSec(remTime) + " left on the timer. Continue?",
+              resumePrompt:
+                "You have an existing study session with " +
+                this.convertToMinSec(remTime) +
+                " left on the timer. Continue?",
               timeRemaining: remTime,
-            })
+            });
+          }
         }
       }
-    }})
+    });
     //for testing
     //this.startStudy(100);
     get("/api/whoami").then((user) => {
       if (!user._id) {
-        this.setState({ isLoggedOut: true }); 
+        this.setState({ isLoggedOut: true });
       }
-    })
-      //uncomment below for debugging/testing
-      
+    });
+    //uncomment below for debugging/testing
+
     //   if (!user._id) {
     //     this.setState({ isLoggedOut: false }); //change back to true
     //   }else{
     //     this.setState({ isLoggedOut: false }); //and remove this
     //   }
     // });
-  };
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.elapsedTime !== prevState.elapsedTime) {
@@ -286,7 +293,7 @@ class StudyPage extends Component {
       });
     }
     let updateDelay = 5;
-    if (this.state.elapsedTime > this.state.elapsedTimeHold + updateDelay-1) {
+    if (this.state.elapsedTime > this.state.elapsedTimeHold + updateDelay - 1) {
       //lets not kill the server too hard
       //update stage and cumulative study time every so often while studying
       this.setState({
@@ -314,24 +321,31 @@ class StudyPage extends Component {
         })
       );
     }
-    if (!prevState.showModalEnd && this.state.elapsedTime === this.state.sessionLength && this.state.isStudying === true){
+    if (
+      !prevState.showModalEnd &&
+      this.state.elapsedTime === this.state.sessionLength &&
+      this.state.isStudying === true
+    ) {
       this.setState({
-        endPrompt: "You have studied for " + (this.getNiceTime(this.state.elapsedTime)) +". Good work! What would you like to do?",
+        endPrompt:
+          "You have studied for " +
+          this.getNiceTime(this.state.elapsedTime) +
+          ". Good work! What would you like to do?",
         showModalEnd: true,
         endText: "session ended",
       });
     }
     //console.log(this.state.showModalEnd)
-  };
-  componentWillUnmount(){
-    if (this.nMiniDaemon){
+  }
+  componentWillUnmount() {
+    if (this.nMiniDaemon) {
       this.nMiniDaemon.pause();
     }
     post(`/api/session/update`, {
       plantId: this.props.match.params.plantId,
       elapsedTime: this.state.elapsedTime,
     });
-  };
+  }
   convertToMinSec(sec) {
     let out = "";
     let seconds = () => {
@@ -345,56 +359,55 @@ class StudyPage extends Component {
     let minutes = sec / 60;
     if (sec % 2 === 1) {
       out = String(Math.floor(minutes)) + ":" + String(seconds());
-    }else{
+    } else {
       out = String(Math.floor(minutes)) + ":" + String(seconds());
     }
     return out;
-  };
+  }
 
-  hideModalResume(){
-    if (this.state.showModalResume === true){
-      this.setState({showModalResume: false,})
+  hideModalResume() {
+    if (this.state.showModalResume === true) {
+      this.setState({ showModalResume: false });
     }
   }
 
-  startFromModal(){
+  startFromModal() {
     this.startStudy(this.state.timeRemaining);
   }
 
   //TODO: buttons/popups for continuing or cancelling existing study session
   render() {
     if (this.state.isLoggedOut) {
-      console.log("is logged out!");
+      //console.log("is logged out!");
       return <Redirect to="/" />;
     }
     if (this.state.goHome === true) {
-      console.log("going home!");
+      //console.log("going home!");
       return <Redirect to={`/home/${this.props.match.params.userId}`} />;
     }
     if (this.state.isStudying !== true && this.state.plant) {
       return (
         <>
-            <ModularModal
-                showModal={this.state.showModalResume}
-                prompt={this.state.resumePrompt}
-                choiceOne={{
-                  choice: "start new",
-                  action: this.hideModalResume,
-                }}
-                choiceTwo={{
-                  choice: "continue",
-                  action: this.startFromModal,
-                }}
-              />
+          <ModularModal
+            showModal={this.state.showModalResume}
+            prompt={this.state.resumePrompt}
+            choiceOne={{
+              choice: "start new",
+              action: this.hideModalResume,
+            }}
+            choiceTwo={{
+              choice: "continue",
+              action: this.startFromModal,
+            }}
+          />
           <div className="StudyPage-container">
-            <div class="cloud x1"></div>
-            <div class="cloud x2"></div>
-            <div class="cloud x3"></div>
-            <div class="cloud x4"></div>
-            <div class="cloud x5"></div>
+            <div className="cloud x1" />
+            <div className="cloud x2" />
+            <div className="cloud x3" />
+            <div className="cloud x4" />
+            <div className="cloud x5" />
             {this.state.user && this.state.plant ? (
               <>
-             
                 <div className="StudyPage-plantContainer">
                   <img
                     src={PLANT_STAGES[this.state.plant.stage][this.state.plant.plantType]}

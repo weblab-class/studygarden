@@ -26,11 +26,12 @@ class NewPlantPage extends Component {
         this.setState({ isLoggedOut: true });
       }
     });
-    get(`/api/user`, { userId: this.props.match.params.userId }).then((user) => this.setState({ user: user }));
+    get(`/api/user`, { userId: this.props.match.params.userId }).then((user) =>
+      this.setState({ user: user })
+    );
     //why not get user in app.js and pass it down as prop?
 
     //get("/api/plant",
-    
   }
 
   setPlantType = (ind) => {
@@ -42,20 +43,26 @@ class NewPlantPage extends Component {
 
   render() {
     if (this.state.isLoggedOut) {
-      console.log("is logged out!");
+      //console.log("is logged out!");
       return <Redirect to="/" />;
     }
     return (
       <>
         <div className="NewPlant-container u-no-select">
-        <svg viewBox="0 0 100% 100%" xmlns="http://www.w3.org/2000/svg" className="u-pattern">
-              <defs>
-                <pattern id="circle" width="200" height="200" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-                <circle cx="45" cy="45" r="30" fill="rgba(255,209,224,0.5)"/>
-                </pattern>
-              </defs>
-              <rect x="0" y="0" width="100%" height="100%" fill="url(#circle)"/>
-            </svg>
+          <svg viewBox="0 0 100% 100%" xmlns="http://www.w3.org/2000/svg" className="u-pattern">
+            <defs>
+              <pattern
+                id="circle"
+                width="200"
+                height="200"
+                patternUnits="userSpaceOnUse"
+                patternTransform="rotate(45)"
+              >
+                <circle cx="45" cy="45" r="30" fill="rgba(255,209,224,0.5)" />
+              </pattern>
+            </defs>
+            <rect x="0" y="0" width="100%" height="100%" fill="url(#circle)" />
+          </svg>
           <NewPlantInput
             plantType={this.state.currentIndex}
             userId={this.props.match.params.userId}
