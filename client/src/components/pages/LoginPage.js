@@ -26,9 +26,9 @@ class LoginPage extends Component {
       //  console.log(this.props.handleLogin);
       return (
         <>
-        
           <div className="LoginPage-container">
-          <Clouds/>
+            <Clouds/>
+          
             <h1 className="LoginPage-title"> study garden </h1>
             {this.props.userId ? (
               <GoogleLogout

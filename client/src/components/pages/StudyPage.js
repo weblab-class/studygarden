@@ -8,7 +8,6 @@ import EnterSessionLength from "../modules/EnterSessionLength.js";
 import "../../utilities.css";
 import "./StudyPage.css";
 import { PLANT_STAGES } from "../modules/PlantStages.js";
-import Timer from "../modules/Timer.js";
 import MiniDaemon from "../modules/MiniDaemon.js";
 import ModularModal from "../modules/ModularModal.js";
 import Clouds from "../modules/Clouds.js"
