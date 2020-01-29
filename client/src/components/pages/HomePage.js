@@ -106,7 +106,7 @@ class HomePage extends Component {
               </div>
             </>
           ) : (
-            <div> Loading... </div>
+            <div className = "u-loading"> Loading... </div>
           )}
         </div>
       </>

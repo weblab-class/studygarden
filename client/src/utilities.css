@@ -174,3 +174,8 @@ input{
   font-size: 12px;
   font-family: "Muli", sans-serif;
 }
+.u-loading{
+  font-size: 32px;
+  color: white;
+  text-shadow: #577494 0px 1px 10px;
+}
