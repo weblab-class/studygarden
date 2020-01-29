@@ -49,6 +49,7 @@ class HomePage extends Component {
     }
     let plantsList = null;
     const hasPlants = this.state.plants.length !== 0;
+    const hasIncompletePlants = this.state.plants.filter((plant) => plant.stage < 4).length !== 0;
     if (hasPlants) {
       plantsList = this.state.plants
         .filter((plant) => plant.stage < 4)
@@ -73,16 +74,16 @@ class HomePage extends Component {
         <div className="HomePage-container">
           {this.state.user ? (
             <>
-              <div className={`HomePage-text-${hasPlants}`}>
+              <div className="HomePage-text">
                 <h1 className="Homepage-name">Welcome, {this.state.user.name}!</h1>
-                {hasPlants ? (
+                {hasIncompletePlants ? (
                   <h2 className="Homepage-seeYourGarden">
                     See your most recent plants here.
                     <p>Click one to start studying!</p>
                   </h2>
                 ) : (
                   <h2 className="Homepage-seeYourGarden">
-                    You don't have any plants yet!
+                    You don't have any incomplete plants!
                     <p>Start your study garden by clicking "new plant" above.</p>
                   </h2>
                 )}
@@ -91,14 +92,16 @@ class HomePage extends Component {
               <div className="HomePage-windowsill u-no-select">
                 <Shelf img={initialBench} bench={"initialBench"} plantsList={plantsList} />
               </div>
-              {hasPlants && (
-                <Link
-                  className="HomePage-archiveLink"
-                  to={`/home/${this.props.match.params.userId}/archive`}
-                >
-                  See the rest of your plants!
-                </Link>
-              )}
+              <div className="HomePage-archiveLinkContainer">
+                {hasPlants && (
+                  <Link
+                    className="HomePage-archiveLink"
+                    to={`/home/${this.props.match.params.userId}/archive`}
+                  >
+                    You can see the rest of your plants in your archive.
+                  </Link>
+                )}
+              </div>
             </>
           ) : (
             <div> Loading... </div>
