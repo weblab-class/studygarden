@@ -26,6 +26,10 @@ class LoginPage extends Component {
       return (
         <>
           <div className="LoginPage-container">
+            <div className="cloud x2" />
+            <div className="cloud x3" />
+            <div className="cloud x4" />
+            <div className="cloud x5" />
             {/* <svg width="2000" height="2500" version="2.0" className="u-pattern" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <pattern id= "polka" viewBox="0,0,100,100" width="10%" height="10%">

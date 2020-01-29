@@ -406,6 +406,20 @@ class StudyPage extends Component {
             <div className="cloud x3" />
             <div className="cloud x4" />
             <div className="cloud x5" />
+            <div class="theSun">
+              <div class="ray_box">
+                <div class="ray ray1"></div>
+                <div class="ray ray2"></div>
+                <div class="ray ray3"></div>
+                <div class="ray ray4"></div>
+                <div class="ray ray5"></div>
+                <div class="ray ray6"></div>
+                <div class="ray ray7"></div>
+                <div class="ray ray8"></div>
+                <div class="ray ray9"></div>
+                <div class="ray ray10"></div>
+              </div>
+            </div>
             {this.state.user && this.state.plant ? (
               <>
                 <div className="StudyPage-plantContainer">
