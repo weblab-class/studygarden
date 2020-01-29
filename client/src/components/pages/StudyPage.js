@@ -10,8 +10,8 @@ import "./StudyPage.css";
 import { PLANT_STAGES } from "../modules/PlantStages.js";
 import MiniDaemon from "../modules/MiniDaemon.js";
 import ModularModal from "../modules/ModularModal.js";
-import Clouds from "../modules/Clouds.js"
-import TheSun from "../modules/TheSun.js"
+import Clouds from "../modules/Clouds.js";
+import TheSun from "../modules/TheSun.js";
 
 class StudyPage extends Component {
   constructor(props) {
@@ -50,19 +50,7 @@ class StudyPage extends Component {
     let nMiniDaemon;
   }
 
-  //TODO: make a timer, have corresponding UI pop up while study session is in progress
   startStudy = (sesLength) => {
-    // let sessionTimer = new Timer(
-    //   () => {
-    //     console.log("uno");
-    //     this.setState((prevState) => ({ elapsedTime: prevState.elapsedTime + 1 }));
-    //   },
-    //   1000,
-    //   123,
-    //   true
-    // );
-    //let a = await sessionTimer.tick()
-    //console.log(a+"b")
     this.setState({
       timeString: this.convertToMinSec(sesLength),
       pauseText: "pause",
@@ -389,11 +377,8 @@ class StudyPage extends Component {
     if (this.state.plant && this.state.plant.stage == 4) {
       return (
         <div className="StudyPage-container">
-          <div className="cloud x1" />
-          <div className="cloud x2" />
-          <div className="cloud x3" />
-          <div className="cloud x4" />
-          <div className="cloud x5" />
+          <Clouds />
+          <TheSun />
           {this.state.user && this.state.plant ? (
             <>
               <div className="StudyPage-plantContainer">
@@ -407,11 +392,11 @@ class StudyPage extends Component {
                 <h2 className="StudyPage-plantTitle">{this.state.plant.plantName}</h2>
                 <div className="StudyPage-plantDone">
                   <h4>Woohoo! You've finished growing your plant!</h4>
-                  <p> You won't be able to study this plant anymore.</p>
-                  <p>
+                  <h5> You won't be able to study this plant anymore.</h5>
+                  <h5>
                     Don't worry, you can still see {this.state.plant.plantName} in your plant
                     archive!
-                  </p>
+                  </h5>
                 </div>
 
                 <ProgressBar
@@ -443,8 +428,8 @@ class StudyPage extends Component {
             }}
           />
           <div className="StudyPage-container">
-            <Clouds/>
-            <TheSun/>
+            <Clouds />
+            <TheSun />
             {this.state.user && this.state.plant ? (
               <>
                 <div className="StudyPage-plantContainer">
@@ -516,8 +501,8 @@ class StudyPage extends Component {
               action: this.keepStudying,
             }}
           />
-          <Clouds/>
-          <TheSun/>
+          <Clouds />
+          <TheSun />
           <div className="StudyPage-container">
             {this.state.user && this.state.plant ? (
               <>

@@ -66,7 +66,8 @@
 
 .StudyPage-plantDone {
   margin: auto;
-  padding: 5%;
+  width: 80%;
+  overflow-wrap: anywhere;
 }
 
 .StudyPage-studyButton {
@@ -370,4 +371,3 @@
     opacity: 0;
   }
 }
-
