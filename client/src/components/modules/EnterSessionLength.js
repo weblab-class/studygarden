@@ -37,7 +37,6 @@ class EnterSessionLength extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-    console.log(value)
     if (target.type === "number") {
       //prevents putting a negative number in
       if (target.value === "") {
@@ -132,11 +131,11 @@ class EnterSessionLength extends Component {
             submit!
           </button>
           {this.state.errStateBadNumber &&
-        <div className= "LogStudyTime-err"> Enter a number! </div>}
-        {this.state.errStateHugeNumber &&
-        <div className= "LogStudyTime-err"> Surely you don't want to study that long... </div>}
-        {this.state.errStateBeyondGoal &&
-        <div className= "LogStudyTime-err"> Cannot study past goal! (In {getNiceTime(this.state.maxStudyTime*60) + ")"} </div>}
+          <div className= "LogStudyTime-err"> Enter a number! </div>}
+          {this.state.errStateHugeNumber &&
+          <div className= "LogStudyTime-err"> Surely you don't want to study that long... </div>}
+          {this.state.errStateBeyondGoal &&
+          <div className= "LogStudyTime-err"> Cannot study past goal! (In {getNiceTime(this.state.maxStudyTime*60) + ")"} </div>}
         </form>
         
       </div>

@@ -266,12 +266,10 @@
   width: 100%;
   place-self: center;
   font-weight: 600;
-  /* place-content: center; */
-  /* text-align: center; */
-  /* animation: 6s fadeInOut 0s 1 normal both;
+  animation: 6s fadeInOut 0s 1 normal both;
   -moz-animation: 6s fadeInOut 0s 1 normal both;
   -webkit-animation: 6s fadeInOut 0s 1 normal both;
-  -o-animation: 6s fadeInOut 0s 1 normal both; */
+  -o-animation: 6s fadeInOut 0s 1 normal both;
 }
 
 @keyframes fadein {

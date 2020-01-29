@@ -183,7 +183,7 @@ class StudyPage extends Component {
     }else if (sec%60 === 0){
       return sec/60 + minuteTxt;
     }else{
-      return Math.floor(sec/60) + minuteTxt + " " + sec%60 + secTxt;
+      return Math.floor(sec/60) + minuteTxt + " and " + sec%60 + secTxt;
     }
   }
 
