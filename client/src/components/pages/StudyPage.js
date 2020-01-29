@@ -70,7 +70,7 @@ class StudyPage extends Component {
     this.nMiniDaemon = new MiniDaemon(
       this,
       (index, length, backwards) => {
-        console.log("uno");
+        // console.log("uno");
         this.setState({ elapsedTime: index });
       },
       1000,
@@ -247,12 +247,12 @@ class StudyPage extends Component {
       console.log(session);
       this.setState({ session: session });
       if (session !== undefined){
-        console.log("11111")
+        // console.log("11111")
         if (session.studySessionLength !== undefined && session.elapsedTime !== undefined){
-          console.log("2222")
+          // console.log("2222")
           const remTime = session.studySessionLength-session.elapsedTime;
           if(remTime > 60){
-            console.log("3333")
+            // console.log("3333")
             console.log("session found");
             this.setState({
               showModalResume: true,
