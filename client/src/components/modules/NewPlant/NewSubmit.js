@@ -24,7 +24,10 @@ class NewSubmit extends Component {
     // Initialize Default State
     this.state = {
       timeCreated: Date.now(),
-      errState: false,
+      errStateLongEntries: false,
+      errLargeGoal: false, 
+      errBadGoal: false, 
+      errHugeGoal: false,
       submitWait: false,
       // Goal: "",
     };
@@ -53,21 +56,53 @@ class NewSubmit extends Component {
       timeCreated: this.state.timeCreated,
       goalTime: this.props.fields.goalTime*(60**2),
     };
-    if (plant.plantName.length <= 2 || plant.subject.length <= 2 || plant.plantName.length > 16 || plant.subject.length > 16)  {
-      if(this.state.errState === false){
-        this.setState({ errState: true });
+    if (plant.plantName.length <= 2 || plant.subject.length <= 2 || plant.plantName.length > 32 || plant.subject.length > 32)  {
+      if(this.state.errStateLongEntries === false) {
+        this.setState({ errStateLongEntries: true, errLargeGoal: false, errBadGoal: false, errHugeGoal: false });
         setTimeout(()=>{
           this.setState({
-            errState: false,
+            errStateLongEntries: false,
           })
         },6000);
       }
       throw new Error("fields must be longer than 2 characters!");
       
+    } else if (this.props.fields.goalTime === "") {
+      if(this.state.errBadGoal === false){
+        this.setState({ errStateLongEntries: false, errLargeGoal: false, errBadGoal: true, errHugeGoal: false });
+        setTimeout(()=>{
+          this.setState({
+            errBadGoal: false,
+          })
+        },6000);
+      }
+        throw new Error("Goal must be a number!");
+    
+    }else if (plant.goalTime/(60**2) > 2**24){
+      if(this.state.errHugeGoal === false){
+        this.setState({ errStateLongEntries: false, errLargeGoal: false, errBadGoal: false, errHugeGoal: true });
+        setTimeout(()=>{
+          this.setState({
+            errHugeGoal: false,
+          })
+        },6000);
+      }
+      throw new Error("plants don't take this long to grow >:(");
+    } else if (plant.goalTime/(60**2) > 600) {
+        if(this.state.errLargeGoal === false){
+          this.setState({ errStateLongEntries: false, errLargeGoal: true, errBadGoal: false, errHugeGoal: false });
+          setTimeout(()=>{
+            this.setState({
+              errLargeGoal: false,
+            })
+          },6000);
+        }
+        throw new Error("excessively long study session");
     } else {
       console.log(plant);
+      console.log(this.state);
       this.postNewPlant(plant);
-      this.setState({submitWait: true, errState: false,})
+      this.setState({submitWait: true, errStateLongEntries: false,})
       setTimeout(() => this.setState({ isSubmitted: true }),500)
       
     }
@@ -91,10 +126,16 @@ class NewSubmit extends Component {
       
       </div>
       
-        {this.state.errState &&
-        <div className= "NewPlant-err"> Name and subject fields must be 3-16 characters long! </div>}
+        {this.state.errStateLongEntries &&
+        <div className= "NewPlant-err"> Name and subject fields must be 3-32 characters long. </div>}
         {this.state.submitWait &&
         <div className= "NewPlant-submitted NewPlant-err"> Submitting plant... </div>}
+        {this.state.errBadGoal &&
+        <div className= "NewPlant-err"> Goal must be a number. </div>}
+        {this.state.errLargeGoal &&
+        <div className= "NewPlant-err"> Your goal is very large. We suggest splitting into different plants. </div>}
+        {this.state.errHugeGoal &&
+        <div className= "NewPlant-err"> These plants have to finish growing sometime in your lifetime... </div>}
       </>
     );
   }

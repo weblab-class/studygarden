@@ -9,10 +9,7 @@
   justify-content: space-between;
   background-color: #cfd896;
   padding-top: 3vh;
-  animation: fadein 1s;
-  -moz-animation: fadein 1s; /* Firefox */
-  -webkit-animation: fadein 1s; /* Safari and Chrome */
-  -o-animation: fadein 1s; /* Opera */
+
 }
 
 .NewPlantInput-form {
@@ -22,21 +19,27 @@
   background-color: #9bbce0;
   max-width: 35%;
   height: auto;
+  max-height: 76%;
   border-radius: 20px;
   box-shadow: 0 2px 50px 1px rgba(0, 0, 0, 0.16);
   margin: auto;
+  position: relative;
+  animation: fadein 1s;
+  -moz-animation: fadein 1s; /* Firefox */
+  -webkit-animation: fadein 1s; /* Safari and Chrome */
+  -o-animation: fadein 1s; /* Opera */
 }
 
 .NewPlantInput-container {
-  padding: 5px;
+  padding: .75%;
   display: flex;
   flex-direction: column;
-  margin: 10px 20px;
+  margin: 1.5% 3%;
   font-weight: bold;
 }
 
 .NewPlantInput-input {
-  margin: 10px 5px;
+  margin: 1.5% .75%;
   font-size: 16px;
   border: solid 0px;
   border-radius: 20px;
@@ -152,11 +155,11 @@
 
 .NewPlant-err {
   position: absolute;
-  top: calc(250px + 50%);
+  top: 103%;
   color: rgb(156, 0, 0);
-  width: 30%;
+  width: 120%;
   font-weight: 600;
-  align-self: center;
+  place-self: center;
   text-align: center;
   animation: 6s fadeInOut 0s 1 normal both;
   -moz-animation: 6s fadeInOut 0s 1 normal both;

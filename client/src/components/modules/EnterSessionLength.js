@@ -66,28 +66,34 @@ class EnterSessionLength extends Component {
   handleSubmit = async (event) => {
     event.preventDefault();
     if (this.state.sessionLength === ""){
-      this.setState({ errStateBadNumber: true, errStateHugeNumber: false,  errStateBeyondGoal: false});
-      setTimeout(()=>{
-        this.setState({
-          errStateBadNumber: false,
-        })
-      },6000);
+      if (this.state.errStateBadNumber === false){
+        this.setState({ errStateBadNumber: true, errStateHugeNumber: false,  errStateBeyondGoal: false});
+        setTimeout(()=>{
+          this.setState({
+            errStateBadNumber: false,
+          })
+        },6000);
+      }
       throw new Error("enter a number!")
     }else if(this.state.sessionLength*60>2**24){
-      this.setState({ errStateHugeNumber: true, errStateBadNumber: false, errStateBeyondGoal: false });
-      setTimeout(()=>{
-        this.setState({
-          errStateHugeNumber: false,
-        })
-      },6000);
+      if (this.state.errStateHugeNumber === false){
+        this.setState({ errStateHugeNumber: true, errStateBadNumber: false, errStateBeyondGoal: false });
+        setTimeout(()=>{
+          this.setState({
+            errStateHugeNumber: false,
+          })
+        },6000);
+      }
       throw new Error("surely you dont want to study that long")
     }else if (this.state.sessionLength>this.state.maxStudyTime){
-      this.setState({ errStateHugeNumber: false, errStateBadNumber: false, errStateBeyondGoal: true });
-      setTimeout(()=>{
-        this.setState({
-          errStateBeyondGoal: false,
-        })
-      },6000);
+      if (this.state.errStateBeyondGoal === false){
+        this.setState({ errStateHugeNumber: false, errStateBadNumber: false, errStateBeyondGoal: true });
+        setTimeout(()=>{
+          this.setState({
+            errStateBeyondGoal: false,
+          })
+        },6000);
+      }
       throw new Error("study time beyond goal")
     }else{
       this.props.startStudy((this.state.sessionLength)*60);
