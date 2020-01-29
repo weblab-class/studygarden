@@ -1,6 +1,7 @@
 //modal
 import React, { Component } from "react";
 import { post } from "../../utilities";
+import getNiceTime from "./GetNiceTime.js"
 
 /**
  * Component creates a new studySession from scratch.
@@ -19,8 +20,13 @@ class LogStudyTime extends Component {
     // Initialize Default State
     this.state = {
       elapsedTime: 1,
+      errStateBadNumber: false,
+      errStateHugeNumber: false,
+      errStateBeyondGoal: false,
+      maxStudyTime: (Math.ceil((this.props.plant.goalTime-this.props.plant.studyTimeCumul)/60))
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -37,9 +43,9 @@ class LogStudyTime extends Component {
         this.setState({
           [name]: value,
         });
-      } else if (target.value < 0) {
+      } else if (Number(value) < 1 || value === "") {
         this.setState({
-          [name]: 0,
+          [name]: 1,
         });
       } else {
         this.setState({
@@ -60,12 +66,38 @@ class LogStudyTime extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const studySession = {
-      elapsedTime: this.state.elapsedTime,
+      elapsedTime: this.state.elapsedTime/60, //conv mins to hours
       creatorId: this.props.userId,
       plantId: this.props.plantId,
       plant: this.props.plant,
     };
-    this.props.logTime(studySession);
+    if (this.state.elapsedTime === ""){
+      this.setState({ errStateBadNumber: true, errStateHugeNumber: false,  errStateBeyondGoal: false});
+      setTimeout(()=>{
+        this.setState({
+          errStateBadNumber: false,
+        })
+      },6000);
+      throw new Error("enter a number!")
+    }else if(this.state.elapsedTime*60>2**24){
+      this.setState({ errStateHugeNumber: true, errStateBadNumber: false, errStateBeyondGoal: false });
+      setTimeout(()=>{
+        this.setState({
+          errStateHugeNumber: false,
+        })
+      },6000);
+      throw new Error("surely you dont want to study that long")
+    }else if (this.state.elapsedTime>this.state.maxStudyTime){
+      this.setState({ errStateHugeNumber: false, errStateBadNumber: false, errStateBeyondGoal: true });
+      setTimeout(()=>{
+        this.setState({
+          errStateBeyondGoal: false,
+        })
+      },6000);
+      throw new Error("study time beyond goal")
+    }else{
+      this.props.logTime(studySession);
+    }
     //console.log(studySession);
   };
 
@@ -82,10 +114,10 @@ class LogStudyTime extends Component {
             }}
             className="LogStudyTime-closeButton u-pointer"
           >
-            X
+            close
           </button>
           <label className="LogStudyTime-container">
-          <div className="LogStudyTime-text">How long did you study (in hours)?</div>
+          <div className="LogStudyTime-text">How many minutes did you study?</div>
             <div>
             <input
               name="elapsedTime"
@@ -105,7 +137,14 @@ class LogStudyTime extends Component {
           >
             submit!
           </button>
+          {this.state.errStateBadNumber &&
+          <div className= "LogStudyTime-err"> Enter a valid number! </div>}
+          {this.state.errStateHugeNumber &&
+          <div className= "LogStudyTime-err"> Surely you didn't study that long... </div>}
+          {this.state.errStateBeyondGoal &&
+          <div className= "LogStudyTime-err"> Cannot record study time past goal! (In {getNiceTime(this.state.maxStudyTime*60) + ")"} </div>}
         </form>
+        
       </div>
     );
   }

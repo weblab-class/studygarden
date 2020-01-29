@@ -54,7 +54,7 @@
   font-size: 1.8vmin;
   border-radius: 10px;
   position: absolute;
-  z-index: 999999;
+  z-index: 99;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
   text-align: center;
   visibility: hidden;
