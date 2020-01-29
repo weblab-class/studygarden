@@ -58,10 +58,15 @@
 .StudyPage-plantSubject {
   margin-top: 0;
   margin-bottom: auto;
-  padding: 2%;
+  padding: 1vh;
   font-size: 36px;
   font-weight: 700;
   color: var(--text-dark);
+}
+
+.StudyPage-plantDone {
+  margin: auto;
+  padding: 5%;
 }
 
 .StudyPage-studyButton {
@@ -72,7 +77,7 @@
   border: 0px;
   border-radius: 24px;
   padding: 10px 20px;
-  margin: 2% auto;
+  margin: 1vh auto;
   width: 70%;
   height: auto;
   font-size: 24px;
@@ -182,6 +187,7 @@
 
 .LogStudyTime-closeButton {
   margin-left: auto;
+  margin-right: 2px;
   padding: 0.25em 0.6em;
   font-size: 15px;
   font-weight: bold;
@@ -196,7 +202,7 @@
 
 .LogStudyTime-submitButton {
   margin: auto;
-  margin-bottom: 25px;
+  margin-bottom: 1vh;
   padding: 10px 15px;
   text-align: center;
   font-size: 20px;
@@ -478,7 +484,6 @@ body {
     margin-left: -1000px;
   }
 }
-
 
 @keyframes fadeInOut {
   from {
