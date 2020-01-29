@@ -66,34 +66,39 @@ class HomePage extends Component {
           />
         ));
     } else {
-      plantsList = (
-        <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
-          <div className="Homepage-empty">No plants found! Click "new plant" to fix that.</div>
-        </div>
-      );
+      plantsList = null;
     }
     return (
       <>
         <div className="HomePage-container">
           {this.state.user ? (
             <>
-              <div className="HomePage-text">
+              <div className={`HomePage-text-${hasPlants}`}>
                 <h1 className="Homepage-name">Welcome, {this.state.user.name}!</h1>
-                <h2 className="Homepage-seeYourGarden">
-                  See your most recent plants here.
-                  <p>Click one to start studying!</p>
-                </h2>
+                {hasPlants ? (
+                  <h2 className="Homepage-seeYourGarden">
+                    See your most recent plants here.
+                    <p>Click one to start studying!</p>
+                  </h2>
+                ) : (
+                  <h2 className="Homepage-seeYourGarden">
+                    You don't have any plants yet!
+                    <p>Start your study garden by clicking "new plant" above.</p>
+                  </h2>
+                )}
               </div>
 
               <div className="HomePage-windowsill u-no-select">
                 <Shelf img={initialBench} bench={"initialBench"} plantsList={plantsList} />
               </div>
-              <Link
-                className="HomePage-archiveLink"
-                to={`/home/${this.props.match.params.userId}/archive`}
-              >
-                See the rest of your plants!
-              </Link>
+              {hasPlants && (
+                <Link
+                  className="HomePage-archiveLink"
+                  to={`/home/${this.props.match.params.userId}/archive`}
+                >
+                  See the rest of your plants!
+                </Link>
+              )}
             </>
           ) : (
             <div> Loading... </div>

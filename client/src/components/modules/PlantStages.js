@@ -23,12 +23,15 @@ import plant52 from "../../../img/flowers/Asset 5.2.png";
 import plant53 from "../../../img/flowers/Asset 5.3.png";
 import plant54 from "../../../img/flowers/Asset 5.4.png";
 
+import plant00 from "../../../img/blank-01.png";
+
 const PLANT_STAGES = [
   [plant11, plant12, plant13, plant14], //empty flowerpots
   [plant21, plant22, plant23, plant24],
   [plant31, plant32, plant33, plant34],
   [plant41, plant42, plant43, plant44],
   [plant51, plant52, plant53, plant54], //completed stage of plants
+  [plant00],
 ];
 
 export { PLANT_STAGES };
