@@ -51,7 +51,7 @@
   color: #000000;
   background-color: #eeeeee;
   font-weight: normal;
-  font-size: 2vmin;
+  font-size: 1.8vmin;
   border-radius: 10px;
   position: absolute;
   z-index: 999999;
@@ -65,8 +65,8 @@
 .bottom-grown {
   color: var(--green);
   font-weight: 800;
-  padding-top: 1vmin;
-  font-size: 2vmin;
+  padding-top: 0.5vmin;
+  font-size: calc(8px + 0.9vmin);
   text-shadow: rgb(197, 197, 197) 1px 0 10px;
   opacity: 1;
 }
@@ -127,12 +127,13 @@ h3 {
 
 .cancelButton {
   background-color: rgb(75, 75, 75, 0);
+  border-radius: 20px;
   border: 2px solid rgb(218, 0, 0);
   font-weight: 800;
   opacity: 1;
   margin-top: 5px;
   font-size: 2vmin;
-  padding: 1px 2px;
+  padding: 1px 10%;
   color: var(--text-dark);
   transition: text-shadow 0.2s;
 }
