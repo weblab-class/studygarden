@@ -76,7 +76,7 @@ class EnterSessionLength extends Component {
             }}
             className="LogStudyTime-closeButton u-pointer"
           >
-            X
+            close
           </button>
           <label className="LogStudyTime-container">
             <div className="LogStudyTime-text">How many minutes do you want to study?</div>

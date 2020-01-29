@@ -50,12 +50,14 @@
   font-size: 32px;
   font-weight: 400;
   margin: auto;
-  padding: 2%;
+  padding: 0;
+  padding-bottom: 1%;
   color: var(--text-dark);
 }
 
 .StudyPage-plantSubject {
-  margin: auto;
+  margin-top: 0;
+  margin-bottom: auto;
   padding: 2%;
   font-size: 36px;
   font-weight: 700;
@@ -73,7 +75,7 @@
   margin: 2% auto;
   width: 70%;
   height: auto;
-  font-size: 3vh;
+  font-size: 24px;
   justify-content: center;
   text-shadow: grey 0px 1px 2px;
   transition: text-shadow 0.2s;
@@ -98,11 +100,11 @@
     flex-direction: column;
   }
   .StudyPage-plantTitle {
-    font-size: 28px;
+    font-size: 24px;
   }
   .StudyPage-plantSubject {
     font-size: 24px;
-    font-weight: 400;
+    font-weight: 700;
     color: var(--text-dark);
   }
 }
@@ -135,7 +137,7 @@
 }
 
 .StudyPage-formContainer {
-  margin: auto;
+  margin: 2% auto;
   width: 70%;
 }
 
@@ -162,11 +164,12 @@
 .LogStudyTime-text {
   color: var(--white);
   text-shadow: rgba(0, 0, 0, 0.16) 0px 1px 5px;
+  line-height: 1.2;
   margin: auto;
 }
 
 .LogStudyTime-input {
-  margin: auto;
+  margin: 2% auto;
   border-radius: 100px;
   padding: 5px 10px;
   border: 0px;
@@ -178,11 +181,12 @@
 
 .LogStudyTime-closeButton {
   margin-left: auto;
+  padding: 0.25em 0.6em;
   font-size: 15px;
   font-weight: bold;
   color: var(--text-light);
   border-radius: 20px;
-  background-color: #8d945f;
+  background-color: #577494;
   border: 0px;
   box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.07);
   text-shadow: grey 0px 1px 2px;
@@ -355,6 +359,7 @@ body {
 
 /*Time to animate*/
 .x1 {
+  animation: moveclouds 40s linear infinite;
   -webkit-animation: moveclouds 40s linear infinite;
   -moz-animation: moveclouds 40s linear infinite;
   -o-animation: moveclouds 40s linear infinite;
@@ -372,6 +377,7 @@ body {
 
   /*Speed will also be proportional to the size and opacity*/
   /*More the speed. Less the time in 's' = seconds*/
+  animation: moveclouds 35s linear infinite;
   -webkit-animation: moveclouds 35s linear infinite;
   -moz-animation: moveclouds 35s linear infinite;
   -o-animation: moveclouds 35s linear infinite;
@@ -386,6 +392,7 @@ body {
   transform: scale(1.6);
   opacity: 0.8; /*opacity proportional to the size*/
 
+  animation: moveclouds 40s linear infinite;
   -webkit-animation: moveclouds 40s linear infinite;
   -moz-animation: moveclouds 40s linear infinite;
   -o-animation: moveclouds 40s linear infinite;
@@ -400,6 +407,7 @@ body {
   transform: scale(1.5);
   opacity: 0.75; /*opacity proportional to the size*/
 
+  animation: moveclouds 35s linear infinite;
   -webkit-animation: moveclouds 35s linear infinite;
   -moz-animation: moveclouds 35s linear infinite;
   -o-animation: moveclouds 35s linear infinite;
@@ -414,10 +422,20 @@ body {
   transform: scale(1.6);
   opacity: 0.8; /*opacity proportional to the size*/
 
+  animation: moveclouds 50s linear infinite;
   -webkit-animation: moveclouds 50s linear infinite;
   -moz-animation: moveclouds 50s linear infinite;
   -o-animation: moveclouds 50s linear infinite;
   animation-delay: -10s;
+}
+
+@keyframes moveclouds {
+  0% {
+    margin-left: 1000px;
+  }
+  100% {
+    margin-left: -1000px;
+  }
 }
 
 @-webkit-keyframes moveclouds {

@@ -82,7 +82,7 @@ class LogStudyTime extends Component {
             }}
             className="LogStudyTime-closeButton u-pointer"
           >
-            X
+            close
           </button>
           <label className="LogStudyTime-container">
           <div className="LogStudyTime-text">How long did you study (in hours)?</div>
