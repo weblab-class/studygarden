@@ -5,6 +5,7 @@ import initialBench from "../../../img/initialBench.png";
 import SinglePlant from "../modules/SinglePlant.js";
 import Shelf from "../modules/Shelf.js";
 import { Redirect, Link } from "react-router-dom";
+import Clouds from "../modules/Clouds.js"
 
 import "../../utilities.css";
 import "./HomePage.css";
@@ -71,6 +72,7 @@ class HomePage extends Component {
     }
     return (
       <>
+      
         <div className="HomePage-container">
           {this.state.user ? (
             <>

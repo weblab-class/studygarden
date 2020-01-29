@@ -11,6 +11,8 @@ import { PLANT_STAGES } from "../modules/PlantStages.js";
 import Timer from "../modules/Timer.js";
 import MiniDaemon from "../modules/MiniDaemon.js";
 import ModularModal from "../modules/ModularModal.js";
+import Clouds from "../modules/Clouds.js"
+import TheSun from "../modules/TheSun.js"
 
 class StudyPage extends Component {
   constructor(props) {
@@ -442,11 +444,8 @@ class StudyPage extends Component {
             }}
           />
           <div className="StudyPage-container">
-            <div className="cloud x1" />
-            <div className="cloud x2" />
-            <div className="cloud x3" />
-            <div className="cloud x4" />
-            <div className="cloud x5" />
+            <Clouds/>
+            <TheSun/>
             {this.state.user && this.state.plant ? (
               <>
                 <div className="StudyPage-plantContainer">
@@ -518,6 +517,8 @@ class StudyPage extends Component {
               action: this.keepStudying,
             }}
           />
+          <Clouds/>
+          <TheSun/>
           <div className="StudyPage-container">
             {this.state.user && this.state.plant ? (
               <>
