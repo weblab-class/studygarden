@@ -11,3 +11,5 @@ You can access Study Garden at https://study-garden.herokuapp.com/.
 ## Credits
 
 Created by Thomas Adebiyi, Eileen Tan-Aristy, and Jennifer Wang for MIT's web.lab class over IAP 2020.
+
+We borrowed CSS features from https://codepen.io/antonioescudero/pen/zrxGve and https://codepen.io/antonioescudero/pen/zrxGve in the making of this website.
