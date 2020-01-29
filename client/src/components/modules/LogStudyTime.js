@@ -138,11 +138,11 @@ class LogStudyTime extends Component {
             submit!
           </button>
           {this.state.errStateBadNumber &&
-          <div className= "LogStudyTime-err"> Enter a number! </div>}
+          <div className= "LogStudyTime-err"> Enter a valid number! </div>}
           {this.state.errStateHugeNumber &&
           <div className= "LogStudyTime-err"> Surely you didn't study that long... </div>}
           {this.state.errStateBeyondGoal &&
-          <div className= "LogStudyTime-err"> Cannot record study past goal! (In {getNiceTime(this.state.maxStudyTime*60) + ")"} </div>}
+          <div className= "LogStudyTime-err"> Cannot record study time past goal! (In {getNiceTime(this.state.maxStudyTime*60) + ")"} </div>}
         </form>
         
       </div>

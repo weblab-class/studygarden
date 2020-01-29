@@ -266,7 +266,7 @@
 
 .LogStudyTime-err {
   position: absolute;
-  bottom: 5%;
+  bottom: -15%;
   color: rgb(206, 19, 19);
   text-shadow: none;
   width: 100%;

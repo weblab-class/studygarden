@@ -137,7 +137,7 @@ class EnterSessionLength extends Component {
             submit!
           </button>
           {this.state.errStateBadNumber &&
-          <div className= "LogStudyTime-err"> Enter a number! </div>}
+          <div className= "LogStudyTime-err"> Enter a valid number! </div>}
           {this.state.errStateHugeNumber &&
           <div className= "LogStudyTime-err"> Surely you don't want to study that long... </div>}
           {this.state.errStateBeyondGoal &&
