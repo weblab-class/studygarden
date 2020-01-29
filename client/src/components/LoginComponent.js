@@ -9,8 +9,6 @@ import NotFound from "./pages/NotFound.js";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import "../utilities.css";
-import "./App.css";
-//import { socket } from "../client-socket.js";
 
 import { get, post } from "../utilities";
 
@@ -33,13 +31,13 @@ class LoginComponent extends Component {
       if (user._id) {
         // they are registed in the database, and currently logged in.
         this.setState({ userId: user._id });
-        console.log("user detected");
+        //console.log("user detected");
       }
     });
   }
 
   handleLogin = (res) => {
-    console.log(`Logged in as ${res.profileObj.name}`);
+    //console.log(`Logged in as ${res.profileObj.name}`);
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
       this.setState({ userId: user._id });
@@ -48,7 +46,7 @@ class LoginComponent extends Component {
   };
 
   handleLogout = () => {
-    console.log("Logged out successfully!");
+    //console.log("Logged out successfully!");
     this.setState({ userId: null });
     post("/api/logout").then((user) => {
       this.setState({ userId: null });
