@@ -22,10 +22,9 @@ class LoginPage extends Component {
 
   render() {
     if (!this.state.user) {
-      console.log(this.props.handleLogin);
+      //  console.log(this.props.handleLogin);
       return (
         <>
-        
           <div className="LoginPage-container">
             {/* <svg width="2000" height="2500" version="2.0" className="u-pattern" xmlns="http://www.w3.org/2000/svg">
               <defs>
