@@ -8,7 +8,7 @@
   flex-flow: column;
   justify-content: center;
   text-align: center;
-  background-color: #9bbce0;
+  background-image: linear-gradient(#9bbce0, #a4def9);
   scrollbar-color: green;
   overflow: visible;
 }
