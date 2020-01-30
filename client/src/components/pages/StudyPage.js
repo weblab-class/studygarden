@@ -501,9 +501,10 @@ class StudyPage extends Component {
               action: this.keepStudying,
             }}
           />
+          
+          <div className="StudyPage-container">
           <Clouds />
           <TheSun />
-          <div className="StudyPage-container">
             {this.state.user && this.state.plant ? (
               <>
                 <div className="StudyPage-plantContainer">
